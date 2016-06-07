@@ -1,0 +1,55 @@
+
+c_02.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Ellipse 4
+  rotate: true
+  xy: 151, 23
+  size: 94, 95
+  orig: 96, 97
+  offset: 1, 1
+  index: -1
+Layer 28
+  rotate: true
+  xy: 2, 28
+  size: 89, 147
+  orig: 91, 149
+  offset: 1, 1
+  index: -1
+arm_01
+  rotate: false
+  xy: 429, 71
+  size: 68, 46
+  orig: 70, 48
+  offset: 1, 1
+  index: -1
+arm_02
+  rotate: false
+  xy: 359, 70
+  size: 68, 47
+  orig: 70, 49
+  offset: 1, 1
+  index: -1
+body
+  rotate: true
+  xy: 2, 2
+  size: 24, 73
+  orig: 26, 75
+  offset: 1, 1
+  index: -1
+leg_01
+  rotate: false
+  xy: 304, 54
+  size: 53, 63
+  orig: 55, 65
+  offset: 1, 1
+  index: -1
+leg_02
+  rotate: false
+  xy: 248, 54
+  size: 54, 63
+  orig: 56, 65
+  offset: 1, 1
+  index: -1

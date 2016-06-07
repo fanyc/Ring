@@ -1,0 +1,251 @@
+
+sorceress_01.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eq_sor_c01_arm_01
+  rotate: true
+  xy: 393, 7
+  size: 45, 29
+  orig: 90, 59
+  offset: 22, 15
+  index: -1
+eq_sor_c01_arm_02
+  rotate: false
+  xy: 841, 89
+  size: 25, 37
+  orig: 49, 73
+  offset: 12, 18
+  index: -1
+eq_sor_c01_arm_03
+  rotate: false
+  xy: 882, 103
+  size: 18, 23
+  orig: 38, 46
+  offset: 10, 12
+  index: -1
+eq_sor_c01_arm_04
+  rotate: false
+  xy: 755, 86
+  size: 41, 40
+  orig: 82, 79
+  offset: 21, 20
+  index: -1
+eq_sor_c01_arm_05
+  rotate: false
+  xy: 868, 89
+  size: 12, 37
+  orig: 25, 74
+  offset: 7, 19
+  index: -1
+eq_sor_c01_arm_06
+  rotate: false
+  xy: 798, 89
+  size: 41, 37
+  orig: 79, 73
+  offset: 19, 18
+  index: -1
+eq_sor_c01_arm_07
+  rotate: false
+  xy: 902, 107
+  size: 20, 19
+  orig: 38, 36
+  offset: 9, 9
+  index: -1
+eq_sor_c01_belt_01
+  rotate: false
+  xy: 924, 114
+  size: 26, 12
+  orig: 52, 23
+  offset: 13, 6
+  index: -1
+eq_sor_c01_boots_01
+  rotate: false
+  xy: 560, 64
+  size: 25, 19
+  orig: 51, 38
+  offset: 13, 10
+  index: -1
+eq_sor_c01_boots_02
+  rotate: false
+  xy: 560, 64
+  size: 25, 19
+  orig: 51, 38
+  offset: 13, 10
+  index: -1
+eq_sor_c01_bottom_01
+  rotate: false
+  xy: 687, 83
+  size: 66, 43
+  orig: 132, 91
+  offset: 33, 23
+  index: -1
+eq_sor_c01_ear_01
+  rotate: true
+  xy: 248, 2
+  size: 16, 23
+  orig: 30, 46
+  offset: 7, 12
+  index: -1
+eq_sor_c01_earring_01
+  rotate: false
+  xy: 902, 92
+  size: 13, 13
+  orig: 27, 27
+  offset: 7, 7
+  index: -1
+eq_sor_c01_eye_01
+  rotate: true
+  xy: 488, 12
+  size: 47, 18
+  orig: 94, 34
+  offset: 23, 8
+  index: -1
+eq_sor_c01_eye_02
+  rotate: false
+  xy: 596, 87
+  size: 45, 14
+  orig: 94, 34
+  offset: 25, 9
+  index: -1
+eq_sor_c01_eye_03
+  rotate: false
+  xy: 248, 20
+  size: 47, 10
+  orig: 94, 34
+  offset: 24, 9
+  index: -1
+eq_sor_c01_eyebrow_01
+  rotate: false
+  xy: 643, 92
+  size: 38, 9
+  orig: 76, 17
+  offset: 19, 4
+  index: -1
+eq_sor_c01_face_01
+  rotate: false
+  xy: 429, 2
+  size: 57, 57
+  orig: 114, 115
+  offset: 28, 29
+  index: -1
+eq_sor_c01_hair_01
+  rotate: true
+  xy: 596, 103
+  size: 23, 89
+  orig: 46, 177
+  offset: 11, 44
+  index: -1
+eq_sor_c01_hair_02
+  rotate: false
+  xy: 518, 85
+  size: 76, 41
+  orig: 150, 83
+  offset: 37, 21
+  index: -1
+eq_sor_c01_hair_03
+  rotate: true
+  xy: 329, 54
+  size: 72, 98
+  orig: 166, 198
+  offset: 52, 50
+  index: -1
+eq_sor_c01_hair_04
+  rotate: true
+  xy: 429, 61
+  size: 65, 87
+  orig: 123, 175
+  offset: 31, 44
+  index: -1
+eq_sor_c01_hat_01
+  rotate: false
+  xy: 163, 32
+  size: 164, 94
+  orig: 327, 188
+  offset: 81, 47
+  index: -1
+eq_sor_c01_leg_01
+  rotate: true
+  xy: 204, 7
+  size: 23, 42
+  orig: 46, 84
+  offset: 11, 21
+  index: -1
+eq_sor_c01_leg_03
+  rotate: true
+  xy: 204, 7
+  size: 23, 42
+  orig: 46, 84
+  offset: 11, 21
+  index: -1
+eq_sor_c01_leg_02
+  rotate: true
+  xy: 518, 62
+  size: 21, 40
+  orig: 42, 80
+  offset: 10, 20
+  index: -1
+eq_sor_c01_leg_04
+  rotate: true
+  xy: 518, 62
+  size: 21, 40
+  orig: 42, 80
+  offset: 10, 20
+  index: -1
+eq_sor_c01_lip_01
+  rotate: false
+  xy: 2, 2
+  size: 9, 4
+  orig: 18, 8
+  offset: 4, 2
+  index: -1
+eq_sor_c01_lip_02
+  rotate: true
+  xy: 488, 2
+  size: 8, 9
+  orig: 16, 15
+  offset: 4, 3
+  index: -1
+eq_sor_c01_manteau_01
+  rotate: false
+  xy: 163, 2
+  size: 39, 28
+  orig: 76, 55
+  offset: 18, 14
+  index: -1
+eq_sor_c01_manteau_02
+  rotate: true
+  xy: 273, 4
+  size: 14, 24
+  orig: 38, 46
+  offset: 12, 11
+  index: -1
+eq_sor_c01_neck_01
+  rotate: false
+  xy: 882, 88
+  size: 18, 13
+  orig: 36, 36
+  offset: 9, 14
+  index: -1
+eq_sor_c01_nose_01
+  rotate: false
+  xy: 508, 44
+  size: 7, 15
+  orig: 14, 30
+  offset: 3, 7
+  index: -1
+eq_sor_c01_top_01
+  rotate: false
+  xy: 329, 2
+  size: 62, 50
+  orig: 124, 98
+  offset: 31, 24
+  index: -1
+wp_sor_c01
+  rotate: false
+  xy: 2, 8
+  size: 159, 118
+  orig: 317, 238
+  offset: 79, 60
+  index: -1
