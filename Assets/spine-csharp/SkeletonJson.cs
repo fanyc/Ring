@@ -44,8 +44,10 @@ using Windows.Storage;
 
 namespace Spine {
 	public class SkeletonJson {
-		private AttachmentLoader attachmentLoader;
 		public float Scale { get; set; }
+
+		private AttachmentLoader attachmentLoader;
+		private List<LinkedMesh> linkedMeshes = new List<LinkedMesh>();
 
 		public SkeletonJson (params Atlas[] atlasArray)
 			: this(new AtlasAttachmentLoader(atlasArray)) {
@@ -57,9 +59,7 @@ namespace Spine {
 			Scale = 1;
 		}
 
-		#if !(IS_UNITY)
-		#if WINDOWS_STOREAPP
-
+		#if !(IS_UNITY) && WINDOWS_STOREAPP
 		private async Task<SkeletonData> ReadFile(string path) {
 			var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
 			var file = await folder.GetFileAsync(path).AsTask().ConfigureAwait(false);
@@ -86,9 +86,7 @@ namespace Spine {
 				return skeletonData;
 			}
 		}
-
 		#endif // WINDOWS_STOREAPP
-		#endif // !UNITY
 
 		public SkeletonData ReadSkeletonData (TextReader reader) {
 			if (reader == null) throw new ArgumentNullException("reader cannot be null.");
@@ -123,6 +121,8 @@ namespace Spine {
 				boneData.rotation = GetFloat(boneMap, "rotation", 0);
 				boneData.scaleX = GetFloat(boneMap, "scaleX", 1);
 				boneData.scaleY = GetFloat(boneMap, "scaleY", 1);
+				boneData.shearX = GetFloat(boneMap, "shearX", 0);
+				boneData.shearY = GetFloat(boneMap, "shearY", 0);
 				boneData.inheritScale = GetBoolean(boneMap, "inheritScale", true);
 				boneData.inheritRotation = GetBoolean(boneMap, "inheritRotation", true);
 				skeletonData.bones.Add(boneData);
@@ -163,9 +163,17 @@ namespace Spine {
 					transformConstraintData.target = skeletonData.FindBone(targetName);
 					if (transformConstraintData.target == null) throw new Exception("Target bone not found: " + targetName);
 
+					transformConstraintData.offsetRotation = GetFloat(transformMap, "rotation", 0);
+					transformConstraintData.offsetX = GetFloat(transformMap, "x", 0) * scale;
+					transformConstraintData.offsetY = GetFloat(transformMap, "y", 0) * scale;
+					transformConstraintData.offsetScaleX = GetFloat(transformMap, "scaleX", 0);
+					transformConstraintData.offsetScaleY = GetFloat(transformMap, "scaleY", 0);
+					transformConstraintData.offsetShearY = GetFloat(transformMap, "shearY", 0);
+
+					transformConstraintData.rotateMix = GetFloat(transformMap, "rotateMix", 1);
 					transformConstraintData.translateMix = GetFloat(transformMap, "translateMix", 1);
-					transformConstraintData.x = GetFloat(transformMap, "x", 0) * scale;
-					transformConstraintData.y = GetFloat(transformMap, "y", 0) * scale;
+					transformConstraintData.scaleMix = GetFloat(transformMap, "scaleMix", 1);
+					transformConstraintData.shearMix = GetFloat(transformMap, "shearMix", 1);
 
 					skeletonData.transformConstraints.Add(transformConstraintData);
 				}
@@ -208,7 +216,7 @@ namespace Spine {
 					foreach (KeyValuePair<String, Object> slotEntry in (Dictionary<String, Object>)entry.Value) {
 						int slotIndex = skeletonData.FindSlotIndex(slotEntry.Key);
 						foreach (KeyValuePair<String, Object> attachmentEntry in ((Dictionary<String, Object>)slotEntry.Value)) {
-							Attachment attachment = ReadAttachment(skin, attachmentEntry.Key, (Dictionary<String, Object>)attachmentEntry.Value);
+							Attachment attachment = ReadAttachment(skin, slotIndex, attachmentEntry.Key, (Dictionary<String, Object>)attachmentEntry.Value);
 							if (attachment != null) skin.AddAttachment(slotIndex, attachmentEntry.Key, attachment);
 						}
 					}
@@ -217,6 +225,25 @@ namespace Spine {
 						skeletonData.defaultSkin = skin;
 				}
 			}
+
+			// Linked meshes.
+			for (int i = 0, n = linkedMeshes.Count; i < n; i++) {
+				LinkedMesh linkedMesh = linkedMeshes[i];
+				Skin skin = linkedMesh.skin == null ? skeletonData.defaultSkin : skeletonData.FindSkin(linkedMesh.skin);
+				if (skin == null) throw new Exception("Slot not found: " + linkedMesh.skin);
+				Attachment parent = skin.GetAttachment(linkedMesh.slotIndex, linkedMesh.parent);
+				if (parent == null) throw new Exception("Parent mesh not found: " + linkedMesh.parent);
+				if (linkedMesh.mesh is MeshAttachment) {
+					MeshAttachment mesh = (MeshAttachment)linkedMesh.mesh;
+					mesh.ParentMesh = (MeshAttachment)parent;
+					mesh.UpdateUVs();
+				} else {
+					WeightedMeshAttachment mesh = (WeightedMeshAttachment)linkedMesh.mesh;
+					mesh.ParentMesh = (WeightedMeshAttachment)parent;
+					mesh.UpdateUVs();
+				}
+			}
+			linkedMeshes.Clear();
 
 			// Events.
 			if (root.ContainsKey("events")) {
@@ -245,7 +272,7 @@ namespace Spine {
 			return skeletonData;
 		}
 
-		private Attachment ReadAttachment (Skin skin, String name, Dictionary<String, Object> map) {
+		private Attachment ReadAttachment (Skin skin, int slotIndex, String name, Dictionary<String, Object> map) {
 			if (map.ContainsKey("name"))
 				name = (String)map["name"];
 
@@ -285,15 +312,11 @@ namespace Spine {
 				}
 
 				return region;
-			case AttachmentType.mesh: {
+			case AttachmentType.mesh:
+			case AttachmentType.linkedmesh: {
 					MeshAttachment mesh = attachmentLoader.NewMeshAttachment(skin, name, path);
 					if (mesh == null) return null;
-
 					mesh.Path = path;
-					mesh.vertices = GetFloatArray(map, "vertices", scale);
-					mesh.triangles = GetIntArray(map, "triangles");
-					mesh.regionUVs = GetFloatArray(map, "uvs", 1);
-					mesh.UpdateUVs();
 
 					if (map.ContainsKey("color")) {
 						var color = (String)map["color"];
@@ -303,38 +326,31 @@ namespace Spine {
 						mesh.a = ToColor(color, 3);
 					}
 
-					mesh.HullLength = GetInt(map, "hull", 0) * 2;
-					if (map.ContainsKey("edges")) mesh.Edges = GetIntArray(map, "edges");
 					mesh.Width = GetInt(map, "width", 0) * scale;
 					mesh.Height = GetInt(map, "height", 0) * scale;
 
+					String parent = GetString(map, "parent", null);
+					if (parent == null) {
+						mesh.vertices = GetFloatArray(map, "vertices", scale);
+						mesh.triangles = GetIntArray(map, "triangles");
+						mesh.regionUVs = GetFloatArray(map, "uvs", 1);
+						mesh.UpdateUVs();
+
+						mesh.HullLength = GetInt(map, "hull", 0) * 2;
+						if (map.ContainsKey("edges")) mesh.Edges = GetIntArray(map, "edges");
+					} else {
+						mesh.InheritFFD = GetBoolean(map, "ffd", true);
+						linkedMeshes.Add(new LinkedMesh(mesh, GetString(map, "skin", null), slotIndex, parent));
+					}
+
 					return mesh;
 				}
-			case AttachmentType.weightedmesh: {
+			case AttachmentType.weightedmesh:
+			case AttachmentType.weightedlinkedmesh: {
 					WeightedMeshAttachment mesh = attachmentLoader.NewWeightedMeshAttachment(skin, name, path);
 					if (mesh == null) return null;
 
 					mesh.Path = path;
-					float[] uvs = GetFloatArray(map, "uvs", 1);
-					float[] vertices = GetFloatArray(map, "vertices", 1);
-					var weights = new List<float>(uvs.Length * 3 * 3);
-					var bones = new List<int>(uvs.Length * 3);
-					for (int i = 0, n = vertices.Length; i < n; ) {
-						int boneCount = (int)vertices[i++];
-						bones.Add(boneCount);
-						for (int nn = i + boneCount * 4; i < nn; ) {
-							bones.Add((int)vertices[i]);
-							weights.Add(vertices[i + 1] * scale);
-							weights.Add(vertices[i + 2] * scale);
-							weights.Add(vertices[i + 3]);
-							i += 4;
-						}
-					}
-					mesh.bones = bones.ToArray();
-					mesh.weights = weights.ToArray();
-					mesh.triangles = GetIntArray(map, "triangles");
-					mesh.regionUVs = uvs;
-					mesh.UpdateUVs();
 
 					if (map.ContainsKey("color")) {
 						var color = (String)map["color"];
@@ -344,10 +360,37 @@ namespace Spine {
 						mesh.a = ToColor(color, 3);
 					}
 
-					mesh.HullLength = GetInt(map, "hull", 0) * 2;
-					if (map.ContainsKey("edges")) mesh.Edges = GetIntArray(map, "edges");
 					mesh.Width = GetInt(map, "width", 0) * scale;
 					mesh.Height = GetInt(map, "height", 0) * scale;
+
+					String parent = GetString(map, "parent", null);
+					if (parent == null) {
+						float[] uvs = GetFloatArray(map, "uvs", 1);
+						float[] vertices = GetFloatArray(map, "vertices", 1);
+						var weights = new List<float>(uvs.Length * 3 * 3);
+						var bones = new List<int>(uvs.Length * 3);
+						for (int i = 0, n = vertices.Length; i < n;) {
+							int boneCount = (int)vertices[i++];
+							bones.Add(boneCount);
+							for (int nn = i + boneCount * 4; i < nn; i += 4) {
+								bones.Add((int)vertices[i]);
+								weights.Add(vertices[i + 1] * scale);
+								weights.Add(vertices[i + 2] * scale);
+								weights.Add(vertices[i + 3]);
+							}
+						}
+						mesh.bones = bones.ToArray();
+						mesh.weights = weights.ToArray();
+						mesh.triangles = GetIntArray(map, "triangles");
+						mesh.regionUVs = uvs;
+						mesh.UpdateUVs();
+
+						mesh.HullLength = GetInt(map, "hull", 0) * 2;
+						if (map.ContainsKey("edges")) mesh.Edges = GetIntArray(map, "edges");
+					} else {
+						mesh.InheritFFD = GetBoolean(map, "ffd", true);
+						linkedMeshes.Add(new LinkedMesh(mesh, GetString(map, "skin", null), slotIndex, parent));
+					}
 
 					return mesh;
 				}
@@ -483,11 +526,13 @@ namespace Spine {
 							timelines.Add(timeline);
 							duration = Math.Max(duration, timeline.frames[timeline.FrameCount * 2 - 2]);
 
-						} else if (timelineName == "translate" || timelineName == "scale") {
+						} else if (timelineName == "translate" || timelineName == "scale" || timelineName == "shear") {
 							TranslateTimeline timeline;
 							float timelineScale = 1;
 							if (timelineName == "scale")
 								timeline = new ScaleTimeline(values.Count);
+							else if (timelineName == "shear")
+								timeline = new ShearTimeline(values.Count);
 							else {
 								timeline = new TranslateTimeline(values.Count);
 								timelineScale = scale;
@@ -497,8 +542,8 @@ namespace Spine {
 							int frameIndex = 0;
 							foreach (Dictionary<String, Object> valueMap in values) {
 								float time = (float)valueMap["time"];
-								float x = valueMap.ContainsKey("x") ? (float)valueMap["x"] : 0;
-								float y = valueMap.ContainsKey("y") ? (float)valueMap["y"] : 0;
+								float x = GetFloat(valueMap, "x", 0);
+								float y = GetFloat(valueMap, "y", 0);
 								timeline.SetFrame(frameIndex, time, (float)x * timelineScale, (float)y * timelineScale);
 								ReadCurve(timeline, frameIndex, valueMap);
 								frameIndex++;
@@ -512,17 +557,18 @@ namespace Spine {
 				}
 			}
 
+			// IK timelines.
 			if (map.ContainsKey("ik")) {
-				foreach (KeyValuePair<String, Object> ikMap in (Dictionary<String, Object>)map["ik"]) {
-					IkConstraintData ikConstraint = skeletonData.FindIkConstraint(ikMap.Key);
-					var values = (List<Object>)ikMap.Value;
+				foreach (KeyValuePair<String, Object> constraintMap in (Dictionary<String, Object>)map["ik"]) {
+					IkConstraintData constraint = skeletonData.FindIkConstraint(constraintMap.Key);
+					var values = (List<Object>)constraintMap.Value;
 					var timeline = new IkConstraintTimeline(values.Count);
-					timeline.ikConstraintIndex = skeletonData.ikConstraints.IndexOf(ikConstraint);
+					timeline.ikConstraintIndex = skeletonData.ikConstraints.IndexOf(constraint);
 					int frameIndex = 0;
 					foreach (Dictionary<String, Object> valueMap in values) {
 						float time = (float)valueMap["time"];
-						float mix = valueMap.ContainsKey("mix") ? (float)valueMap["mix"] : 1;
-						bool bendPositive = valueMap.ContainsKey("bendPositive") ? (bool)valueMap["bendPositive"] : true;
+						float mix = GetFloat(valueMap, "mix", 1);
+						bool bendPositive = GetBoolean(valueMap, "bendPositive", true);
 						timeline.SetFrame(frameIndex, time, mix, bendPositive ? 1 : -1);
 						ReadCurve(timeline, frameIndex, valueMap);
 						frameIndex++;
@@ -532,6 +578,30 @@ namespace Spine {
 				}
 			}
 
+			// Transform constraint timelines.
+			if (map.ContainsKey("transform")) {
+				foreach (KeyValuePair<String, Object> constraintMap in (Dictionary<String, Object>)map["transform"]) {
+					TransformConstraintData constraint = skeletonData.FindTransformConstraint(constraintMap.Key);
+					var values = (List<Object>)constraintMap.Value;
+					var timeline = new TransformConstraintTimeline(values.Count);
+					timeline.transformConstraintIndex = skeletonData.transformConstraints.IndexOf(constraint);
+					int frameIndex = 0;
+					foreach (Dictionary<String, Object> valueMap in values) {
+						float time = (float)valueMap["time"];
+						float rotateMix = GetFloat(valueMap, "rotateMix", 1);
+						float translateMix = GetFloat(valueMap, "translateMix", 1);
+						float scaleMix = GetFloat(valueMap, "scaleMix", 1);
+						float shearMix = GetFloat(valueMap, "shearMix", 1);
+						timeline.SetFrame(frameIndex, time, rotateMix, translateMix, scaleMix, shearMix);
+						ReadCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines.Add(timeline);
+					duration = Math.Max(duration, timeline.frames[timeline.FrameCount * 5 - 5]);
+				}
+			}
+
+			// FFD timelines.
 			if (map.ContainsKey("ffd")) {
 				foreach (KeyValuePair<String, Object> ffdMap in (Dictionary<String, Object>)map["ffd"]) {
 					Skin skin = skeletonData.FindSkin(ffdMap.Key);
@@ -539,7 +609,7 @@ namespace Spine {
 						int slotIndex = skeletonData.FindSlotIndex(slotMap.Key);
 						foreach (KeyValuePair<String, Object> meshMap in (Dictionary<String, Object>)slotMap.Value) {
 							var values = (List<Object>)meshMap.Value;
-							var timeline = new FFDTimeline(values.Count);
+							var timeline = new FfdTimeline(values.Count);
 							Attachment attachment = skin.GetAttachment(slotIndex, meshMap.Key);
 							if (attachment == null) throw new Exception("FFD attachment not found: " + meshMap.Key);
 							timeline.slotIndex = slotIndex;
@@ -655,6 +725,19 @@ namespace Spine {
 			else if (curveObject is List<Object>) {
 				var curve = (List<Object>)curveObject;
 				timeline.SetCurve(frameIndex, (float)curve[0], (float)curve[1], (float)curve[2], (float)curve[3]);
+			}
+		}
+
+		internal class LinkedMesh {
+			internal String parent, skin;
+			internal int slotIndex;
+			internal Attachment mesh;
+
+			public LinkedMesh (Attachment mesh, String skin, int slotIndex, String parent) {
+				this.mesh = mesh;
+				this.skin = skin;
+				this.slotIndex = slotIndex;
+				this.parent = parent;
 			}
 		}
 	}

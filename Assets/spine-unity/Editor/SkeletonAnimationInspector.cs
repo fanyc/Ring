@@ -28,83 +28,80 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
-
-using System;
 using UnityEditor;
 using UnityEngine;
 using Spine;
 
-[CustomEditor(typeof(SkeletonAnimation))]
-public class SkeletonAnimationInspector : SkeletonRendererInspector {
-	protected SerializedProperty animationName, loop, timeScale, autoReset;
-	protected bool m_isPrefab;
-	protected bool wasAnimationNameChanged;
+namespace Spine.Unity.Editor {
+	
+	[CustomEditor(typeof(SkeletonAnimation))]
+	public class SkeletonAnimationInspector : SkeletonRendererInspector {
+		protected SerializedProperty animationName, loop, timeScale, autoReset;
+		protected bool wasAnimationNameChanged;
 
-	protected override void OnEnable () {
-		base.OnEnable();
-		animationName = serializedObject.FindProperty("_animationName");
-		loop = serializedObject.FindProperty("loop");
-		timeScale = serializedObject.FindProperty("timeScale");
-
-		if (PrefabUtility.GetPrefabType(this.target) == PrefabType.Prefab)
-			m_isPrefab = true;
-	}
-
-	protected override void gui () {
-		base.gui();
-
-		SkeletonAnimation component = (SkeletonAnimation)target;
-		if (!component.valid)
-			return;
-		
-		if (wasAnimationNameChanged) {
-			if (!Application.isPlaying) {
-				if (component.state != null) component.state.ClearTrack(0);
-				component.skeleton.SetToSetupPose();
-			}
-
-			Spine.Animation animationToUse = component.skeleton.Data.FindAnimation(animationName.stringValue);
-
-			if (!Application.isPlaying) {
-				if (animationToUse != null) animationToUse.Apply(component.skeleton, 0f, 0f, false, null);
-				component.Update();
-				component.LateUpdate();
-				SceneView.RepaintAll();
-			} else {
-				if (animationToUse != null)
-					component.state.SetAnimation(0, animationToUse, loop.boolValue);
-				else
-					component.state.ClearTrack(0);
-			}
-
-			wasAnimationNameChanged = false;
+		protected override void OnEnable () {
+			base.OnEnable();
+			animationName = serializedObject.FindProperty("_animationName");
+			loop = serializedObject.FindProperty("loop");
+			timeScale = serializedObject.FindProperty("timeScale");
 		}
 
-		// Reflect animationName serialized property in the inspector even if SetAnimation API was used.
-		if (Application.isPlaying) {
-			TrackEntry current = component.state.GetCurrent(0);
-			if (current != null) {
-				if (component.AnimationName != animationName.stringValue) {
-					animationName.stringValue = current.Animation.Name;
+		protected override void DrawInspectorGUI () {
+			base.DrawInspectorGUI();
+
+			SkeletonAnimation component = (SkeletonAnimation)target;
+			if (!component.valid)
+				return;
+
+			if (!isInspectingPrefab) {
+				if (wasAnimationNameChanged) {
+					if (!Application.isPlaying) {
+						if (component.state != null) component.state.ClearTrack(0);
+						component.skeleton.SetToSetupPose();
+					}
+
+					Spine.Animation animationToUse = component.skeleton.Data.FindAnimation(animationName.stringValue);
+
+					if (!Application.isPlaying) {
+						if (animationToUse != null) animationToUse.Apply(component.skeleton, 0f, 0f, false, null);
+						component.Update();
+						component.LateUpdate();
+						SceneView.RepaintAll();
+					} else {
+						if (animationToUse != null)
+							component.state.SetAnimation(0, animationToUse, loop.boolValue);
+						else
+							component.state.ClearTrack(0);
+					}
+
+					wasAnimationNameChanged = false;
+				}
+
+				// Reflect animationName serialized property in the inspector even if SetAnimation API was used.
+				if (Application.isPlaying) {
+					TrackEntry current = component.state.GetCurrent(0);
+					if (current != null) {
+						if (component.AnimationName != animationName.stringValue)
+							animationName.stringValue = current.Animation.Name;
+					}
 				}
 			}
-		}
+				
+			EditorGUILayout.Space();
+			EditorGUI.BeginChangeCheck();
+			EditorGUILayout.PropertyField(animationName);
+			wasAnimationNameChanged |= EditorGUI.EndChangeCheck(); // Value used in the next update.
 
-		EditorGUILayout.Space();
-		EditorGUI.BeginChangeCheck();
-		EditorGUILayout.PropertyField(animationName);
-		wasAnimationNameChanged |= EditorGUI.EndChangeCheck();
-			
-		EditorGUILayout.PropertyField(loop);
-		EditorGUILayout.PropertyField(timeScale);
-		component.timeScale = Math.Max(component.timeScale, 0);
+			EditorGUILayout.PropertyField(loop);
+			EditorGUILayout.PropertyField(timeScale);
+			component.timeScale = Mathf.Max(component.timeScale, 0);
 
-		EditorGUILayout.Space();
+			EditorGUILayout.Space();
 
-		if (!m_isPrefab) {
-			if (component.GetComponent<SkeletonUtility>() == null) {
-				if (GUILayout.Button(new GUIContent("Add Skeleton Utility", SpineEditorUtilities.Icons.skeletonUtility), GUILayout.Height(30))) {
-					component.gameObject.AddComponent<SkeletonUtility>();
+			if (!isInspectingPrefab) {
+				if (component.GetComponent<SkeletonUtility>() == null) {
+					if (GUILayout.Button(new GUIContent("Add Skeleton Utility", SpineEditorUtilities.Icons.skeletonUtility), GUILayout.Height(30)))
+						component.gameObject.AddComponent<SkeletonUtility>();
 				}
 			}
 		}

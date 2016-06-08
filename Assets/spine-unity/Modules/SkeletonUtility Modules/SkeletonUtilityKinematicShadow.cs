@@ -30,85 +30,97 @@
  *****************************************************************************/
 
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class SkeletonUtilityKinematicShadow : MonoBehaviour {
-	public bool hideShadow = true;
-	public Transform parent;
-	Dictionary<Transform, Transform> shadowTable;
-	GameObject shadowRoot;
+namespace Spine.Unity.Modules {
+	
+	// SkeletonUtilityKinematicShadow allows hinge chains to inherit a velocity interpreted from changes in parent transform position or from unrelated rigidbodies.
+	// Note: Uncheck "useRootTransformIfNull
+	public class SkeletonUtilityKinematicShadow : MonoBehaviour {
+		#region Inspector
+		[Tooltip("If checked, the hinge chain can inherit your root transform's velocity or position/rotation changes.")]
+		public bool detachedShadow = false;
+		public Transform parent;
+		public bool hideShadow = true;
+		#endregion
 
-	void Start () {
-		shadowRoot = (GameObject)Instantiate(gameObject);
-		if (hideShadow)
-			shadowRoot.hideFlags = HideFlags.HideInHierarchy;
-
-		if (parent == null)
-			shadowRoot.transform.parent = transform.root;
-		else
-			shadowRoot.transform.parent = parent;
-
-		shadowTable = new Dictionary<Transform, Transform>();
-
-		Destroy(shadowRoot.GetComponent<SkeletonUtilityKinematicShadow>());
-
-		shadowRoot.transform.position = transform.position;
-		shadowRoot.transform.rotation = transform.rotation;
-
-		Vector3 scaleRef = transform.TransformPoint(Vector3.right);
-		float scale = Vector3.Distance(transform.position, scaleRef);
-		shadowRoot.transform.localScale = Vector3.one;
-
-		var shadowJoints = shadowRoot.GetComponentsInChildren<Joint>();
-		foreach (Joint j in shadowJoints) {
-			j.connectedAnchor *= scale;
+		GameObject shadowRoot;
+		readonly List<TransformPair> shadowTable = new List<TransformPair>();
+		struct TransformPair {
+			public Transform dest, src;
 		}
 
-		var joints = GetComponentsInChildren<Joint>();
-		foreach (var j in joints)
-			Destroy(j);
+		void Start () {
+			// Duplicate this gameObject as the "shadow" with a different parent.
+			shadowRoot = Instantiate<GameObject>(this.gameObject);
+			Destroy(shadowRoot.GetComponent<SkeletonUtilityKinematicShadow>());
 
-		var rbs = GetComponentsInChildren<Rigidbody>();
-		foreach (var rb in rbs)
-			Destroy(rb);
+			// Prepare shadow gameObject's properties.
+			var shadowRootTransform = shadowRoot.transform;
+			shadowRootTransform.position = transform.position;
+			shadowRootTransform.rotation = transform.rotation;
 
-		var colliders = GetComponentsInChildren<Collider>();
-		foreach (var c in colliders)
-			Destroy(c);
+			Vector3 scaleRef = transform.TransformPoint(Vector3.right);
+			float scale = Vector3.Distance(transform.position, scaleRef);
+			shadowRootTransform.localScale = Vector3.one;
 
-
-		//match by bone name
-		var shadowBones = shadowRoot.GetComponentsInChildren<SkeletonUtilityBone>();
-		var bones = GetComponentsInChildren<SkeletonUtilityBone>();
-
-		//build bone lookup
-		foreach (var b in bones) {
-			if (b.gameObject == gameObject)
-				continue;
-
-			foreach (var sb in shadowBones) {
-				if (sb.GetComponent<Rigidbody>() == null)
-					continue;
-
-				if (sb.boneName == b.boneName) {
-					shadowTable.Add(sb.transform, b.transform);
-					break;
-				}
+			if (!detachedShadow) {
+				// Do not change to null coalescing operator (??). Unity overloads null checks for UnityEngine.Objects but not the ?? operator.
+				if (parent == null)
+					shadowRootTransform.parent = transform.root;  
+				else
+					shadowRootTransform.parent = parent;
 			}
+
+			if (hideShadow)
+				shadowRoot.hideFlags = HideFlags.HideInHierarchy;
+			
+			var shadowJoints = shadowRoot.GetComponentsInChildren<Joint>();
+			foreach (Joint j in shadowJoints)
+				j.connectedAnchor *= scale;
+
+			// Build list of bone pairs (matches shadow transforms with bone transforms)
+			var bones = GetComponentsInChildren<SkeletonUtilityBone>();
+			var shadowBones = shadowRoot.GetComponentsInChildren<SkeletonUtilityBone>();
+			foreach (var b in bones) {
+				if (b.gameObject == this.gameObject)
+					continue;
+				
+				foreach (var sb in shadowBones) {
+					if (sb.GetComponent<Rigidbody>() != null && sb.boneName == b.boneName) {
+						shadowTable.Add(new TransformPair {
+							dest = b.transform,
+							src = sb.transform
+						});
+						break;
+					}
+				}
+
+			}
+
+			// Destroy conflicting and unneeded components
+			DestroyComponents(shadowBones);
+
+			DestroyComponents(GetComponentsInChildren<Joint>());
+			DestroyComponents(GetComponentsInChildren<Rigidbody>());
+			DestroyComponents(GetComponentsInChildren<Collider>());
 		}
 
-		foreach (var b in shadowBones)
-			Destroy(b);
-	}
+		static void DestroyComponents (Component[] components) {
+			for (int i = 0, n = components.Length; i < n; i++)
+				Destroy(components[i]);
+		}
 
-	void FixedUpdate () {
-		shadowRoot.GetComponent<Rigidbody>().MovePosition(transform.position);
-		shadowRoot.GetComponent<Rigidbody>().MoveRotation(transform.rotation);
+		void FixedUpdate () {
+			var shadowRootRigidbody = shadowRoot.GetComponent<Rigidbody>();
+			shadowRootRigidbody.MovePosition(transform.position);
+			shadowRootRigidbody.MoveRotation(transform.rotation);
 
-		foreach (var pair in shadowTable) {
-			pair.Value.localPosition = pair.Key.localPosition;
-			pair.Value.localRotation = pair.Key.localRotation;
+			for (int i = 0, n = shadowTable.Count; i < n; i++) {
+				var pair = shadowTable[i];
+				pair.dest.localPosition = pair.src.localPosition;
+				pair.dest.localRotation = pair.src.localRotation;
+			}
 		}
 	}
 }

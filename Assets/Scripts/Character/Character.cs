@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Spine.Unity;
 
 public class Character : ObjectBase
 {
-    protected SkeletonAnimation m_cachedAnimation;
+    protected SkeletonAnimation m_cachedAnimation; 
     
     public enum STATE
     {
