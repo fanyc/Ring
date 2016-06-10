@@ -1,5 +1,5 @@
 ********************************************************************************
-*                       Wednesday, 08 June 2016 11:20:56                       *
+*                        Friday, 10 June 2016 20:10:02                         *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.6.2.0
 Platform: Mac
@@ -12,104 +12,14 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-2e3fc02451abb48cdae2235ace420431
-Exit code: 1
-Elapsed time: 7.34 sec
-
-- Compiler output (1 line):
-0: Compilation failed: 1 error(s), 0 warnings
-
-- Compiler errors (1 line):
-0: Assets/Scripts/Character/Character.cs(8,15): error CS0246: The type or namespace name `SkeletonAnimation' could not be found. Are you missing `Spine.Unity' using directive?
-********************************************************************************
-*                       Wednesday, 08 June 2016 11:21:07                       *
-********************************************************************************
-CSharpCompilerWrapper.exe version: 1.6.2.0
-Platform: Mac
-Target assembly: /Assembly-CSharp.dll
-Project directory: /Users/mm/Desktop/Unity Workspace/MIni Game
-Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
-Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
-Compiler: Mono C# 6.0
-
-- Compilation -----------------------------------------------
-
-Process: /usr/local/bin/mono
-Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-ecfe69c7407914b1d9a52e21a031a25d
-Exit code: 1
-Elapsed time: 1.36 sec
-
-- Compiler output (1 line):
-0: Compilation failed: 1 error(s), 0 warnings
-
-- Compiler errors (1 line):
-0: Assets/Scripts/Character/Character.cs(8,15): error CS0246: The type or namespace name `SkeletonAnimation' could not be found. Are you missing `Spine.Unity' using directive?
-********************************************************************************
-*                       Wednesday, 08 June 2016 11:21:07                       *
-********************************************************************************
-CSharpCompilerWrapper.exe version: 1.6.2.0
-Platform: Mac
-Target assembly: /Assembly-CSharp-Editor-firstpass.dll
-Project directory: /Users/mm/Desktop/Unity Workspace/MIni Game
-Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
-Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
-Compiler: Mono C# 6.0
-
-- Compilation -----------------------------------------------
-
-Process: /usr/local/bin/mono
-Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-1569eef567275424ab2446ba8a8406fc
+Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-3eb18abc60476418192af78785558ac8
 Exit code: 0
-Elapsed time: 1.26 sec
-
-- Compiler output (0 lines):
-
-- Compiler errors (0 lines):
-********************************************************************************
-*                       Wednesday, 08 June 2016 11:22:50                       *
-********************************************************************************
-CSharpCompilerWrapper.exe version: 1.6.2.0
-Platform: Mac
-Target assembly: /Assembly-CSharp.dll
-Project directory: /Users/mm/Desktop/Unity Workspace/MIni Game
-Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
-Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
-Compiler: Mono C# 6.0
-
-- Compilation -----------------------------------------------
-
-Process: /usr/local/bin/mono
-Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-54a5efdcf5b7e4d3fa837a21065ec2c3
-Exit code: 1
-Elapsed time: 4.09 sec
+Elapsed time: 60.29 sec
 
 - Compiler output (1 line):
-0: Compilation failed: 1 error(s), 0 warnings
+0: Compilation succeeded - 27 warning(s)
 
-- Compiler errors (1 line):
-0: Assets/Scripts/Character/Character.cs(8,15): error CS0246: The type or namespace name `SkeletonAnimation' could not be found. Are you missing `Spine.Unity' using directive?
-********************************************************************************
-*                       Wednesday, 08 June 2016 11:23:28                       *
-********************************************************************************
-CSharpCompilerWrapper.exe version: 1.6.2.0
-Platform: Mac
-Target assembly: /Assembly-CSharp.dll
-Project directory: /Users/mm/Desktop/Unity Workspace/MIni Game
-Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
-Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
-Compiler: Mono C# 6.0
-
-- Compilation -----------------------------------------------
-
-Process: /usr/local/bin/mono
-Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-4ae17b44a86bb498691d83772429a290
-Exit code: 0
-Elapsed time: 4.88 sec
-
-- Compiler output (1 line):
-0: Compilation succeeded - 30 warning(s)
-
-- Compiler errors (30 lines):
+- Compiler errors (27 lines):
 0: Assets/Scripts/UI/UIItem/UIItemSkill.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
 1: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
 2: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
@@ -124,24 +34,21 @@ Elapsed time: 4.88 sec
 11: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
 12: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
 13: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
-14: Assets/uslucad/TextPic.cs(121,17): warning CS0219: The variable `size' is assigned but its value is never used
-15: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
-16: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
-17: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
-18: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
-19: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
-20: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
-21: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
-22: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
-23: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
-24: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
-25: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
-26: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
-27: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
-28: Assets/uslucad/TextPic.cs(64,15): warning CS0414: The private field `TextPic.selected' is assigned but its value is never used
-29: Assets/uslucad/TextWithIcon.cs(28,27): warning CS0414: The private field `UI.Sources.TextWithIcon.imagePrefab' is assigned but its value is never used
+14: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+15: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+16: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+17: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+18: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+19: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+20: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+21: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+22: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+23: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+24: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+25: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+26: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                       Wednesday, 08 June 2016 11:23:35                       *
+*                        Friday, 10 June 2016 20:15:22                         *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.6.2.0
 Platform: Mac
@@ -154,9 +61,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-e756917b7988541e38c341b9fef7a5a9
+Arguments: "/Users/mm/Desktop/Unity Workspace/MIni Game/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-df1bfb4db8d4441bbbc64e98b90eb420
 Exit code: 0
-Elapsed time: 4.54 sec
+Elapsed time: 587.01 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 16 warning(s)

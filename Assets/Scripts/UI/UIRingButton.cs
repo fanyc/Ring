@@ -5,9 +5,11 @@ using SeventyOneSquared;
 
 public class UIRingButton : MonoSingleton<UIRingButton> {
     
-    public PDUnity[] Normal;
-    public PDUnity[] Boost;
-    
+    // public PDUnity[] Normal;
+    // public PDUnity[] Boost;
+    public GameObject Normal;
+    public GameObject Boost;
+
     protected bool IsEnter = false;
     protected bool IsPressed = false;
     public bool IsCharging
@@ -21,10 +23,12 @@ public class UIRingButton : MonoSingleton<UIRingButton> {
         
         if(IsEnter && IsPressed)
         {
-            for(int i = 0; i < Normal.Length; ++i)
-                Normal[i].Running = false;
-            for(int i = 0; i < Boost.Length; ++i)
-                Boost[i].Running = true;
+            // for(int i = 0; i < Normal.Length; ++i)
+            //     Normal[i].Running = false;
+            // for(int i = 0; i < Boost.Length; ++i)
+            //     Boost[i].Running = true;
+            Normal.SetActive(false);
+            Boost.SetActive(true);
         }
     }
     
@@ -34,10 +38,12 @@ public class UIRingButton : MonoSingleton<UIRingButton> {
         
         if(!IsEnter || !IsPressed)
         {
-            for(int i = 0; i < Normal.Length; ++i)
-                Normal[i].Running = true;
-            for(int i = 0; i < Boost.Length; ++i)
-                Boost[i].Running = false;
+            // for(int i = 0; i < Normal.Length; ++i)
+            //     Normal[i].Running = true;
+            // for(int i = 0; i < Boost.Length; ++i)
+            //     Boost[i].Running = false;
+            Normal.SetActive(true);
+            Boost.SetActive(false);
         }
     }
     
@@ -47,10 +53,12 @@ public class UIRingButton : MonoSingleton<UIRingButton> {
         
         if(IsEnter && IsPressed)
         {
-            for(int i = 0; i < Normal.Length; ++i)
-                Normal[i].Running = false;
-            for(int i = 0; i < Boost.Length; ++i)
-                Boost[i].Running = true;
+            // for(int i = 0; i < Normal.Length; ++i)
+            //     Normal[i].Running = false;
+            // for(int i = 0; i < Boost.Length; ++i)
+            //     Boost[i].Running = true;
+            Normal.SetActive(false);
+            Boost.SetActive(true);
         }
     }
     
@@ -60,10 +68,12 @@ public class UIRingButton : MonoSingleton<UIRingButton> {
         
         if(!IsEnter || !IsPressed)
         {
-            for(int i = 0; i < Normal.Length; ++i)
-                Normal[i].Running = true;
-            for(int i = 0; i < Boost.Length; ++i)
-                Boost[i].Running = false;
+            // for(int i = 0; i < Normal.Length; ++i)
+            //     Normal[i].Running = true;
+            // for(int i = 0; i < Boost.Length; ++i)
+            //     Boost[i].Running = false;
+            Normal.SetActive(true);
+            Boost.SetActive(false);
         }
     }
     

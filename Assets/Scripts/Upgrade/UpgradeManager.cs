@@ -17,10 +17,10 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
        m_dictUpgrade.Add("WarriorAttackDamage", new Upgrade((int level)=>{ return 1.0f + BigDecimal.Pow(10.0f, Damage.Evaluate( Mathf.Max(0, (level - 1) * 3 - 2 )) ) * 1.0f / 3.0f; }));
        m_dictUpgrade.Add("WarriorAttackPrice", new Upgrade((int level)=>{ return (BigDecimal.Pow(10.0f, Price.Evaluate( Mathf.Max(0, (level) * 3 - 2 )) ) - BigDecimal.Pow(10.0f, Price.Evaluate( Mathf.Max(0, (level) * 3 - 2 ) - 1 ) )) * 10.0f / 3.0f; }));
        
-       m_dictUpgrade.Add("ArcherAttackDamage", new Upgrade((int level)=>{ return 2.0f + BigDecimal.Pow(10.0f, Damage.Evaluate( Mathf.Max(0, (level - 1) * 3 - 1 )) ) * 1.0f / 3.0f; }));
+       m_dictUpgrade.Add("ArcherAttackDamage", new Upgrade((int level)=>{ return 1.0f + BigDecimal.Pow(10.0f, Damage.Evaluate( Mathf.Max(0, (level - 1) * 3 - 1 )) ) * 1.0f / 3.0f; }));
        m_dictUpgrade.Add("ArcherAttackPrice", new Upgrade((int level)=>{ return (BigDecimal.Pow(10.0f, Price.Evaluate( Mathf.Max(0, (level) * 3 - 1 )) ) - BigDecimal.Pow(10.0f, Price.Evaluate( Mathf.Max(0, (level) * 3 - 1) - 1 ) )) * 10.0f / 3.0f; }));
        
-       m_dictUpgrade.Add("SoceressAttackDamage", new Upgrade((int level)=>{ return 5.0f + BigDecimal.Pow(10.0f, Damage.Evaluate( Mathf.Max(0, (level - 1) * 3 - 0 )) ) * 1.0f / 3.0f; }));
+       m_dictUpgrade.Add("SoceressAttackDamage", new Upgrade((int level)=>{ return 1.0f + BigDecimal.Pow(10.0f, Damage.Evaluate( Mathf.Max(0, (level - 1) * 3 - 0 )) ) * 1.0f / 3.0f; }));
        m_dictUpgrade.Add("SoceressAttackPrice", new Upgrade((int level)=>{ return (BigDecimal.Pow(10.0f, Price.Evaluate( Mathf.Max(0, (level) * 3 - 0 )) ) - BigDecimal.Pow(10.0f, Price.Evaluate( Mathf.Max(0, (level) * 3 - 0) - 1 ) )) * 10.0f / 3.0f; }));
        
     //    m_dictUpgrade.Add("WarriorAttackDamage", new Upgrade((int level)=>{ return Mathf.Pow(10.0f, Damage.Evaluate( level - 1 )) / 3.0f * 10.0f ; }));

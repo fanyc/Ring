@@ -128,6 +128,16 @@ public class Character : ObjectBase
         m_cachedAnimation.timeScale = timeScale;
     }
     
+    public void AddAnimationEvent(Spine.AnimationState.EventDelegate listener)
+    {
+        m_cachedAnimation.state.Event += listener;
+    } 
+
+    public void RemoveAnimationEvent(Spine.AnimationState.EventDelegate listener)
+    {
+        m_cachedAnimation.state.Event -= listener;
+    } 
+
     public virtual void Beaten(BigDecimal damage)
     {
         

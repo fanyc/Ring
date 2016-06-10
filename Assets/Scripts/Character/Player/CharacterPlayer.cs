@@ -46,11 +46,10 @@ public class CharacterPlayer : Character
     }
     protected virtual IEnumerator MOVE()
     {
-        PlayAnimation("run_01", false, true, GameManager.Instance.PlayerSpeed);
+        PlayAnimation("run_01", false, true);
         while(m_currentState == STATE.MOVE)
         {
-            SetAnimationTimeScale(GameManager.Instance.PlayerSpeed);
-            Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f * GameManager.Instance.PlayerSpeed, 0.0f);
+            Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f, 0.0f);
             
             if(GameManager.Instance.cachedTransform.position.x + Offset < pos.x)
             {

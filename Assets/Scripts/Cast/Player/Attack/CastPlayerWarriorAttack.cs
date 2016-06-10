@@ -17,21 +17,26 @@ public class CastPlayerWarriorAttack : Castable
     
     protected override void Prepare()
     {
+        m_caster.AddAnimationEvent(Hit);
     }
     protected override IEnumerator Cast()
     {
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
-        SetCoolTime(1.0f / GameManager.Instance.PlayerSpeed);
-        m_caster.PlayAnimation("attack_01", true, false, GameManager.Instance.PlayerSpeed);
-        yield return new WaitForSeconds(0.35f / GameManager.Instance.PlayerSpeed);
-        target.Beaten(1.0f + UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue);
-        yield return new WaitForSeconds(0.55f / GameManager.Instance.PlayerSpeed);
-        
+        SetCoolTime(0.467f / GameManager.Instance.PlayerSpeed);
+        m_caster.PlayAnimation("atk_" + Random.Range(1,4).ToString("00"), true, false, GameManager.Instance.PlayerSpeed);
+        yield return new WaitForSeconds(0.467f / GameManager.Instance.PlayerSpeed);
         State = Character.STATE.IDLE;
     }
     
     protected override void Release()
     {
+        m_caster.RemoveAnimationEvent(Hit);
+    }
+
+    void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
+    {
+        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
+        target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * 0.467f);
     }
 }

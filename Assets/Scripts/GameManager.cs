@@ -7,7 +7,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     //====================Properties Start====================
     protected int m_nLevel;
-    protected int m_nCurrnetWave;
+    protected int m_nCurrentWave;
     protected const int WAVE_COUNT = 5;
     public enum StateInGame
     {
@@ -49,7 +49,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         get
         {
-            return 1.0f + (UIRingButton.Instance.IsCharging ? 0.5f : 0.0f);
+            return 1.0f + (UIRingButton.Instance.IsCharging ? 1.0f : 0.0f);
         }
     }
     
@@ -89,7 +89,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         m_fGold = new BigDecimal(0);
         m_InGameState = StateInGame.IDLE;
-        m_nCurrnetWave = 0;
+        m_nCurrentWave = 0;
         
         NextWave();
     }
@@ -105,16 +105,27 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void NextWave()
     {
-        m_nCurrnetWave++;
-        cachedTransform.position = new Vector3((m_nCurrnetWave - 1) / 8 * 16.875f, 0.0f);
-        if((m_nCurrnetWave - 1) % 8 == 0 && m_nCurrnetWave != 1)
+        m_nCurrentWave++;
+        cachedTransform.position = new Vector3(m_nCurrentWave * 5.625f, 0.0f);
+        if(m_nCurrentWave > 1)
         {
-            UpgradeManager.Instance.GetUpgrade("EnemyHP").Level++;
-            UpgradeManager.Instance.GetUpgrade("Reward").Level++;
+            if((m_nCurrentWave - 1) % 8 == 0)
+            {
+                if((m_nCurrentWave - 1) % (8 * 12) == 0)
+                {
+                    
+                }
+                //else
+                {
+                    UpgradeManager.Instance.GetUpgrade("EnemyHP").Level++;
+                    UpgradeManager.Instance.GetUpgrade("Reward").Level++;
+                }
+            }
         }
-        // if(m_nCurrnetWave > WAVE_COUNT)
+        
+        // if(m_nCurrentWave > WAVE_COUNT)
         // {
-        //     m_nCurrnetWave = 0;
+        //     m_nCurrentWave = 0;
         // }
         // else
         m_InGameState = StateInGame.IDLE;

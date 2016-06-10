@@ -24,10 +24,9 @@ public class CastPlayerMageAttack : Castable
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
         SetCoolTime(5.0f / GameManager.Instance.PlayerSpeed);
-        m_caster.PlayAnimation("attack_01", true, false, GameManager.Instance.PlayerSpeed);
-        yield return new WaitForSeconds(0.85f / GameManager.Instance.PlayerSpeed);
-        target.Beaten(5.0f + UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue);
-        yield return new WaitForSeconds(0.35f / GameManager.Instance.PlayerSpeed);
+        m_caster.PlayAnimation("atk_" + Random.Range(1, 3).ToString("00"), true, false, GameManager.Instance.PlayerSpeed);
+        yield return new WaitForSeconds(1.867f / GameManager.Instance.PlayerSpeed);
+        //target.Beaten(5.0f + UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue);
     
         State = Character.STATE.IDLE;
     }
