@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DamageText : MonoBehaviour {
+public class DamageText : ObjectBase
+{	
+	protected TMPro.TextMeshPro m_Text;
 
-	// Use this for initialization
-	void Start () {
-	
+	void Awake()
+	{
+		m_Text = cachedTransform.GetChild(0).GetComponent<TMPro.TextMeshPro>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void Init(string text)
+	{
+		m_Text.text = text;
 	}
 }

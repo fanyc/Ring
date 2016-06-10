@@ -34,6 +34,7 @@ public class CharacterEnemy : Character
         if(m_currentState == STATE.DEAD) return;
         base.Beaten(damage);
         m_fHP -= damage;
+        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(cachedTransform.position.x + Random.Range(0.0f, 1.0f) - 1.5f, Random.Range(0.0f, 1.0f) + 1.5f)).Init(damage.ToUnit());
         if(m_fHP <= 0.0f)
         {
             Dead();

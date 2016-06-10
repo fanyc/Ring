@@ -78,6 +78,8 @@ public class GameManager : MonoSingleton<GameManager>
         }
         
         ObjectPool<ItemGold>.CreatePool("@ItemGold", Resources.Load<GameObject>("Item/@ItemGold"), 20);
+        ObjectPool<DamageText>.CreatePool("@DamageText", Resources.Load<GameObject>("@DamageText"), 100);
+        
     }
     
     void Start()

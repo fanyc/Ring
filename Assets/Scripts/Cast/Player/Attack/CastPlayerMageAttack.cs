@@ -18,20 +18,29 @@ public class CastPlayerMageAttack : Castable
     
     protected override void Prepare()
     {
+        m_caster.AddAnimationEvent(Hit);
     }
+
     protected override IEnumerator Cast()
     {
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
-        SetCoolTime(5.0f / GameManager.Instance.PlayerSpeed);
+        SetCoolTime(1.867f / GameManager.Instance.PlayerSpeed);
         m_caster.PlayAnimation("atk_" + Random.Range(1, 3).ToString("00"), true, false, GameManager.Instance.PlayerSpeed);
         yield return new WaitForSeconds(1.867f / GameManager.Instance.PlayerSpeed);
-        //target.Beaten(5.0f + UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue);
+        //target.Beaten(UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue + 2.0f);
     
         State = Character.STATE.IDLE;
     }
     
     protected override void Release()
     {
+        m_caster.RemoveAnimationEvent(Hit);
+    }
+
+    void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
+    {
+        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
+        target.Beaten(UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue * 1.867f);
     }
 }

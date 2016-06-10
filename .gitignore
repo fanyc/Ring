@@ -1,9 +1,13 @@
-**/.DS_Store
 .vscode
-Library
-bin
+
 obj
 Temp
+Library
+
 *.apk
-*.csproj
 *.sln
+*.csproj
+*.unitypackage
+*.userprefs
+
+**/.DS_STORE
