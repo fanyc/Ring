@@ -1,5 +1,13 @@
 public class CharacterPlayerMage : CharacterPlayer
 {
+    public new static float AttackPerSecond
+    {
+        get
+        {
+            return 1.867f;
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();

@@ -25,9 +25,9 @@ public class CastPlayerArcherAttack : Castable
     {
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
-        SetCoolTime(0.867f / GameManager.Instance.PlayerSpeed);
+        SetCoolTime(CharacterPlayerArcher.AttackPerSecond / GameManager.Instance.PlayerSpeed);
         m_caster.PlayAnimation("atk_" + Random.Range(1, 3).ToString("00"), true, false, GameManager.Instance.PlayerSpeed);
-        yield return new WaitForSeconds(0.867f / GameManager.Instance.PlayerSpeed);
+        yield return new WaitForSeconds(CharacterPlayerArcher.AttackPerSecond / GameManager.Instance.PlayerSpeed);
         //target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue + 2.0f);
     
         State = Character.STATE.IDLE;
@@ -41,6 +41,6 @@ public class CastPlayerArcherAttack : Castable
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
     {
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
-        target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue * 0.867f);
+        target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue);
     }
 }

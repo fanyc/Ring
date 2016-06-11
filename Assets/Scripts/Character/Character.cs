@@ -52,7 +52,7 @@ public class Character : ObjectBase
     
     IEnumerator IDLE()
     {
-        PlayAnimation("stand_01", true, true);
+        PlayAnimation("stand_01", false, true);
         while(m_currentState == STATE.IDLE)
         {
             IdleThought();
@@ -101,13 +101,14 @@ public class Character : ObjectBase
     {
         if(name.Equals("") == false)
         {
-            m_cachedAnimation.loop = isLoop;
+            //m_cachedAnimation.loop = isLoop;
             SetAnimationTimeScale(timeScale);
             if(isReset)
             {
                 m_cachedAnimation.state.ClearTrack(0);
             }
-            m_cachedAnimation.AnimationName = name;
+            //m_cachedAnimation.AnimationName = name;
+            m_cachedAnimation.state.SetAnimation(0, name, isLoop);
             
             
         }

@@ -4,6 +4,13 @@ using System.Numerics;
 
 public class CharacterPlayer : Character
 {
+    public static float AttackPerSecond
+    {
+        get
+        {
+            return 0.0f;
+        }
+    }
     public float Offset;
     protected Castable m_castAttack;
     protected Castable m_castSkill;
