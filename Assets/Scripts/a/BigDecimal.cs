@@ -254,6 +254,16 @@ namespace System.Numerics
 			int scale = (int)Math.Floor(log);
 			return (BigDecimal)BigInteger.Pow (10, scale) * (BigDecimal)Math.Exp((log - scale) / Math.Log10(Math.E));
 		}
+
+		public static float Ratio(BigDecimal left, BigDecimal right)
+		{
+			return Ratio<float>(left, right);
+		}
+		 public static T Ratio<T>(BigDecimal left, BigDecimal right) where T : struct
+		 {
+			 int scale = Math.Max(left._unscaledValue.ToString().Length - left._scale, right._unscaledValue.ToString().Length - right._scale);
+			 return (T)Convert.ChangeType(new BigDecimal(left._unscaledValue, left._scale + scale).ToType<decimal>() / new BigDecimal(right._unscaledValue, right._scale + scale).ToType<decimal>(), typeof(T));
+		 }
 		
 		#endregion
 		

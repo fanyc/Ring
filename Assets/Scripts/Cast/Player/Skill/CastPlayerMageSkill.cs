@@ -25,7 +25,7 @@ public class CastPlayerMageSkill : Castable
     {
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
-        m_caster.PlayAnimation("skill_a01", true, false, GameManager.Instance.PlayerSpeed);
+        m_caster.PlayAnimation("skill_01", true, false, GameManager.Instance.PlayerSpeed);
         yield return new WaitForSeconds(0.6f / GameManager.Instance.PlayerSpeed);
         target.Beaten(100.0f);
         yield return new WaitForSeconds(0.6f / GameManager.Instance.PlayerSpeed);

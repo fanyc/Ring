@@ -14,4 +14,9 @@ public class CharacterPlayerMage : CharacterPlayer
         m_castAttack = new CastPlayerMageAttack(this);
         m_castSkill = new CastPlayerMageSkill(this);
     }
+
+    protected override string GetRunAnimation()
+    {
+        return "run_02";
+    }
 }

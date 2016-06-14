@@ -6,7 +6,7 @@ public class CharacterEnemyOger : CharacterEnemy
     public override void Init()
     {
         base.Init();
-        m_castAttack = new CastEnemyOgerAttack(this);
+        //m_castAttack = new CastEnemyOgerAttack(this);
     }
     
     public override void Dead()

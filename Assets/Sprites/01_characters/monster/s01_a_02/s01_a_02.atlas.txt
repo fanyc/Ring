@@ -1,0 +1,76 @@
+
+s01_a_02.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_01
+  rotate: true
+  xy: 162, 57
+  size: 102, 212
+  orig: 102, 212
+  offset: 0, 0
+  index: -1
+arm_02
+  rotate: true
+  xy: 570, 154
+  size: 100, 150
+  orig: 100, 150
+  offset: 0, 0
+  index: -1
+belt_01
+  rotate: false
+  xy: 2, 11
+  size: 137, 51
+  orig: 137, 51
+  offset: 0, 0
+  index: -1
+belt_02
+  rotate: false
+  xy: 827, 188
+  size: 63, 66
+  orig: 63, 66
+  offset: 0, 0
+  index: -1
+body_01
+  rotate: false
+  xy: 2, 64
+  size: 158, 190
+  orig: 158, 190
+  offset: 0, 0
+  index: -1
+hand_01
+  rotate: true
+  xy: 162, 161
+  size: 93, 224
+  orig: 93, 224
+  offset: 0, 0
+  index: -1
+head_01
+  rotate: false
+  xy: 388, 126
+  size: 180, 128
+  orig: 180, 128
+  offset: 0, 0
+  index: -1
+leg_01
+  rotate: false
+  xy: 376, 2
+  size: 76, 122
+  orig: 76, 122
+  offset: 0, 0
+  index: -1
+leg_02
+  rotate: false
+  xy: 454, 2
+  size: 76, 122
+  orig: 76, 122
+  offset: 0, 0
+  index: -1
+neck_01
+  rotate: true
+  xy: 722, 188
+  size: 66, 103
+  orig: 66, 103
+  offset: 0, 0
+  index: -1

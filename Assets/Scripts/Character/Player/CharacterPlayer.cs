@@ -23,6 +23,11 @@ public class CharacterPlayer : Character
     {
         Init();
     }
+
+    void Update()
+    {
+        MP += 1.0f * (UIRingButton.Instance.IsCharging ? 2.0f : 1.0f) * Time.deltaTime;
+    }
     
     protected override void IdleThought()
     {
@@ -51,9 +56,15 @@ public class CharacterPlayer : Character
     {
         return m_castSkill;
     }
+
+    protected virtual string GetRunAnimation()
+    {
+        return "run_01";
+    }
+
     protected virtual IEnumerator MOVE()
     {
-        PlayAnimation("run_01", false, true);
+        PlayAnimation(GetRunAnimation(), false, true);
         while(m_currentState == STATE.MOVE)
         {
             Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f, 0.0f);

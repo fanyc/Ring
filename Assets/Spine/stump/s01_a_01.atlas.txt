@@ -1,0 +1,104 @@
+
+s01_a_01.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_01
+  rotate: false
+  xy: 609, 179
+  size: 121, 66
+  orig: 121, 66
+  offset: 0, 0
+  index: -1
+arm_02
+  rotate: true
+  xy: 416, 139
+  size: 106, 191
+  orig: 106, 191
+  offset: 0, 0
+  index: -1
+arm_03
+  rotate: false
+  xy: 266, 95
+  size: 148, 150
+  orig: 148, 150
+  offset: 0, 0
+  index: -1
+body_01
+  rotate: true
+  xy: 2, 42
+  size: 203, 262
+  orig: 203, 262
+  offset: 0, 0
+  index: -1
+leaf_01
+  rotate: false
+  xy: 951, 195
+  size: 41, 50
+  orig: 41, 50
+  offset: 0, 0
+  index: -1
+leaf_02
+  rotate: false
+  xy: 371, 44
+  size: 43, 49
+  orig: 43, 49
+  offset: 0, 0
+  index: -1
+leaf_03
+  rotate: false
+  xy: 500, 113
+  size: 40, 24
+  orig: 40, 24
+  offset: 0, 0
+  index: -1
+leaf_04
+  rotate: false
+  xy: 2, 2
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+leaf_05
+  rotate: true
+  xy: 609, 141
+  size: 36, 50
+  orig: 36, 50
+  offset: 0, 0
+  index: -1
+leaf_06
+  rotate: true
+  xy: 371, 26
+  size: 16, 42
+  orig: 16, 42
+  offset: 0, 0
+  index: -1
+leg_01
+  rotate: true
+  xy: 732, 174
+  size: 71, 109
+  orig: 71, 109
+  offset: 0, 0
+  index: -1
+leg_02
+  rotate: true
+  xy: 266, 15
+  size: 78, 103
+  orig: 78, 103
+  offset: 0, 0
+  index: -1
+leg_03
+  rotate: true
+  xy: 416, 84
+  size: 53, 82
+  orig: 53, 82
+  offset: 0, 0
+  index: -1
+leg_04
+  rotate: true
+  xy: 843, 175
+  size: 70, 106
+  orig: 70, 106
+  offset: 0, 0
+  index: -1

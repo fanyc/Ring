@@ -14,4 +14,9 @@ public class CharacterPlayerArcher : CharacterPlayer
         m_castAttack = new CastPlayerArcherAttack(this);
         m_castSkill = new CastPlayerArcherSkill(this);
     }
+
+    protected override string GetRunAnimation()
+    {
+        return "run_02";
+    }
 }

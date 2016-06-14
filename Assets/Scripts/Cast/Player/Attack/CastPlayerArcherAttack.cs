@@ -13,6 +13,8 @@ public class CastPlayerArcherAttack : Castable
     {
         if(IsCoolTime()) return false;
         if(GameManager.Instance.InGameState != GameManager.StateInGame.BATTLE) return false;
+        if(GameManager.Instance.CurrentEnemy?.State == Character.STATE.DEAD) return false;
+
         return true;
     }
     

@@ -77,16 +77,16 @@ public class UIRingButton : MonoSingleton<UIRingButton> {
         }
     }
     
-    void Update()
-    {
-        if(IsCharging)
-        {
-            List<CharacterPlayer> list = GameManager.Instance.GetPlayers();
+    // void Update()
+    // {
+    //     if(IsCharging)
+    //     {
+    //         List<CharacterPlayer> list = GameManager.Instance.GetPlayers();
             
-            for(int i = 0; i < list.Count; ++i)
-            {
-                list[i].MP += 1.0f * Time.deltaTime;
-            }
-        }
-    }
+    //         for(int i = 0; i < list.Count; ++i)
+    //         {
+    //             list[i].MP += 1.0f * Time.deltaTime;
+    //         }
+    //     }
+    // }
 }

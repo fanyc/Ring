@@ -8,7 +8,7 @@ public class GameManager : MonoSingleton<GameManager>
     //====================Properties Start====================
     protected int m_nLevel;
     protected int m_nCurrentWave;
-    protected const int WAVE_COUNT = 5;
+    protected const int WAVE_COUNT = 8;
     public enum StateInGame
     {
         IDLE,
@@ -36,14 +36,12 @@ public class GameManager : MonoSingleton<GameManager>
         {
             m_nMoveCount = value;
             if(m_nMoveCount <= 0)
-            {
+            { 
                 m_InGameState = StateInGame.BATTLE;
             }
             
         }
     }
-    
-    public List<CharacterPlayer> PlayerList;
     
     public float PlayerSpeed
     {
@@ -66,6 +64,17 @@ public class GameManager : MonoSingleton<GameManager>
             UIWallet.Instance.textGold.text = m_fGold.ToUnit();
         }
     }
+
+    public List<CharacterPlayer> PlayerList;
+
+    public GameObject NormalInfo;
+    public GameObject BossInfo;
+
+    public TMPro.TextMeshProUGUI Level;
+    public TMPro.TextMeshProUGUI Wave;
+    
+    
+    
     
     //====================Properties End====================
     //====================Functions Start====================
@@ -91,14 +100,21 @@ public class GameManager : MonoSingleton<GameManager>
     {
         m_fGold = new BigDecimal(0);
         m_InGameState = StateInGame.IDLE;
+        m_nLevel = 1;
         m_nCurrentWave = 0;
+
+        BossInfo.SetActive(false);
+        NormalInfo.SetActive(true);
+
+        Level.text = "Level 1";
+        Wave.text = "1/" + WAVE_COUNT;
         
         NextWave();
     }
     
     public CharacterEnemy SpawnEnemy()
     {
-        m_currentEnemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy001");
+        m_currentEnemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy00" + Random.Range(1, 4));
         m_currentEnemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemy.Offset, 0.0f);
         m_currentEnemy.Init();
         
@@ -108,20 +124,24 @@ public class GameManager : MonoSingleton<GameManager>
     public void NextWave()
     {
         m_nCurrentWave++;
-        cachedTransform.position = new Vector3(m_nCurrentWave * 5.625f, 0.0f);
-        if(m_nCurrentWave > 1)
+        if(m_nCurrentWave > 1 && m_nCurrentWave % WAVE_COUNT == 1)
         {
-            if((m_nCurrentWave - 1) % 8 == 0)
+            UpgradeManager.Instance.GetUpgrade("EnemyHP").Level++;
+            UpgradeManager.Instance.GetUpgrade("Reward").Level++;
+            ++m_nLevel;
+        }
+
+        cachedTransform.position = new Vector3(m_nCurrentWave * 5.625f, 0.0f);
+        if(m_nCurrentWave > 0)
+        {
+            if(m_nCurrentWave % WAVE_COUNT == 0)
             {
-                if((m_nCurrentWave - 1) % (8 * 12) == 0)
+                if(m_nCurrentWave % (WAVE_COUNT * 12) == 0)
                 {
                     
                 }
                 //else
-                {
-                    UpgradeManager.Instance.GetUpgrade("EnemyHP").Level++;
-                    UpgradeManager.Instance.GetUpgrade("Reward").Level++;
-                }
+                
             }
         }
         
@@ -169,5 +189,19 @@ public class GameManager : MonoSingleton<GameManager>
         }
         m_InGameState = StateInGame.MOVE;
         m_nMoveCount = PlayerList.Count;
+
+        
+
+        Level.text = "Level " + m_nLevel;
+        Wave.text = ((m_nCurrentWave - 1) % WAVE_COUNT + 1) + "/" + WAVE_COUNT;
+
+        while(m_InGameState == StateInGame.MOVE) yield return null;
+        if(m_nCurrentWave > 0 && m_nCurrentWave % WAVE_COUNT == 0)
+        {
+            BossInfo.SetActive(true);
+            NormalInfo.SetActive(false);
+        }
+
+        HPGauge.UpdateRatio();
     }
 }
