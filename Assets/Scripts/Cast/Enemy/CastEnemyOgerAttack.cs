@@ -20,7 +20,7 @@ public class CastEnemyOgerAttack : Castable
     protected override IEnumerator Cast()
     {
         State = Character.STATE.CAST;
-        m_caster.PlayAnimation("attack_01", true);
+        m_caster.PlayAnimation("atk_01", true);
         yield return new WaitForSeconds(0.5f);
         if(UIRingButton.Instance.IsCharging)
         {

@@ -1,5 +1,20 @@
+using System.Collections.Generic;
+
 public class CharacterPlayerMage : CharacterPlayer
 {
+    protected static SkillDataList m_skillDataList = new SkillDataList();
+
+    public override SkillDataList ListSkillData
+    {
+        get {return m_skillDataList;}
+    }
+
+    static CharacterPlayerMage()
+    {
+        m_skillDataList.AddSkillData("파 크라이", "SoceressSkill", "skill_01");
+    }
+
+
     public new static float AttackPerSecond
     {
         get
@@ -8,9 +23,9 @@ public class CharacterPlayerMage : CharacterPlayer
         }
     }
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         m_castAttack = new CastPlayerMageAttack(this);
         m_castSkill = new CastPlayerMageSkill(this);
     }

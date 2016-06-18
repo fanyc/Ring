@@ -2,8 +2,18 @@ using UnityEngine;
 using System.Collections;
 using System.Numerics;
 
-public class CharacterEnemy : Character
+public abstract class CharacterEnemy : Character
 {
+    public abstract bool IsBoss
+    {
+        get;
+    }
+
+    public virtual float HPFactor
+    {
+        get { return 1.0f; }
+    }
+
     public BigDecimal MaxHP;
     public float Offset;
     protected Castable m_castAttack;
@@ -19,7 +29,7 @@ public class CharacterEnemy : Character
     public override void Init()
     {
         base.Init();
-        MaxHP = m_fHP = UpgradeManager.Instance.GetUpgrade("EnemyHP").currentValue + new BigDecimal(8.0f);
+        MaxHP = m_fHP = (UpgradeManager.Instance.GetUpgrade("EnemyHP").currentValue + new BigDecimal(8.0f)) * HPFactor;
         m_cachedAnimation.skeleton.a = 1.0f;
     }
     protected override void IdleThought()
@@ -41,7 +51,7 @@ public class CharacterEnemy : Character
         if(m_currentState == STATE.DEAD) return;
         base.Beaten(damage);
         m_fHP -= damage;
-        PlayAnimation("hit_01", true, false);
+        PlayBeatenAnimation();
         //m_cachedAnimation.state.AddAnimation(1, "stand_01", true, 0.233f);
         ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(cachedTransform.position.x + Random.Range(0.0f, 1.0f) - 1.5f, Random.Range(0.0f, 1.0f) + 1.5f)).Init(damage.ToUnit());
         if(m_fHP <= 0.0f)
@@ -51,11 +61,21 @@ public class CharacterEnemy : Character
         }
         HPGauge.UpdateRatio();
     }
+
+    public virtual void PlayBeatenAnimation()
+    {
+        PlayAnimation("hit_01", true, false);
+    }
     
     protected IEnumerator DEAD()
     {
         GameManager.Instance.BossInfo.SetActive(false);
         GameManager.Instance.NormalInfo.SetActive(true);
+
+        if(IsBoss == true)
+        {
+            GameManager.Instance.StopCoroutine("_timer");
+        }
 
         PlayAnimation("stand_01");
 

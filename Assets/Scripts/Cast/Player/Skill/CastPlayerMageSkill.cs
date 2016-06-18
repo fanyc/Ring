@@ -20,21 +20,26 @@ public class CastPlayerMageSkill : Castable
     
     protected override void Prepare()
     {
+        m_caster.AddAnimationEvent(Hit);
     }
     protected override IEnumerator Cast()
     {
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
-        m_caster.PlayAnimation("skill_01", true, false, GameManager.Instance.PlayerSpeed);
-        yield return new WaitForSeconds(0.6f / GameManager.Instance.PlayerSpeed);
-        target.Beaten(100.0f);
-        yield return new WaitForSeconds(0.6f / GameManager.Instance.PlayerSpeed);
-        
-        SetCoolTime(1.0f / GameManager.Instance.PlayerSpeed);
+        SetCoolTime(CharacterPlayerMage.AttackPerSecond / GameManager.Instance.PlayerSpeed);
+        m_caster.PlayAnimation("skill_01", false, false, GameManager.Instance.PlayerSpeed);
+        yield return new WaitForSeconds(1.867f);
         State = Character.STATE.IDLE;
     }
     
     protected override void Release()
     {
+        m_caster.RemoveAnimationEvent(Hit);
+    }
+
+    void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
+    {
+        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
+        target.Beaten(UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("SoceressSkillDamage").currentValue);
     }
 }

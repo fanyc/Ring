@@ -26,13 +26,13 @@ public class UIItemUpgradeArcher : UIItem {
     {
         BigDecimal price = UpgradeManager.Instance.GetUpgrade("ArcherAttackPrice").currentValue;
         
-        if(GameManager.Instance.Gold >= price)
+        if(UIWallet.Instance.Gold >= price)
         {
             UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").Level++;
             UpgradeManager.Instance.GetUpgrade("ArcherAttackSpeed").Level++;
             UpgradeManager.Instance.GetUpgrade("ArcherAttackPrice").Level++;
             
-            GameManager.Instance.Gold -= price;
+            UIWallet.Instance.Gold -= price;
             
             Init();
         }

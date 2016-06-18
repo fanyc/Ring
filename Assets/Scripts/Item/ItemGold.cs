@@ -16,7 +16,7 @@ public class ItemGold : Item {
     }
     protected override void Release()
     {
-        GameManager.Instance.Gold += m_fAmount;
+        UIWallet.Instance.Gold += m_fAmount;
         base.Release();
     }
 }

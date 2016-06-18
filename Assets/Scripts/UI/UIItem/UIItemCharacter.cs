@@ -26,12 +26,12 @@ public class UIItemCharacter : UIItem {
     {
         BigDecimal price = UpgradeManager.Instance.GetUpgrade(StrUpgradeGroup + "AttackPrice").currentValue;
         
-        if(GameManager.Instance.Gold >= price)
+        if(UIWallet.Instance.Gold >= price)
         {
             UpgradeManager.Instance.GetUpgrade(StrUpgradeGroup + "AttackDamage").Level++;
             UpgradeManager.Instance.GetUpgrade(StrUpgradeGroup + "AttackPrice").Level++;
             
-            GameManager.Instance.Gold -= price;
+            UIWallet.Instance.Gold -= price;
             
             Init();
         }

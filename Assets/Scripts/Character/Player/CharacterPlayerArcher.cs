@@ -1,5 +1,26 @@
+using System.Collections.Generic;
+
 public class CharacterPlayerArcher : CharacterPlayer
 {
+    protected static SkillDataList m_skillDataList = new SkillDataList();
+
+    public override SkillDataList ListSkillData
+    {
+        get {return m_skillDataList;}
+    }
+
+    static CharacterPlayerArcher()
+    {
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
+        
+    }
+
     public new static float AttackPerSecond
     {
         get
@@ -8,9 +29,9 @@ public class CharacterPlayerArcher : CharacterPlayer
         }
     }
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         m_castAttack = new CastPlayerArcherAttack(this);
         m_castSkill = new CastPlayerArcherSkill(this);
     }

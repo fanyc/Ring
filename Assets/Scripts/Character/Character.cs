@@ -41,6 +41,8 @@ public class Character : ObjectBase
     
     public virtual void Init()
     {
+        StopAllCoroutines();
+        
         m_currentState = STATE.IDLE;
         NextState();
     }

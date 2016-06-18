@@ -1,9 +1,55 @@
 using UnityEngine;
 using System.Collections;
 using System.Numerics;
+using System.Collections.Generic;
 
-public class CharacterPlayer : Character
+public abstract class CharacterPlayer : Character
 {
+    public struct SkillData
+    {
+        public string name;
+        public string upgradeGroup;
+        public string animationName;
+
+        public SkillData(string name, string upgradeGroup, string animationName)
+        {
+            this.name = name;
+            this.upgradeGroup = upgradeGroup;
+            this.animationName = animationName;
+        }
+    }
+
+    public class SkillDataList
+    {
+        protected List<SkillData> m_listSkillData = new List<SkillData>();
+        
+        public SkillData this[int index]
+        {
+            get
+            {
+                return m_listSkillData[index];
+            }
+        }
+
+        public int Count
+        {
+            get
+            {
+                return m_listSkillData.Count;
+            }
+        }
+
+        public void AddSkillData(string name, string upgradeGroup, string animationName)
+        {
+            m_listSkillData.Add(new SkillData(name, upgradeGroup, animationName));
+        }
+    }
+    public abstract SkillDataList ListSkillData
+    {
+        get;
+    }
+
+
     public static float AttackPerSecond
     {
         get
@@ -19,9 +65,11 @@ public class CharacterPlayer : Character
     {
         get; set;
     }
-    void OnEnable()
+
+    public override void Init()
     {
-        Init();
+        base.Init();
+        cachedTransform.position = new Vector3(Offset, 0.0f);
     }
 
     void Update()
@@ -51,7 +99,7 @@ public class CharacterPlayer : Character
         if(m_castAttack != null)
             Cast(m_castAttack);
     }
-    
+
     public Castable GetSkill()
     {
         return m_castSkill;

@@ -1,5 +1,20 @@
+using System.Collections.Generic;
+
 public class CharacterPlayerWarrior : CharacterPlayer
 {
+    protected static SkillDataList m_skillDataList = new SkillDataList();
+
+    public override SkillDataList ListSkillData
+    {
+        get {return m_skillDataList;}
+    }
+
+    static CharacterPlayerWarrior()
+    {
+        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01");
+    }
+
+
     public new static float AttackPerSecond
     {
         get
@@ -7,9 +22,9 @@ public class CharacterPlayerWarrior : CharacterPlayer
             return 0.467f;
         }
     }
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         m_castAttack = new CastPlayerWarriorAttack(this);
         m_castSkill = new CastPlayerWarriorSkill(this);
     }

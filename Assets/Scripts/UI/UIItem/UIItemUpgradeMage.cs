@@ -26,13 +26,13 @@ public class UIItemUpgradeMage : UIItem {
     {
         BigDecimal price = UpgradeManager.Instance.GetUpgrade("MageAttackPrice").currentValue;
         
-        if(GameManager.Instance.Gold >= price)
+        if(UIWallet.Instance.Gold >= price)
         {
             UpgradeManager.Instance.GetUpgrade("MageAttackDamage").Level++;
             UpgradeManager.Instance.GetUpgrade("MageAttackSpeed").Level++;
             UpgradeManager.Instance.GetUpgrade("MageAttackPrice").Level++;
             
-            GameManager.Instance.Gold -= price;
+            UIWallet.Instance.Gold -= price;
             
             Init();
         }
