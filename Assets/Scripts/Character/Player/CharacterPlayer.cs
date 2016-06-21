@@ -83,7 +83,10 @@ public abstract class CharacterPlayer : Character
         {
             case GameManager.StateInGame.MOVE:
             {
-                State = STATE.MOVE;
+                if(GameManager.Instance.cachedTransform.position.x + Offset > cachedTransform.position.x)
+                {
+                    State = STATE.MOVE;
+                }
             }
             break;
             case GameManager.StateInGame.BATTLE:

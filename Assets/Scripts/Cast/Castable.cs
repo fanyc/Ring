@@ -93,7 +93,9 @@ public class Castable
     }
     public void StopCast()
     {
+        m_caster.StopCoroutine(CachedCoroutine);
         m_enumCast = null;
+        Release();
     }
     
     public bool IsCasting()

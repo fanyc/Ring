@@ -4,11 +4,22 @@ using System.Numerics;
 
 public abstract class CharacterEnemy : Character
 {
-    public abstract bool IsBoss
+    public enum TYPE
     {
-        get;
+        Null = -1,
+        Normal = 0,
+        LevelBoss,
+        StageBoss,
+    }
+    public virtual bool IsBoss
+    {
+        get
+        {
+            return Type == TYPE.LevelBoss || Type == TYPE.StageBoss;
+        }
     }
 
+    
     public virtual float HPFactor
     {
         get { return 1.0f; }
@@ -16,6 +27,10 @@ public abstract class CharacterEnemy : Character
 
     public BigDecimal MaxHP;
     public float Offset;
+    public abstract TYPE Type
+    {
+        get;
+    }
     protected Castable m_castAttack;
     protected BigDecimal m_fHP;
     public BigDecimal HP

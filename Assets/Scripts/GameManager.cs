@@ -97,6 +97,10 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void Init()
     {
+        m_currentEnemy?.Recycle();
+        m_currentEnemy = null;
+
+        StopAllCoroutines();
         cachedTransform.position = new Vector3(0.0f, 0.0f);
 
         for(int i = 0; i < PlayerList.Count; ++i)
@@ -225,7 +229,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Rebirth()
     {
-        m_currentEnemy.Recycle();
+        
+        StopCoroutine("_waitIdle");
+        for(int i = 0; i < PlayerList.Count; ++i)
+        {
+            PlayerList[i].CastCancel();
+        }
         Init();
     }
     
@@ -234,6 +243,7 @@ public class GameManager : MonoSingleton<GameManager>
         bool all = false;
         while(all == false)
         {
+            yield return null;
             all = true;
             for(int i = 0; i < PlayerList.Count; ++i)
             {
@@ -243,11 +253,8 @@ public class GameManager : MonoSingleton<GameManager>
                     break;
                 }  
             }
-            
             if(all == true) break;
-            yield return null;
         }
-
         m_InGameState = StateInGame.MOVE;
         m_nMoveCount = PlayerList.Count;
 
@@ -303,5 +310,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         TimerText.text = $"0.0<size=-4> s</size>";
         TimerGauge.fillAmount = 0.0f;
+
+        LeaveBoss();
     }
 }

@@ -10,6 +10,9 @@ public class UISkillButton : ObjectBase {
     public TMPro.TextMeshProUGUI textCoolTime;
 
     public TMPro.TextMeshProUGUI textLevel;
+
+    public Image InnerFrameEnable;
+    public Image InnerFrameDisable;
     
     
     protected Button m_cachedButton;
@@ -17,6 +20,9 @@ public class UISkillButton : ObjectBase {
     void Awake()
     {
         m_cachedButton = GetComponent<Button>();
+        InnerFrameEnable.enabled = false;
+        InnerFrameDisable.enabled = true;
+        
     }
     
     public virtual void CastSkill()
@@ -32,6 +38,9 @@ public class UISkillButton : ObjectBase {
 
             textCoolTime.gameObject.SetActive(true);
             textCoolTime.text = Caster.GetSkill().Cost.ToString("0");
+
+            InnerFrameEnable.enabled = false;
+            InnerFrameDisable.enabled = true;
         }
     }
     
@@ -55,6 +64,8 @@ public class UISkillButton : ObjectBase {
             {
                 textCoolTime.gameObject.SetActive(false);
                 m_cachedButton.enabled = true;
+                InnerFrameEnable.enabled = true;
+                InnerFrameDisable.enabled = false;
             }
         }
     }

@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class CharacterEnemyOrcMage : CharacterEnemy
 {
-    public override bool IsBoss
+    public override TYPE Type
     {
-        get
-        {
-            return true;
-        }
+        get { return TYPE.LevelBoss; }
     }
-
     public override float HPFactor
     {
         get { return 30.0f; }

@@ -27,7 +27,7 @@ public class CastPlayerWarriorSkill : Castable
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerWarrior.AttackPerSecond / GameManager.Instance.PlayerSpeed);
-        m_caster.PlayAnimation("skill_a01", false, false, GameManager.Instance.PlayerSpeed);
+        m_caster.PlayAnimation("skill_a01", false, false);
         yield return new WaitForSeconds(0.767f);
         State = Character.STATE.IDLE;
     }

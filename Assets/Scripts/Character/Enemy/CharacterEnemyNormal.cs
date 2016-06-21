@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class CharacterEnemyNormal : CharacterEnemy
 {
-    public override bool IsBoss
+    public override TYPE Type
     {
-        get
-        {
-            return false;
-        }
+        get { return TYPE.Normal; }
     }
+
 
     public override void Init()
     {

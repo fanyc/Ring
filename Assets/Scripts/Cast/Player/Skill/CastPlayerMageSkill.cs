@@ -27,7 +27,7 @@ public class CastPlayerMageSkill : Castable
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerMage.AttackPerSecond / GameManager.Instance.PlayerSpeed);
-        m_caster.PlayAnimation("skill_01", false, false, GameManager.Instance.PlayerSpeed);
+        m_caster.PlayAnimation("skill_01", false, false);
         yield return new WaitForSeconds(1.867f);
         State = Character.STATE.IDLE;
     }
