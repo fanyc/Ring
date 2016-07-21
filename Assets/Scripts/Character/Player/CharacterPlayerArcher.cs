@@ -11,14 +11,7 @@ public class CharacterPlayerArcher : CharacterPlayer
 
     static CharacterPlayerArcher()
     {
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        m_skillDataList.AddSkillData("파 크라이", "ArcherSkill", "skill_01");
-        
+        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "SkillIcon/btle_icskill_elf_01b");
     }
 
     public new static float AttackPerSecond
@@ -28,6 +21,7 @@ public class CharacterPlayerArcher : CharacterPlayer
             return 0.867f;
         }
     }
+
 
     public override void Init()
     {

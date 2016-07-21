@@ -6,11 +6,21 @@ public abstract class CharacterEnemy : Character
 {
     public enum TYPE
     {
-        Null = -1,
+        NULL = -1,
         Normal = 0,
         LevelBoss,
         StageBoss,
     }
+
+    public enum DAMAGE_TYPE
+    {
+        NULL = -1,
+        WARRIOR,
+        ELF,
+        SORCERESS,
+        ETC,
+    }
+
     public virtual bool IsBoss
     {
         get
@@ -46,7 +56,10 @@ public abstract class CharacterEnemy : Character
         base.Init();
         MaxHP = m_fHP = (UpgradeManager.Instance.GetUpgrade("EnemyHP").currentValue + new BigDecimal(8.0f)) * HPFactor;
         m_cachedAnimation.skeleton.a = 1.0f;
+
+        SetCamera();
     }
+    
     protected override void IdleThought()
     {
         if(GameManager.Instance.InGameState == GameManager.StateInGame.BATTLE)
@@ -61,38 +74,71 @@ public abstract class CharacterEnemy : Character
             Cast(m_castAttack);
     }
     
-    public override void Beaten(BigDecimal damage)
+    public void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
     {
-        if(m_currentState == STATE.DEAD) return;
-        base.Beaten(damage);
+        Color startColor = Color.white;
+        Color endColor = Color.white;
+        Color outlineColor = Color.black;
+        Vector3 offset = Vector3.zero;
+
+        switch (type)
+        {
+            case DAMAGE_TYPE.WARRIOR:
+            startColor = new Color32(254, 216, 69, 255);
+            endColor = new Color32(223, 121, 30, 255);
+            outlineColor = new Color32(102, 35, 21, 192);
+            offset = new Vector3(0.0f, 0.0f, 0.0f);
+            break;
+
+            case DAMAGE_TYPE.ELF:
+            startColor = new Color32(210, 234, 74, 255);
+            endColor = new Color32(116, 153, 39, 255);
+            outlineColor = new Color32(59, 66, 15, 192);
+            offset = new Vector3(-0.3f, 0.3f, 1.0f);
+            break;
+
+            case DAMAGE_TYPE.SORCERESS:
+            startColor = new Color32(255, 235, 166, 255);
+            endColor = new Color32(237, 65, 75, 255);
+            outlineColor = new Color32(185, 15, 80, 192);
+            offset = new Vector3(-0.6f, 0.6f, 2.0f);
+            break;
+
+            case DAMAGE_TYPE.ETC:
+            startColor = new Color32(255, 81, 81, 255);
+            endColor = new Color32(226, 14, 14, 255);
+            outlineColor = new Color32(77, 1, 1, 192);
+            offset = new Vector3(-0.9f, 0.9f, 3.0f);
+            break;
+        }
+
+        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(cachedTransform.position.x + 0.8f, 2.0f)).Init(damage.ToUnit(), offset, startColor, endColor, outlineColor);
+        Beaten(damage, isSmash);        
+    }
+
+    public override void Beaten(BigDecimal damage, bool isSmash = false)
+    {
+        if(State == STATE.DEAD || State == STATE.NULL) return;
+        base.Beaten(damage, isSmash);
         m_fHP -= damage;
-        PlayBeatenAnimation();
+        if(Type != TYPE.StageBoss || isSmash == true)
+            PlayBeatenAnimation();
         //m_cachedAnimation.state.AddAnimation(1, "stand_01", true, 0.233f);
-        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(cachedTransform.position.x + Random.Range(0.0f, 1.0f) - 1.5f, Random.Range(0.0f, 1.0f) + 1.5f)).Init(damage.ToUnit());
         if(m_fHP <= 0.0f)
         {
             m_fHP = 0.0f;
+            HPGauge.UpdateRatio();
             Dead();
         }
-        HPGauge.UpdateRatio();
+        else
+        {
+            HPGauge.UpdateRatio();
+        }
     }
 
-    public virtual void PlayBeatenAnimation()
-    {
-        PlayAnimation("hit_01", true, false);
-    }
-    
     protected IEnumerator DEAD()
     {
-        GameManager.Instance.BossInfo.SetActive(false);
-        GameManager.Instance.NormalInfo.SetActive(true);
-
-        if(IsBoss == true)
-        {
-            GameManager.Instance.StopCoroutine("_timer");
-        }
-
-        PlayAnimation("stand_01");
+        PlayIdleAnimation();
 
         float t = 0.0f;
         
@@ -104,11 +150,26 @@ public abstract class CharacterEnemy : Character
         }
         m_cachedAnimation.skeleton.a = 0.0f;
         Recycle();
-        GameManager.Instance.NextWave();
     }
     
     public virtual void Dead()
     {
-        m_currentState = STATE.DEAD;
+        State = STATE.DEAD;
+
+        //UILevelInfo.Instance.SetBoss(false);
+        //UILevelInfo.Instance.SetLeaveBoss(false);
+
+        GameManager.Instance.NextWave();
+        
+        if(IsBoss == true)
+        {
+            GameManager.Instance.StopCoroutine("_timer");
+        }
+    }
+
+    public virtual void SetCamera()
+    {
+        CameraController.Instance.TargetScale = 1.0f;
+        CameraController.Instance.Offset = new Vector2(-0.2f, 1.65f);
     }
 }

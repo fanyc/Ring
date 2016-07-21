@@ -86,8 +86,20 @@ public class GameManager : MonoSingleton<GameManager>
         }
         
         ObjectPool<ItemGold>.CreatePool("@ItemGold", Resources.Load<GameObject>("Item/@ItemGold"), 20);
-        ObjectPool<DamageText>.CreatePool("@DamageText", Resources.Load<GameObject>("@DamageText"), 100);
+        ObjectPool<DamageText>.CreatePool("@DamageText", Resources.Load<GameObject>("@DamageText"), 20);
         ObjectPool<UIItemSkill>.CreatePool("@ItemSkill", Resources.Load<GameObject>("@ItemSkill"), 16);
+
+        Effect[] effects = Resources.LoadAll<Effect>("Effects/");
+        for(int i = 0; i < effects.Length; ++i)
+        {
+            ObjectPool<Effect>.CreatePool(effects[i].name, effects[i].gameObject, 2);
+        }
+
+        Projectile[] projectiles = Resources.LoadAll<Projectile>("Projectiles/");
+        for(int i = 0; i < projectiles.Length; ++i)
+        {
+            ObjectPool<Projectile>.CreatePool(projectiles[i].name, projectiles[i].gameObject, 2);
+        }
     }
     
     void Start()
@@ -136,7 +148,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public CharacterEnemy SpawnBoss()
     {
-        m_currentEnemy = ObjectPool<CharacterEnemy>.Spawn("@Boss00" + Random.Range(1, 2));
+        m_currentEnemy = ObjectPool<CharacterEnemy>.Spawn("@LevelBoss00" + Random.Range(1, 2));
         m_currentEnemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemy.Offset, 0.0f);
         m_currentEnemy.Init();
 

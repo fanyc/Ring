@@ -93,7 +93,11 @@ public class Castable
     }
     public void StopCast()
     {
-        m_caster.StopCoroutine(CachedCoroutine);
+        if(CachedCoroutine != null)
+        {
+            m_caster.StopCoroutine(CachedCoroutine);
+            CachedCoroutine = null;
+        }
         m_enumCast = null;
         Release();
     }
@@ -133,7 +137,7 @@ public class Castable
     {
     }
 
-    protected void SetCoolTime(float coolTime)
+    public void SetCoolTime(float coolTime)
     {
         float oldCoolTIme = m_fCoolTime;
         m_fMaxCoolTime = m_fCoolTime = coolTime;

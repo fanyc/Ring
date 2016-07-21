@@ -13,7 +13,7 @@ public class Background : ObjectBase {
 	void Start()
 	{
 		m_material = GetComponent<MeshRenderer>().material;
-		m_camera = cachedTransform.parent.GetComponent<CameraController>();
+		m_camera = cachedTransform.parent.parent.GetComponent<CameraController>();
 	}
 
 	void LateUpdate () {

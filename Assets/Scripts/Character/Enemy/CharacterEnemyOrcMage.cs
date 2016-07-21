@@ -1,4 +1,3 @@
-
 using System.Numerics;
 using UnityEngine;
 
@@ -10,30 +9,24 @@ public class CharacterEnemyOrcMage : CharacterEnemy
     }
     public override float HPFactor
     {
-        get { return 30.0f; }
+        get { return 5.0f; }
     }
 
     public override void Init()
     {
         base.Init();
         m_castAttack = new CastEnemyOgerAttack(this);
-    }
-    
-    public override void PlayBeatenAnimation()
-    {
-
-        m_cachedAnimation.state.AddAnimation(0, "hit_01", false, 0.0f);
+        m_castAttack.SetCoolTime(2.5f);
     }
 
     public override void Dead()
     {
-        base.Dead();
-         
-        BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue;
+        BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / 6.0f * 2.0f / 15.0f;
         for(int i = 0; i < 15; ++i)
         {
-            ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position).Init(reward / 100.0f * 3.0f);
+            ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position + new Vector3(0.0f, 1.0f)).Init(reward);
         }
-        
+
+        base.Dead();
     }
 }

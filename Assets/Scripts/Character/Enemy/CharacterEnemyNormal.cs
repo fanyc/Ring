@@ -12,18 +12,18 @@ public class CharacterEnemyNormal : CharacterEnemy
     public override void Init()
     {
         base.Init();
-        //m_castAttack = new CastEnemyOgerAttack(this);
+        m_castAttack = new CastEnemyOgerAttack(this);
+        m_castAttack.SetCoolTime(2.5f);
     }
     
     public override void Dead()
     {
-        base.Dead();
-         
-        BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue;
-        for(int i = 0; i < 5; ++i)
+        BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / (6.0f * 8.0f);
+        for(int i = 0; i < 8; ++i)
         {
-            ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position).Init(reward / 100.0f);
+            ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position + new Vector3(0.0f, 1.0f)).Init(reward);
         }
-        
+
+        base.Dead();
     }
 }

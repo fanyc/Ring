@@ -64,7 +64,7 @@ namespace SeventyOneSquared
 	[Serializable]
 	public class PDUnity : MonoBehaviour {
 		
-		private class PDUnityParticleEmitter
+		public class PDUnityParticleEmitter
 		{
 			public string textureName;
 			public byte[] textureData;
@@ -129,7 +129,7 @@ namespace SeventyOneSquared
 		}
 		
 		// Particle type
-		private enum kParticleTypes
+		public enum kParticleTypes
 		{
 			kParticleTypeGravity,
 			kParticleTypeRadial
@@ -177,6 +177,10 @@ namespace SeventyOneSquared
 		private int currentBlendSource = 0;
 		private int currentBlendDestination = 0;
 		private PDUnityParticleEmitter emitterConfig;
+		public PDUnityParticleEmitter EmitterConfig
+		{
+			get { return emitterConfig; }
+		}
 		
 		// Components
 		// Creates a material that is explicitly created & destroyed by the component.
@@ -328,11 +332,15 @@ namespace SeventyOneSquared
 			}
 		}
 		
-		private void OnEnable()
+		void Awake()
 		{
 			this.Initialize();
 			this.loadEmitterFile();
+		}
 
+		private void OnEnable()
+		{
+			reset();
 			#if UNITY_EDITOR
 			if(!Application.isPlaying)
 			{
@@ -350,8 +358,8 @@ namespace SeventyOneSquared
 				EditorApplication.update -= new EditorApplication.CallbackFunction(this.EditorUpdate);
 			}
 			#endif  
-			
-			this.ClearDown();
+
+
 		}
 		
 		void Reset()

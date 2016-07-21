@@ -10,12 +10,15 @@ public abstract class CharacterPlayer : Character
         public string name;
         public string upgradeGroup;
         public string animationName;
+        public string thumbnailName;
+        
 
-        public SkillData(string name, string upgradeGroup, string animationName)
+        public SkillData(string name, string upgradeGroup, string animationName, string thumbnailName)
         {
             this.name = name;
             this.upgradeGroup = upgradeGroup;
             this.animationName = animationName;
+            this.thumbnailName = thumbnailName;
         }
     }
 
@@ -39,9 +42,9 @@ public abstract class CharacterPlayer : Character
             }
         }
 
-        public void AddSkillData(string name, string upgradeGroup, string animationName)
+        public void AddSkillData(string name, string upgradeGroup, string animationName, string thumbnailName)
         {
-            m_listSkillData.Add(new SkillData(name, upgradeGroup, animationName));
+            m_listSkillData.Add(new SkillData(name, upgradeGroup, animationName, thumbnailName));
         }
     }
     public abstract SkillDataList ListSkillData
@@ -49,6 +52,7 @@ public abstract class CharacterPlayer : Character
         get;
     }
 
+    public UISkillButton SkillButton;
 
     public static float AttackPerSecond
     {
@@ -74,7 +78,12 @@ public abstract class CharacterPlayer : Character
 
     void Update()
     {
-        MP += 1.0f * (UIRingButton.Instance.IsCharging ? 2.0f : 1.0f) * Time.deltaTime;
+        MP += 1.0f * (UIRingButton.Instance.IsCharging ? 0.0f : 1.0f) * Time.deltaTime;
+
+        // if(GameManager.Instance.AutoSkill && m_castSkill.Cost + 0.5f < MP)
+        // {
+        //     SkillButton?.CastSkill();
+        // }
     }
     
     protected override void IdleThought()
@@ -116,7 +125,7 @@ public abstract class CharacterPlayer : Character
     protected virtual IEnumerator MOVE()
     {
         PlayAnimation(GetRunAnimation(), false, true);
-        while(m_currentState == STATE.MOVE)
+        while(State == STATE.MOVE)
         {
             Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f, 0.0f);
             
@@ -136,7 +145,7 @@ public abstract class CharacterPlayer : Character
         NextState();
     }
     
-    public override void Beaten(BigDecimal damage)
+    public override void Beaten(BigDecimal damage, bool isSmash = false)
     {
         //base.Beaten(damage);
         //MP = 0.0f;

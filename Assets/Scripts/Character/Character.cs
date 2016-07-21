@@ -10,6 +10,7 @@ public class Character : ObjectBase
     
     public enum STATE
     {
+        NULL = -1,
         IDLE,
         MOVE,
         ATTACK,
@@ -26,6 +27,8 @@ public class Character : ObjectBase
         get { return m_currentState; }
         set
         {
+            if(m_currentState == STATE.DEAD && value != STATE.NULL) return;
+            if(m_currentState == STATE.NULL) return;
             m_currentState = value;
         }
     }
@@ -49,13 +52,13 @@ public class Character : ObjectBase
     
     protected void NextState()
     {
-        StartCoroutine(m_currentState.ToString());
+        StartCoroutine(State.ToString());
     }
     
     IEnumerator IDLE()
     {
-        PlayAnimation("stand_01", false, true);
-        while(m_currentState == STATE.IDLE)
+        PlayIdleAnimation();
+        while(State == STATE.IDLE)
         {
             IdleThought();
             yield return null;
@@ -116,6 +119,11 @@ public class Character : ObjectBase
         }
     }
 
+    public Spine.Bone GetAnimationBone(string boneName)
+    {
+        return m_cachedAnimation.Skeleton.FindBone(boneName);
+    }
+
     public bool IsEndAnimation(float offset = 0.0f)
     {
         return m_cachedAnimation.state.GetCurrent(0) == null || m_cachedAnimation.state.GetCurrent(0).Time + offset >= m_cachedAnimation.state.GetCurrent(0).EndTime;
@@ -131,6 +139,14 @@ public class Character : ObjectBase
         m_cachedAnimation.timeScale = timeScale;
     }
     
+    public string GetAnimationName()
+    {
+        return m_cachedAnimation.AnimationName;
+    }
+
+    
+
+
     public void AddAnimationEvent(Spine.AnimationState.EventDelegate listener)
     {
         m_cachedAnimation.state.Event += listener;
@@ -141,8 +157,22 @@ public class Character : ObjectBase
         m_cachedAnimation.state.Event -= listener;
     } 
 
-    public virtual void Beaten(BigDecimal damage)
+    public virtual void Beaten(BigDecimal damage, bool isSmash = false)
     {
         
+    }
+
+    public virtual void PlayBeatenAnimation()
+    {
+        if(State == STATE.IDLE)
+        {
+            PlayAnimation("hit_01", true, false);
+            m_cachedAnimation.state.AddAnimation(0, "stand_01", true, 0.0f);
+        }
+    }
+
+    public virtual void PlayIdleAnimation()
+    {
+        PlayAnimation("stand_01", false, true);
     }
 }

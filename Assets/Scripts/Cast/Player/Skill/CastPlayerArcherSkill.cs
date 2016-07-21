@@ -6,7 +6,7 @@ public class CastPlayerArcherSkill : Castable
 {
     public override float Cost
     {
-        get { return 45.0f; }
+        get { return 0.0f; }
     }
     public CastPlayerArcherSkill(Character caster) : base(caster)
     {
@@ -15,6 +15,9 @@ public class CastPlayerArcherSkill : Castable
     {
         if(IsCoolTime()) return false;
         if(GameManager.Instance.InGameState != GameManager.StateInGame.BATTLE) return false;
+        if(GameManager.Instance.CurrentEnemy == null) return false;
+        if(GameManager.Instance.CurrentEnemy.State == Character.STATE.DEAD ||
+            GameManager.Instance.CurrentEnemy.State == Character.STATE.NULL) return false;
         return true;
     }
     
@@ -39,7 +42,26 @@ public class CastPlayerArcherSkill : Castable
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
     {
+        // Effect eff = ObjectPool<Effect>.Spawn("@Effect_Sand", Vector3.zero,
+        // m_caster.GetComponentInChildren<Spine.Unity.SkeletonUtility>().boneRoot.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0));
+        // eff.Init(eff.cachedTransform.position);
+        
+
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
-        target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("ArcherSkillDamage").currentValue);
+
+        if(target == null) return;
+        Spine.Bone bone = m_caster.GetAnimationBone("wp_elf_c01_c");
+        Projectile proj = ObjectPool<Projectile>.Spawn("@Proj_Arrow_MagnumShot");
+        float angle = bone.AppliedRotation + Random.Range(-2.5f, 2.5f);
+        float dist = (target.cachedTransform.position.x - m_caster.cachedTransform.position.x) + Random.Range(-0.25f, 0.25f);
+        proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
+        Vector2 pos = (Vector2)m_caster.cachedTransform.position + new Vector2(bone.WorldX, bone.WorldY);
+        Vector2 dest = pos + new Vector2(dist, dist * Mathf.Tan(angle * Mathf.Deg2Rad));
+        proj.Init((Vector3)pos, dest, ()=>
+        {
+            target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("ArcherSkillDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.ELF, true);
+            ObjectPool<Effect>.Spawn("@Effect_MagnumShot").Init(dest);
+            CameraController.Instance.SetShake(0.3f, 0.1f, 0.5f);
+        });
     }
 }

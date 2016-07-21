@@ -18,16 +18,17 @@ public class Item : ObjectBase
         // vel.y = Mathf.Sin(angle);
         // vel.z = 0.0f;
         // vel *= Mathf.Abs(f) * 24.0f * Random.Range(0.5f, 1.0f);
-        float angle = Random.Range(0.0f, 360.0f) * Mathf.Deg2Rad;
+        float f = Random.Range(0.0f, 1.0f);
+        float angle = (60.0f + 20.0f * f) * Mathf.Deg2Rad;
         vel.x = Mathf.Cos(angle);
         vel.y = Mathf.Sin(angle);
         vel.z = 0.0f;
-        vel *= 24.0f * Random.Range(0.5f, 1.0f);
+        vel *= 6.0f * (2.0f + f * 1.0f + Random.Range(0.0f, 1.0f));
         m_vecVelocity = vel;
-        m_fVelocity2 = 0.0f;
+        m_fVelocity2 = 10.0f;
         StartCoroutine("_update");
     }
-    
+       
     protected IEnumerator _update()
     {
         Vector3 pos = cachedTransform.position;
@@ -36,30 +37,35 @@ public class Item : ObjectBase
         {
             yield return null;
             pos += (m_vecVelocity) * Time.smoothDeltaTime;
-            dist = (Vector2)(m_tfTarget.position - pos);
             
-            // pos += (Vector3)(dist.normalized * (24.0f * Time.smoothDeltaTime));
-            // m_vecVelocity += (Vector3)(dist.normalized * (48.0f * Time.smoothDeltaTime));
-            // m_vecVelocity = Vector3.ClampMagnitude(m_vecVelocity, 24.0f);
-            
-            pos += (Vector3)(dist.normalized * (m_fVelocity2 * Time.smoothDeltaTime));
-            m_fVelocity2 += 48.0f * Time.smoothDeltaTime;
-            
-            if(m_vecVelocity.sqrMagnitude > Mathf.Pow(Time.smoothDeltaTime * 48.0f, 2.0f))
+            if(pos.y > 0.0f || m_vecVelocity.y > 0.0f)
             {
-                m_vecVelocity -= m_vecVelocity.normalized * (Time.smoothDeltaTime * 48.0f);
+                m_vecVelocity.y -= 9.8f * 6.0f * Time.smoothDeltaTime;
             }
             else
             {
-                m_vecVelocity = Vector3.zero;
+                pos.y = 0.0f;
+                break;
             }
-            
+
             cachedTransform.position = pos;
-            
-            if(dist.sqrMagnitude < 10.0f * Time.smoothDeltaTime)
+        }
+
+        while(true)
+        {
+            yield return null;
+
+            dist = (Vector2)(m_tfTarget.position - pos);
+
+            if(dist.sqrMagnitude < (m_fVelocity2 * Time.smoothDeltaTime) * (m_fVelocity2 * Time.smoothDeltaTime))
             {
                 break;
             }
+            
+            pos += (Vector3)(dist.normalized * (m_fVelocity2 * Time.smoothDeltaTime));
+            m_fVelocity2 += 100.0f * Time.smoothDeltaTime;
+
+            cachedTransform.position = pos;
         }
         
         Release();

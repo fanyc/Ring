@@ -11,7 +11,7 @@ public class CharacterPlayerMage : CharacterPlayer
 
     static CharacterPlayerMage()
     {
-        m_skillDataList.AddSkillData("파 크라이", "SoceressSkill", "skill_01");
+        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "SkillIcon/btle_icskill_sor_01b");
     }
 
 

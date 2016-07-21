@@ -13,7 +13,9 @@ public class CastPlayerArcherAttack : Castable
     {
         if(IsCoolTime()) return false;
         if(GameManager.Instance.InGameState != GameManager.StateInGame.BATTLE) return false;
-        if(GameManager.Instance.CurrentEnemy?.State == Character.STATE.DEAD) return false;
+        if(GameManager.Instance.CurrentEnemy == null) return false;
+        if(GameManager.Instance.CurrentEnemy.State == Character.STATE.DEAD ||
+            GameManager.Instance.CurrentEnemy.State == Character.STATE.NULL) return false;
 
         return true;
     }
@@ -41,8 +43,21 @@ public class CastPlayerArcherAttack : Castable
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
-    {
+    {        
         CharacterEnemy target = GameManager.Instance.CurrentEnemy;
-        target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue);
-    }
+
+        if(target == null) return;
+        Spine.Bone bone = m_caster.GetAnimationBone("wp_elf_c01_c");
+        Projectile proj = ObjectPool<Projectile>.Spawn("@Proj_Arrow_Normal");
+        float angle = bone.AppliedRotation + Random.Range(-2.5f, 2.5f);
+        float dist = (target.cachedTransform.position.x - m_caster.cachedTransform.position.x) + Random.Range(-0.25f, 0.25f);
+        proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
+        Vector2 pos = (Vector2)m_caster.cachedTransform.position + new Vector2(bone.WorldX, bone.WorldY);
+        Vector2 dest = new Vector2(dist, dist * Mathf.Tan(angle * Mathf.Deg2Rad));
+        proj.Init((Vector3)pos, pos + dest, ()=>
+        {
+            target.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.ELF);
+            ObjectPool<Effect>.Spawn("@Effect_Arrow_Normal").Init(pos + dest);
+        });
+    } 
 }
