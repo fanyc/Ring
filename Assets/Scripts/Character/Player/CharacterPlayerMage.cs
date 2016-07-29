@@ -25,12 +25,12 @@ public class CharacterPlayerMage : CharacterPlayer
 
     public override void Init()
     {
-        base.Init();
         m_castAttack = new CastPlayerMageAttack(this);
         m_castSkill = new CastPlayerMageSkill(this);
+        base.Init();
     }
 
-    protected override string GetRunAnimation()
+    public override string GetRunAnimation()
     {
         return "run_02";
     }

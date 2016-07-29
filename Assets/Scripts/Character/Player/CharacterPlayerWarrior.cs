@@ -1,3 +1,5 @@
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class CharacterPlayerWarrior : CharacterPlayer
@@ -24,8 +26,43 @@ public class CharacterPlayerWarrior : CharacterPlayer
     }
     public override void Init()
     {
-        base.Init();
         m_castAttack = new CastPlayerWarriorAttack(this);
         m_castSkill = new CastPlayerWarriorSkill(this);
+        base.Init();
+    }
+
+    protected override void IdleThought()
+    {
+        if(m_castAttack?.GetTargets()?.Length > 0)
+        {
+            Attack();
+        }
+        else if(m_fKnockBack == 0.0f)
+        {
+            State = STATE.MOVE;
+        }
+    }
+
+    protected override IEnumerator MOVE()
+    {
+        PlayAnimation(GetRunAnimation(), false, true);
+        while(State == STATE.MOVE)
+        {
+            
+            if(m_castAttack.GetTargets().Length > 0)
+            {
+                Attack();
+                yield return null;
+                break;
+            }
+            
+            Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.4f * GameManager.Instance.Direction, 0.0f);
+            
+            cachedTransform.position = pos;
+            
+            yield return null;
+        }
+        
+        NextState();
     }
 }

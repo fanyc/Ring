@@ -52,6 +52,19 @@ public abstract class CharacterPlayer : Character
         get;
     }
 
+    private int m_nCachedLayer = 0;
+    public override int Layer
+    {
+        get
+        {
+            if(m_nCachedLayer == 0)
+            {
+                m_nCachedLayer = 1 << LayerMask.NameToLayer("Ally");
+            }
+            return m_nCachedLayer;
+        }
+    }
+
     public UISkillButton SkillButton;
 
     public static float AttackPerSecond
@@ -72,8 +85,8 @@ public abstract class CharacterPlayer : Character
 
     public override void Init()
     {
-        base.Init();
         cachedTransform.position = new Vector3(Offset, 0.0f);
+        base.Init();
     }
 
     void Update()
@@ -117,11 +130,6 @@ public abstract class CharacterPlayer : Character
         return m_castSkill;
     }
 
-    protected virtual string GetRunAnimation()
-    {
-        return "run_01";
-    }
-
     protected virtual IEnumerator MOVE()
     {
         PlayAnimation(GetRunAnimation(), false, true);
@@ -144,10 +152,15 @@ public abstract class CharacterPlayer : Character
         State = STATE.IDLE;
         NextState();
     }
-    
-    public override void Beaten(BigDecimal damage, bool isSmash = false)
+
+    public override void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
     {
         //base.Beaten(damage);
         //MP = 0.0f;
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
     }
 }

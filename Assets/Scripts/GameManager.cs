@@ -23,10 +23,10 @@ public class GameManager : MonoSingleton<GameManager>
         get { return m_InGameState; }
     }
     
-    protected CharacterEnemy m_currentEnemy;
-    public CharacterEnemy CurrentEnemy
+    protected List<CharacterEnemy> m_currentEnemies = new List<CharacterEnemy>();
+    public List<CharacterEnemy> CurrentEnemies
     {
-        get { return m_currentEnemy; }
+        get { return m_currentEnemies; }
     }
     
     protected bool m_bBossClear = true;
@@ -58,6 +58,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         get; set;
     }
+
+    public int Direction = 1;
+
+    public float LimitDistance = 10.0f;
 
     public List<CharacterPlayer> PlayerList;
 
@@ -109,8 +113,11 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void Init()
     {
-        m_currentEnemy?.Recycle();
-        m_currentEnemy = null;
+        for(int i = 0; i < m_currentEnemies.Count; ++i)
+        {
+            m_currentEnemies[i].Recycle();
+        }
+        m_currentEnemies.Clear();
 
         StopAllCoroutines();
         cachedTransform.position = new Vector3(0.0f, 0.0f);
@@ -139,81 +146,31 @@ public class GameManager : MonoSingleton<GameManager>
     
     public CharacterEnemy SpawnEnemy()
     {
-        m_currentEnemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy00" + Random.Range(1, 4));
-        m_currentEnemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemy.Offset, 0.0f);
-        m_currentEnemy.Init();
+        CharacterEnemy enemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy00" + Random.Range(1, 2));
+        enemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemies.Count + enemy.Offset, 0.0f);
+        enemy.Init();
+
+        m_currentEnemies.Add(enemy);
         
-        return m_currentEnemy;
+        return enemy;
     }
 
     public CharacterEnemy SpawnBoss()
     {
-        m_currentEnemy = ObjectPool<CharacterEnemy>.Spawn("@LevelBoss00" + Random.Range(1, 2));
-        m_currentEnemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemy.Offset, 0.0f);
-        m_currentEnemy.Init();
+        CharacterEnemy enemy = ObjectPool<CharacterEnemy>.Spawn("@LevelBoss00" + Random.Range(1, 2));
+        enemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemies.Count + enemy.Offset, 0.0f);
+        enemy.Init();
+
+        m_currentEnemies.Add(enemy);
 
         m_bBossClear = false;
         
-        return m_currentEnemy;
-    }
-
-    public void LeaveBoss()
-    {
-        m_currentEnemy.Recycle();
-        SpawnEnemy();
-
-        HPGauge.UpdateRatio();
-
-        BossInfo.SetActive(false);
-        NormalInfo.SetActive(true);
-        BossButton.SetActive(true);
-
-        StopCoroutine("_timer");
-    }
-
-    public void TryBoss()
-    {
-        if(m_nCurrentWave % WAVE_COUNT == 0)
-        {
-            m_currentEnemy.Recycle();
-
-            BossInfo.SetActive(true);
-            NormalInfo.SetActive(false);
-            
-            float timer = 30.0f;
-            if(m_nCurrentWave % (WAVE_COUNT * 12) == 0)
-            {
-                timer = 60.0f;
-            }
-
-            SpawnBoss();
-            StopCoroutine("_timer");
-            StartCoroutine("_timer", timer);
-
-            HPGauge.UpdateRatio();
-        }
-
-        BossButton.SetActive(false);
+        return enemy;
     }
     
     public void NextWave()
     {
-        if( m_currentEnemy?.IsBoss == true && 
-            m_currentEnemy?.State == Character.STATE.DEAD)
-        {
-            m_bBossClear = true;
-        }
-
-        if(m_bBossClear)
-        {
-            m_nCurrentWave++;
-            if(m_nCurrentWave > 1 && m_nCurrentWave % WAVE_COUNT == 1)
-            {
-                UpgradeManager.Instance.GetUpgrade("EnemyHP").Level++;
-                UpgradeManager.Instance.GetUpgrade("Reward").Level++;
-                ++m_nLevel;
-            }
-        }
+        m_nCurrentWave++;
 
         cachedTransform.position += new Vector3(5.625f, 0.0f);
         
@@ -252,77 +209,58 @@ public class GameManager : MonoSingleton<GameManager>
     
     IEnumerator _waitIdle()
     {
-        bool all = false;
-        while(all == false)
-        {
-            yield return null;
-            all = true;
-            for(int i = 0; i < PlayerList.Count; ++i)
-            {
-                if(PlayerList[i].State != Character.STATE.IDLE)
-                {
-                    all = false;
-                    break;
-                }  
-            }
-            if(all == true) break;
-        }
+        // bool all = false;
+        // while(all == false)
+        // {
+        //     yield return null;
+        //     all = true;
+        //     for(int i = 0; i < PlayerList.Count; ++i)
+        //     {
+        //         if(PlayerList[i].State != Character.STATE.IDLE)
+        //         {
+        //             all = false;
+        //             break;
+        //         }  
+        //     }
+        //     if(all == true) break;
+        // }
+
         m_InGameState = StateInGame.MOVE;
         m_nMoveCount = PlayerList.Count;
 
-        if(m_nCurrentWave > 0)
+        for(int i = 0; i < 3; ++i)
         {
-            if(m_bBossClear == true && m_nCurrentWave % WAVE_COUNT == 0)
-            {
-                float timer = 30.0f;
-                if(m_nCurrentWave % (WAVE_COUNT * 12) == 0)
-                {
-                    timer = 60.0f;
-                }
-
-                SpawnBoss();
-                StopCoroutine("_timer");
-                StartCoroutine("_timer", timer);
-            }
-            else
-            {
-                SpawnEnemy();
-            }
+            SpawnEnemy();
         }
 
-        Level.text = "Level " + m_nLevel;
+        //Level.text = "Level " + m_nLevel;
         Wave.text = ((m_nCurrentWave - 1) % WAVE_COUNT + 1) + "/" + WAVE_COUNT;
 
         while(m_InGameState == StateInGame.MOVE) yield return null;
-        if(m_currentEnemy.IsBoss)
-        {
-            BossInfo.SetActive(true);
-            NormalInfo.SetActive(false);
-        }
 
         HPGauge.UpdateRatio();
     }
 
-    IEnumerator _timer(float timeLimit)
-    {
-        while(m_InGameState == StateInGame.MOVE) yield return null;
+    // IEnumerator _timer(float timeLimit)
+    // {
+    //     while(m_InGameState == StateInGame.MOVE) yield return null;
         
-        float time = timeLimit;
-        TimerText.text = $"{timeLimit:0.0}<size=-4> s</size>";
-        TimerGauge.fillAmount = 1.0f;
+    //     float time = timeLimit;
+    //     TimerText.text = $"{timeLimit:0.0}<size=-4> s</size>";
+    //     TimerGauge.fillAmount = 1.0f;
 
-        while(time > 0.0f)
-        {
-            yield return null;
-            time -= Time.deltaTime;
+    //     while(time > 0.0f)
+    //     {
+    //         yield return null;
+    //         time -= Time.deltaTime;
 
-            TimerText.text = $"{time:0.0}<size=-4> s</size>";
-            TimerGauge.fillAmount = time / timeLimit;
-        }
+    //         TimerText.text = $"{time:0.0}<size=-4> s</size>";
+    //         TimerGauge.fillAmount = time / timeLimit;
+    //     }
 
-        TimerText.text = $"0.0<size=-4> s</size>";
-        TimerGauge.fillAmount = 0.0f;
+    //     TimerText.text = $"0.0<size=-4> s</size>";
+    //     TimerGauge.fillAmount = 0.0f;
 
-        LeaveBoss();
-    }
+    //     LeaveBoss();
+    // }
 }

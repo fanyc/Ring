@@ -14,10 +14,6 @@ public class CastPlayerArcherSkill : Castable
     public override bool Condition()
     {
         if(IsCoolTime()) return false;
-        if(GameManager.Instance.InGameState != GameManager.StateInGame.BATTLE) return false;
-        if(GameManager.Instance.CurrentEnemy == null) return false;
-        if(GameManager.Instance.CurrentEnemy.State == Character.STATE.DEAD ||
-            GameManager.Instance.CurrentEnemy.State == Character.STATE.NULL) return false;
         return true;
     }
     
@@ -27,7 +23,6 @@ public class CastPlayerArcherSkill : Castable
     }
     protected override IEnumerator Cast()
     {
-        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerArcher.AttackPerSecond / GameManager.Instance.PlayerSpeed);
         m_caster.PlayAnimation("skill_01", false, false);
@@ -47,7 +42,7 @@ public class CastPlayerArcherSkill : Castable
         // eff.Init(eff.cachedTransform.position);
         
 
-        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
+        CharacterEnemy target = GameManager.Instance.CurrentEnemies[0];
 
         if(target == null) return;
         Spine.Bone bone = m_caster.GetAnimationBone("wp_elf_c01_c");

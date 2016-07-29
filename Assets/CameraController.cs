@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CameraController : MonoSingleton<CameraController> {
 
-	public Transform Target;
     public Vector2 Offset;
 
     public float Speed = 2.6f;
@@ -14,7 +14,6 @@ public class CameraController : MonoSingleton<CameraController> {
     public const float Size = 3.636f;
 
     protected float m_fScale = 1.0f;
-    protected Vector2 m_offset;
     
     public float Scale
     {
@@ -46,20 +45,33 @@ public class CameraController : MonoSingleton<CameraController> {
         TargetScale = 1.0f;
         m_cachedCamera.orthographicSize = Size * Scale;
         m_vecShake = Vector3.zero;
-        m_offset = Offset;
     }
 
     void LateUpdate()
     {
+        List<CharacterPlayer> players = GameManager.Instance.PlayerList;
+        Transform target = players[0].cachedTransform;
+
+        for(int i = 1, c = players.Count; i < c; ++i )
+        {
+            if(target.position.x * GameManager.Instance.Direction < players[i].cachedTransform.position.x * GameManager.Instance.Direction)
+            {
+                target = players[i].cachedTransform;
+            }
+        }
+
         m_fScale = Mathf.Lerp(m_fScale, TargetScale, Speed * Time.smoothDeltaTime);
         m_cachedCamera.orthographicSize = Size * Scale;
 
-        m_offset = Vector2.Lerp(m_offset, Offset, Speed * Time.smoothDeltaTime);
-        Vector3 pos = Target.position + (Vector3)m_offset * Scale + m_vecShake;
+        Vector3 centor = GameManager.Instance.cachedTransform.position;
+        Vector3 pos = new Vector3(target.position.x, 0.0f, 0.0f) + (Vector3)Offset * Scale + m_vecShake;
         m_vecShake = Vector3.zero;
+        float margin = 0.5f;
+        float limit = margin + 10.0f - Size * Scale * m_cachedCamera.aspect;
+        pos.x = Mathf.Clamp(pos.x, centor.x - limit, centor.x + limit);
+        pos = Vector2.Lerp(cachedTransform.position, pos, Speed * Time.smoothDeltaTime);
         pos.z = -10.0f;
         cachedTransform.position = pos;
-
     }
 
     public void SetShake(float amplitude, float waveLength, float duration)
@@ -76,7 +88,5 @@ public class CameraController : MonoSingleton<CameraController> {
             per += Time.smoothDeltaTime / duration;
             yield return null;
         }
-
-        m_vecShake = Vector3.zero;
     }
 }

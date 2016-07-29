@@ -17,10 +17,10 @@ public class HPGauge : ObjectBase {
 	}
 	protected void _updateRatio()
 	{
-		if(GameManager.Instance.CurrentEnemy != null)
-		{
-			m_imgGauge.fillAmount = BigDecimal.Ratio(GameManager.Instance.CurrentEnemy.HP, GameManager.Instance.CurrentEnemy.MaxHP);
-		}
+		// if(GameManager.Instance.CurrentEnemy != null)
+		// {
+		// 	m_imgGauge.fillAmount = BigDecimal.Ratio(GameManager.Instance.CurrentEnemy.HP, GameManager.Instance.CurrentEnemy.MaxHP);
+		// }
 	}
 
 	public static void UpdateRatio()

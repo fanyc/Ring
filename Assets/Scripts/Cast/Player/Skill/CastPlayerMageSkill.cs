@@ -16,10 +16,6 @@ public class CastPlayerMageSkill : Castable
     public override bool Condition()
     {
         if(IsCoolTime()) return false;
-        if(GameManager.Instance.InGameState != GameManager.StateInGame.BATTLE) return false;
-        if(GameManager.Instance.CurrentEnemy == null) return false;
-        if(GameManager.Instance.CurrentEnemy.State == Character.STATE.DEAD ||
-            GameManager.Instance.CurrentEnemy.State == Character.STATE.NULL) return false;
         return true;
     }
     
@@ -29,7 +25,6 @@ public class CastPlayerMageSkill : Castable
     }
     protected override IEnumerator Cast()
     {
-        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerMage.AttackPerSecond / GameManager.Instance.PlayerSpeed);
         m_caster.PlayAnimation("skill_01", false, false);
@@ -57,7 +52,7 @@ public class CastPlayerMageSkill : Castable
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
     {        
         eff?.GetComponent<ParticleSystem>().Stop();
-        CharacterEnemy target = GameManager.Instance.CurrentEnemy;
+        CharacterEnemy target = GameManager.Instance.CurrentEnemies[0];
         
         if(target == null) return;
         Projectile proj = ObjectPool<Projectile>.Spawn("@Proj_Meteor");

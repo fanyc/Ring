@@ -4,6 +4,29 @@ using System;
 
 public class Castable
 {
+    public static Character GetNearestTarget(Character caster, Character[] targets)
+    {
+        int count = targets.Length;
+
+        if(count <= 0) return null;
+        Character target = targets[0];
+        float distX = Mathf.Abs(target.cachedTransform.position.x - caster.cachedTransform.position.x);
+        for(int i = 1; i < count; ++i)
+        {
+            if(targets[i] == null) continue;
+            float dist = Mathf.Abs(targets[i].cachedTransform.position.x - caster.cachedTransform.position.x);
+            if(dist < distX)
+            {
+                target = targets[i];
+                distX = dist;
+            }
+        }
+
+        return target;
+    }
+
+    protected static Collider2D[] m_Buffer = new Collider2D[100];
+
     public Action OnCoolTime;
     protected Coroutine CachedCoroutine;
     protected IEnumerator m_enumCast;
@@ -37,19 +60,25 @@ public class Castable
         get{ return 0.0f; }
     }
     
-    public virtual Vector3 Rect
+    public virtual Vector2 Rect
     {
         get
         {
-            return Vector3.zero;
+            return Vector2.zero;
         }
     }
-    
-    public bool IsInRect(Vector3 targetPos, float factor = 1.0f)
+
+    public virtual float MinDistance
     {
-        Vector3 dist = position - targetPos;
-        Vector3 rect = Rect * factor;
-        return dist.y <= rect.y && Mathf.Abs(dist.x) <= Mathf.Abs(rect.x) && Mathf.Abs(dist.z) <= Mathf.Abs(rect.z);
+        get
+        {
+            return 0.0f;
+        }
+    }
+
+    public virtual int TargetMask
+    {
+        get { return 0; }
     }
     
     protected Character m_caster;
@@ -80,7 +109,15 @@ public class Castable
         }
     }
 
-
+    public virtual Character[] GetTargets()
+    {
+        return null;
+    }
+    
+    public Character GetNearestTarget(Character[] targets)
+    {
+        return GetNearestTarget(m_caster, targets);
+    }
     public Castable(Character caster)
     {
         m_fCoolTime = 0.0f;

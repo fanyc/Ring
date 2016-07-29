@@ -14,9 +14,9 @@ public class CharacterEnemyOrcMage : CharacterEnemy
 
     public override void Init()
     {
-        base.Init();
         m_castAttack = new CastEnemyOgerAttack(this);
         m_castAttack.SetCoolTime(2.5f);
+        base.Init();
     }
 
     public override void Dead()
