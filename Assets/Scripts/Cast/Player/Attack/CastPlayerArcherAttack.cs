@@ -16,7 +16,7 @@ public class CastPlayerArcherAttack : Castable
     {
         get
         {
-            return new Vector2((MinDistance + 1.0f) * GameManager.Instance.Direction, 10.0f);
+            return new Vector2((MinDistance + 0.0f) * GameManager.Instance.Direction, 10.0f);
         }
     }
 

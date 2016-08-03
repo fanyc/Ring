@@ -13,7 +13,7 @@ public class CharacterPlayerWarrior : CharacterPlayer
 
     static CharacterPlayerWarrior()
     {
-        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "SkillIcon/btle_icskill_wri_01b");
+        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "SkillIcon/btle_icskill_wri_01b", "CastPlayerWarriorSkill");
     }
 
 
@@ -27,7 +27,7 @@ public class CharacterPlayerWarrior : CharacterPlayer
     public override void Init()
     {
         m_castAttack = new CastPlayerWarriorAttack(this);
-        m_castSkill = new CastPlayerWarriorSkill(this);
+        m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
         base.Init();
     }
 

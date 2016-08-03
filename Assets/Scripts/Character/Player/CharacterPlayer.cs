@@ -11,14 +11,17 @@ public abstract class CharacterPlayer : Character
         public string upgradeGroup;
         public string animationName;
         public string thumbnailName;
+
+        public string castableName;
         
 
-        public SkillData(string name, string upgradeGroup, string animationName, string thumbnailName)
+        public SkillData(string name, string upgradeGroup, string animationName, string thumbnailName, string castableName)
         {
             this.name = name;
             this.upgradeGroup = upgradeGroup;
             this.animationName = animationName;
             this.thumbnailName = thumbnailName;
+            this.castableName = castableName;
         }
     }
 
@@ -42,9 +45,9 @@ public abstract class CharacterPlayer : Character
             }
         }
 
-        public void AddSkillData(string name, string upgradeGroup, string animationName, string thumbnailName)
+        public void AddSkillData(string name, string upgradeGroup, string animationName, string thumbnailName, string castableName)
         {
-            m_listSkillData.Add(new SkillData(name, upgradeGroup, animationName, thumbnailName));
+            m_listSkillData.Add(new SkillData(name, upgradeGroup, animationName, thumbnailName, castableName));
         }
     }
     public abstract SkillDataList ListSkillData

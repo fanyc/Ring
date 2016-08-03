@@ -198,18 +198,18 @@ public class Castable
         m_fCoolTime = 0.0f;
     }
 
-    // public static Castable CreateCast(string strType)
-    // {
-    //     Type type = Type.GetType(strType);
-    //     if(type != null)
-    //     {
-    //         object instance = Activator.CreateInstance(type, (object)Player.Instance);
+    public static Castable CreateCast(string strType, Character caster)
+    {
+        Type type = Type.GetType(strType);
+        if(type != null)
+        {
+            object instance = Activator.CreateInstance(type, (object)caster);
 
-    //         if(instance != null)
-    //         {
-    //             return (Castable)instance;
-    //         }
-    //     }
-    //     return null;
-    // }
+            if(instance != null)
+            {
+                return (Castable)instance;
+            }
+        }
+        return null;
+    }
 }

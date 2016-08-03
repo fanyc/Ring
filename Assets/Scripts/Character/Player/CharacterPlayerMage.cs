@@ -1,3 +1,5 @@
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class CharacterPlayerMage : CharacterPlayer
@@ -11,7 +13,7 @@ public class CharacterPlayerMage : CharacterPlayer
 
     static CharacterPlayerMage()
     {
-        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "SkillIcon/btle_icskill_sor_01b");
+        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "SkillIcon/btle_icskill_sor_01b", "CastPlayerMageSkill");
     }
 
 
@@ -26,8 +28,72 @@ public class CharacterPlayerMage : CharacterPlayer
     public override void Init()
     {
         m_castAttack = new CastPlayerMageAttack(this);
-        m_castSkill = new CastPlayerMageSkill(this);
+        m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
+
         base.Init();
+    }
+    protected override void IdleThought()
+    {
+        Character[] targets = m_castAttack.GetTargets();
+        
+        if(targets?.Length > 0)
+        {
+            Character target = Castable.GetNearestTarget(this, targets);
+            float minDistance =
+            Mathf.Min(m_castAttack.MinDistance - 1.0f,
+                      Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.cachedTransform.position.x));
+                                
+            if(minDistance <= Mathf.Abs(target.cachedTransform.position.x - cachedTransform.position.x))
+            {
+                Attack();
+                return;
+                
+            }
+        }
+
+        State = STATE.MOVE;
+    }
+
+    protected override IEnumerator MOVE()
+    {
+        PlayAnimation(GetRunAnimation(), false, true);
+        while(State == STATE.MOVE)
+        {
+            Vector3 pos = cachedTransform.position;
+            float step = 11.25f * Time.smoothDeltaTime * 0.4f;
+            Character[] targets = m_castAttack.GetTargets();
+            if(targets?.Length > 0)
+            {
+                Character target = Castable.GetNearestTarget(this, targets);
+                float dist = target.cachedTransform.position.x - pos.x;
+                float dest = Mathf.Min(m_castAttack.MinDistance,
+                Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.cachedTransform.position.x));
+                if(Mathf.Abs(Mathf.Abs(dist) - dest) <= step)
+                {
+                    pos.x = target.cachedTransform.position.x + (dest * Mathf.Sign(dist));
+                    Direction = GameManager.Instance.Direction;
+                    Attack();
+                    yield return null;
+                    break;
+                }
+                else
+                {
+                    Direction = GameManager.Instance.Direction * System.Math.Sign(Mathf.Abs(dist) - dest);
+                }
+            }
+            else
+            {
+                Direction = GameManager.Instance.Direction;
+            }
+            
+            pos += new Vector3(step * Direction, 0.0f);
+            
+            cachedTransform.position = pos;
+            
+            yield return null;
+        }
+        
+        NextState();
     }
 
     public override string GetRunAnimation()

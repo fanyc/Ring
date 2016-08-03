@@ -13,7 +13,7 @@ public class CharacterPlayerArcher : CharacterPlayer
 
     static CharacterPlayerArcher()
     {
-        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "SkillIcon/btle_icskill_elf_01b");
+        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "SkillIcon/btle_icskill_elf_01b", "CastPlayerArcherSkill");
     }
 
     public new static float AttackPerSecond
@@ -28,26 +28,31 @@ public class CharacterPlayerArcher : CharacterPlayer
     public override void Init()
     {
         m_castAttack = new CastPlayerArcherAttack(this);
-        m_castSkill = new CastPlayerArcherSkill(this);
+        m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
+
         base.Init();
     }
 
     protected override void IdleThought()
     {
-        float minDistance =
-            Mathf.Min(m_castAttack.MinDistance,
-                      Mathf.Min(GameManager.Instance.LimitDistance,
-                                Mathf.Abs(cachedTransform.position.x - GameManager.Instance.cachedTransform.position.x))) - 1.0f;
         Character[] targets = m_castAttack.GetTargets();
-        if(targets?.Length > 0 &&
-           (minDistance <= Mathf.Abs(Castable.GetNearestTarget(this, targets).cachedTransform.position.x - cachedTransform.position.x))
+        
+        if(targets?.Length > 0)
         {
-            Attack();
+            Character target = Castable.GetNearestTarget(this, targets);
+            float minDistance =
+            Mathf.Min(m_castAttack.MinDistance - 1.0f,
+                      Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.cachedTransform.position.x));
+                                
+            if(minDistance <= Mathf.Abs(target.cachedTransform.position.x - cachedTransform.position.x))
+            {
+                Attack();
+                return;
+                
+            }
         }
-        else
-        {
-            State = STATE.MOVE;
-        }
+
+        State = STATE.MOVE;
     }
 
     protected override IEnumerator MOVE()
@@ -62,9 +67,11 @@ public class CharacterPlayerArcher : CharacterPlayer
             {
                 Character target = Castable.GetNearestTarget(this, targets);
                 float dist = target.cachedTransform.position.x - pos.x;
-                if(Mathf.Abs(Mathf.Abs(dist) - m_castAttack.MinDistance) <= step)
+                float dest = Mathf.Min(m_castAttack.MinDistance,
+                Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.cachedTransform.position.x));
+                if(Mathf.Abs(Mathf.Abs(dist) - dest) <= step)
                 {
-                    pos.x = target.cachedTransform.position.x + (m_castAttack.MinDistance * Mathf.Sign(dist));
+                    pos.x = target.cachedTransform.position.x + (dest * Mathf.Sign(dist));
                     Direction = GameManager.Instance.Direction;
                     Attack();
                     yield return null;
@@ -72,7 +79,7 @@ public class CharacterPlayerArcher : CharacterPlayer
                 }
                 else
                 {
-                    Direction = GameManager.Instance.Direction * System.Math.Sign(Mathf.Abs(dist) - m_castAttack.MinDistance);
+                    Direction = GameManager.Instance.Direction * System.Math.Sign(Mathf.Abs(dist) - dest);
                 }
             }
             else
