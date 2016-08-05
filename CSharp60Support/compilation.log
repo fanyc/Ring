@@ -1,5 +1,5 @@
 ********************************************************************************
-*                      Wednesday, 03 August 2016 20:24:48                      *
+*                       Friday, 05 August 2016 21:48:15                        *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -12,9 +12,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-b5016a32e7f4446398ca9883661e427f
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-4afebdc35796748fe9e7acb1f5b8c432
 Exit code: 0
-Elapsed time: 2.72 sec
+Elapsed time: 2.14 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 26 warning(s)
@@ -47,7 +47,7 @@ Elapsed time: 2.72 sec
 24: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
 25: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                      Wednesday, 03 August 2016 20:24:52                      *
+*                       Friday, 05 August 2016 21:48:18                        *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -60,9 +60,439 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-8b72a2a758cad4eef98da24b0470085d
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-6a8df19e09621484d8601449a728de43
 Exit code: 0
-Elapsed time: 1.82 sec
+Elapsed time: 1.79 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 16 warning(s)
+
+- Compiler errors (16 lines):
+0: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
+1: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
+2: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+3: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+4: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+5: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+6: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+7: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+13: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+14: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+15: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:51:25                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-60bc72987c4ce47f0bd15409a2387ec6
+Exit code: 0
+Elapsed time: 2.86 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 26 warning(s)
+
+- Compiler errors (26 lines):
+0: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+1: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+2: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+3: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+4: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+5: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+6: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+7: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+8: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+9: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+10: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+11: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+12: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
+13: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+14: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+15: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+16: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+17: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+18: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+19: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+20: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+21: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+22: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+23: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+24: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+25: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:51:29                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp-Editor.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-72d71aa4750ce4eadbdacaf3b8b95618
+Exit code: 0
+Elapsed time: 1.85 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 16 warning(s)
+
+- Compiler errors (16 lines):
+0: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
+1: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
+2: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+3: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+4: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+5: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+6: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+7: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+13: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+14: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+15: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:54:53                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-33ac02e39d15849eeb96de1273452cc0
+Exit code: 0
+Elapsed time: 1.80 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 26 warning(s)
+
+- Compiler errors (26 lines):
+0: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+1: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+2: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+3: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+4: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+5: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+6: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+7: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+8: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+9: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+10: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+11: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+12: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
+13: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+14: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+15: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+16: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+17: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+18: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+19: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+20: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+21: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+22: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+23: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+24: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+25: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:54:56                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp-Editor.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-ae9519949b1674ab9a81fc535d94c11c
+Exit code: 0
+Elapsed time: 1.52 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 16 warning(s)
+
+- Compiler errors (16 lines):
+0: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
+1: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
+2: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+3: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+4: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+5: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+6: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+7: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+13: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+14: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+15: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:56:06                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-c5806e371fc0f4dd293ffd23ac122377
+Exit code: 0
+Elapsed time: 2.81 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 26 warning(s)
+
+- Compiler errors (26 lines):
+0: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+1: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+2: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+3: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+4: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+5: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+6: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+7: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+8: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+9: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+10: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+11: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+12: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
+13: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+14: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+15: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+16: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+17: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+18: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+19: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+20: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+21: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+22: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+23: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+24: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+25: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:56:10                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp-Editor.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-75eb1713070b44d1793902c5365f4dc3
+Exit code: 0
+Elapsed time: 2.13 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 16 warning(s)
+
+- Compiler errors (16 lines):
+0: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
+1: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
+2: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+3: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+4: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+5: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+6: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+7: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+13: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+14: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+15: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:58:15                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-ac9cec03c4ecc48d88cc1b573bf00013
+Exit code: 0
+Elapsed time: 2.78 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 26 warning(s)
+
+- Compiler errors (26 lines):
+0: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+1: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+2: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+3: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+4: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+5: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+6: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+7: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+8: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+9: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+10: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+11: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+12: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
+13: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+14: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+15: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+16: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+17: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+18: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+19: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+20: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+21: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+22: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+23: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+24: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+25: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:58:18                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp-Editor.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-e0e952315aad84e5080699de4f3356c3
+Exit code: 0
+Elapsed time: 1.84 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 16 warning(s)
+
+- Compiler errors (16 lines):
+0: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
+1: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
+2: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+3: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+4: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+5: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+6: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+7: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+13: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+14: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+15: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:58:44                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-a68d644bc3a054c238ece274e1f22d8f
+Exit code: 0
+Elapsed time: 2.39 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 26 warning(s)
+
+- Compiler errors (26 lines):
+0: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+1: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+2: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+3: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+4: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+5: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+6: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+7: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+8: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+9: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+10: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+11: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+12: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
+13: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+14: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+15: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+16: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+17: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+18: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+19: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+20: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+21: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+22: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+23: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+24: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+25: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+********************************************************************************
+*                       Friday, 05 August 2016 21:58:47                        *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp-Editor.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents/Frameworks
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-e8164b37d33f544debc5e0bbbcf7c95e
+Exit code: 0
+Elapsed time: 1.86 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 16 warning(s)

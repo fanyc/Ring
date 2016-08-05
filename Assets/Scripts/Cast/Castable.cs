@@ -152,8 +152,6 @@ public class Castable
         while(m_enumCast != null && m_enumCast.MoveNext())
             yield return m_enumCast.Current;
         m_enumCast = null;
-            
-        Release();
     }
 
     public virtual bool Condition()

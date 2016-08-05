@@ -29,7 +29,7 @@ public class CharacterPlayerArcher : CharacterPlayer
     {
         m_castAttack = new CastPlayerArcherAttack(this);
         m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
-
+        
         base.Init();
     }
 

@@ -28,6 +28,13 @@ public class CharacterPlayerWarrior : CharacterPlayer
     {
         m_castAttack = new CastPlayerWarriorAttack(this);
         m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
+        UIAbilityIconSkill orig = Resources.Load<UIAbilityIconSkill>("Abilities/@AbilityIconSkill_Warrior");
+        ObjectPool<UIAbilityIcon>.CreatePool("Ability" + m_skillDataList[0].castableName, orig.cachedGameObject, 10, (UIAbilityIcon icon)=>
+        {
+            ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[0]);
+        });
+        UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[0].castableName);
+
         base.Init();
     }
 

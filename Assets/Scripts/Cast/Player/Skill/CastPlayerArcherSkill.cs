@@ -20,6 +20,7 @@ public class CastPlayerArcherSkill : Castable
     protected override void Prepare()
     {
         m_caster.AddAnimationEvent(Hit);
+        m_caster.WeightBonus += 100.0f;
     }
     protected override IEnumerator Cast()
     {
@@ -32,6 +33,7 @@ public class CastPlayerArcherSkill : Castable
     
     protected override void Release()
     {
+        m_caster.WeightBonus -= 100.0f;
         m_caster.RemoveAnimationEvent(Hit);
     }
 

@@ -10,6 +10,8 @@ public class UIAbilityIconSkill : UIAbilityIcon {
 
     public void Init(Character caster, CharacterPlayer.SkillData skillData)
     {
+        base.Init();
+        
         m_Caster = caster;
         m_SkillData = skillData;
         m_castSkill = Castable.CreateCast(skillData.castableName, caster);
@@ -25,6 +27,6 @@ public class UIAbilityIconSkill : UIAbilityIcon {
     public override void Use()
     {
         base.Use();
-        m_Caster.Cast(m_castSkill);
+        m_Caster?.Cast(m_castSkill);
     }
 }

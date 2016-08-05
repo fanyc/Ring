@@ -126,6 +126,8 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PlayerList[i].Init();
         }
+
+        UIAbilitySlot.Instance.Init();
         
         UIWallet.Instance.Init();
         m_InGameState = StateInGame.IDLE;

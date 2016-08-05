@@ -23,12 +23,12 @@ public class ObjectPool<ObjectType>
     protected Dictionary<string, GameObject> m_Sources = new Dictionary<string, GameObject>();
     protected Dictionary<string, Queue<ObjectType>> m_ObjectPool = new Dictionary<string, Queue<ObjectType>>();
 
-    public static void CreatePool(string poolName, GameObject source, int size = 100)
+    public static void CreatePool(string poolName, GameObject source, int size = 100, System.Action<ObjectType> init = null)
     {
-        Instance.createPool(poolName, source, size);
+        Instance.createPool(poolName, source, size, init);
     }
 
-    protected void createPool(string poolName, GameObject source, int size)
+    protected void createPool(string poolName, GameObject source, int size, System.Action<ObjectType> init = null)
     {
         if(m_Sources.ContainsKey(poolName))
         {
@@ -44,10 +44,16 @@ public class ObjectPool<ObjectType>
         for(int i = 0; i < size; ++i)
         {
             obj = ((GameObject)Object.Instantiate(source)).GetComponent<ObjectType>();
-            obj.cachedTransform.SetParent(ObjectPool.ObjectPoolRoot);
+            obj.cachedTransform.SetParent(ObjectPool.ObjectPoolRoot, false);
             obj.cachedGameObject.name = obj.cachedGameObject.name.Replace("(Clone)", "");
             obj.cachedTransform.position = new Vector3(10000.0f, 10000.0f, 0.0f);
             obj.cachedGameObject.SetActive(false);
+
+            if(init != null)
+            {
+                init(obj);
+            }
+
             queue.Enqueue(obj);
         }
 
@@ -84,7 +90,7 @@ public class ObjectPool<ObjectType>
         obj.cachedGameObject.SetActive(true);
         if(parent)
         {
-            obj.cachedTransform.SetParent(parent);
+            obj.cachedTransform.SetParent(parent, false);
         }
         obj.cachedTransform.localPosition = localPosition;
 
@@ -105,7 +111,7 @@ public class ObjectPool<ObjectType>
             return;
         }
 
-        obj.cachedTransform.SetParent(ObjectPool.ObjectPoolRoot);
+        obj.cachedTransform.SetParent(ObjectPool.ObjectPoolRoot, false);
         obj.cachedTransform.position = new Vector3(10000.0f, 10000.0f);
         obj.cachedGameObject.SetActive(false);
 

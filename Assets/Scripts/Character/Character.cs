@@ -103,6 +103,9 @@ public abstract class Character : ObjectBase
     public BigDecimal MaxHP = BigDecimal.Zero;
 
     protected float m_fKnockBack = 0.0f;
+    protected float m_fWeight = 0.0f;
+    public float WeightBonus = 0.0f;
+    
     
     protected virtual void Awake()
     {
@@ -258,6 +261,13 @@ public abstract class Character : ObjectBase
         {
             m_fKnockBack = m_fKnockBack + power.x;
         }
+
+        if(m_fWeight + WeightBonus > Mathf.Abs(m_fKnockBack))
+        {
+            m_fKnockBack = 0.0f;
+            return;
+        }
+
         State = STATE.BEATEN;
         StopCoroutine("_knockBack");
         StartCoroutine("_knockBack");
