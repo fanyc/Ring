@@ -1,0 +1,62 @@
+
+skill_w_a01.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+skill_a_w01_01
+  rotate: false
+  xy: 2, 334
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_02
+  rotate: false
+  xy: 2, 168
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_03
+  rotate: false
+  xy: 326, 334
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_04
+  rotate: false
+  xy: 2, 2
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_05
+  rotate: false
+  xy: 326, 168
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_06
+  rotate: false
+  xy: 650, 334
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_07
+  rotate: false
+  xy: 326, 2
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1
+skill_a_w01_08
+  rotate: false
+  xy: 650, 168
+  size: 322, 164
+  orig: 322, 164
+  offset: 0, 0
+  index: -1

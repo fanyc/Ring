@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public abstract class CharacterPlayer : Character
 {
+    public static List<CharacterPlayer> PlayerList = new List<CharacterPlayer>();
+    
     public struct SkillData
     {
         public string name;
@@ -88,7 +90,8 @@ public abstract class CharacterPlayer : Character
 
     public override void Init()
     {
-        cachedTransform.position = new Vector3(Offset, 0.0f);
+        PlayerList.Add(this);
+        position = new Vector3(Offset, 0.0f);
         base.Init();
     }
 
@@ -108,7 +111,7 @@ public abstract class CharacterPlayer : Character
         {
             case GameManager.StateInGame.MOVE:
             {
-                if(GameManager.Instance.cachedTransform.position.x + Offset > cachedTransform.position.x)
+                if(GameManager.Instance.cachedTransform.position.x + Offset > position.x)
                 {
                     State = STATE.MOVE;
                 }
@@ -138,15 +141,15 @@ public abstract class CharacterPlayer : Character
         PlayAnimation(GetRunAnimation(), false, true);
         while(State == STATE.MOVE)
         {
-            Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f, 0.0f);
+            Vector3 pos = position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f, 0.0f);
             
             if(GameManager.Instance.cachedTransform.position.x + Offset < pos.x)
             {
-                cachedTransform.position = new Vector3(GameManager.Instance.cachedTransform.position.x + Offset, 0.0f);
+                position = new Vector3(GameManager.Instance.cachedTransform.position.x + Offset, 0.0f);
                 break;
             }
             
-            cachedTransform.position = pos;
+            position = pos;
             
             yield return null;
         }
@@ -164,6 +167,7 @@ public abstract class CharacterPlayer : Character
 
     public override void Dead()
     {
+        PlayerList.Remove(this);
         base.Dead();
     }
 }

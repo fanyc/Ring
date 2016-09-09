@@ -27,23 +27,9 @@ public class CastPlayerMageAttack : Castable
     {
         get
         {
-            return 7.0f;
+            return 5.0f;
         }
     }
-
-    public override Character[] GetTargets()
-    {
-        int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + Rect, m_Buffer, TargetMask);
-
-        Character[] ret = new Character[count];
-        for(int i = 0; i < count; ++i)
-        {
-            ret[i] = Character.GetCharacter(m_Buffer[i]);
-        }
-
-        return ret;
-    }
-
     public CastPlayerMageAttack(Character caster) : base(caster)
     {
     }
@@ -70,7 +56,7 @@ public class CastPlayerMageAttack : Castable
 
         Spine.Bone bone = m_caster.GetAnimationBone("wp_sor_c01");
         float angle = bone.AppliedRotation;
-        Vector2 pos = (Vector2)m_caster.cachedTransform.position + new Vector2(bone.WorldX, bone.WorldY);
+        Vector2 pos = (Vector2)m_caster.position + new Vector2(bone.WorldX, bone.WorldY);
         eff.Init(pos);
         eff.cachedTransform.localPosition = new Vector3(0.845f, 0.0f, -0.01f);
         eff.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
@@ -86,6 +72,7 @@ public class CastPlayerMageAttack : Castable
     {
         eff?.Recycle();
         m_caster.RemoveAnimationEvent(Hit);
+        base.Release();
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
@@ -94,12 +81,12 @@ public class CastPlayerMageAttack : Castable
         if(target == null) return;
 
         Projectile proj = ObjectPool<Projectile>.Spawn("@Proj_Fireball");
-        Vector2 pos = (Vector2)eff.cachedTransform.position;// m_caster.cachedTransform.position + new Vector2(bone.WorldX, bone.WorldY)
+        Vector2 pos = (Vector2)eff.cachedTransform.position;// m_caster.position + new Vector2(bone.WorldX, bone.WorldY)
         //+ new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.845f;
 
         eff?.Recycle();
         
-        proj.Init((Vector3)pos, target.cachedTransform.position + new Vector3(0.0f, pos.y), ()=>
+        proj.Init((Vector3)pos, target.position + new Vector3(0.0f, pos.y), ()=>
         {
             int count = Physics2D.OverlapCircleNonAlloc((Vector2)proj.cachedTransform.position, 2.0f, m_Buffer, TargetMask);
 
@@ -108,7 +95,7 @@ public class CastPlayerMageAttack : Castable
             {
                 Character t = Character.GetCharacter(m_Buffer[i]);
                 t.Beaten(damage, CharacterEnemy.DAMAGE_TYPE.SORCERESS);
-                t.KnockBack(new Vector2(15.0f, 2.3f));
+                t.KnockBack(new Vector2(15.0f, 0.0f));
             }
 
             ObjectPool<Effect>.Spawn("@Effect_Fireball_Explosion").Init(proj.cachedTransform.position);

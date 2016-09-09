@@ -61,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int Direction = 1;
 
-    public float LimitDistance = 10.0f;
+    public float LimitDistance = 500.0f;
 
     public List<CharacterPlayer> PlayerList;
 
@@ -92,7 +92,8 @@ public class GameManager : MonoSingleton<GameManager>
         ObjectPool<ItemGold>.CreatePool("@ItemGold", Resources.Load<GameObject>("Item/@ItemGold"), 20);
         ObjectPool<DamageText>.CreatePool("@DamageText", Resources.Load<GameObject>("@DamageText"), 20);
         ObjectPool<UIItemSkill>.CreatePool("@ItemSkill", Resources.Load<GameObject>("@ItemSkill"), 16);
-
+        ObjectPool<HPGauge>.CreatePool("@HPGauge", Resources.Load<GameObject>("@HPGauge"), 10);
+        
         Effect[] effects = Resources.LoadAll<Effect>("Effects/");
         for(int i = 0; i < effects.Length; ++i)
         {
@@ -148,8 +149,8 @@ public class GameManager : MonoSingleton<GameManager>
     
     public CharacterEnemy SpawnEnemy()
     {
-        CharacterEnemy enemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy00" + Random.Range(1, 2));
-        enemy.cachedTransform.position = cachedTransform.position + new Vector3(m_currentEnemies.Count + enemy.Offset, 0.0f);
+        CharacterEnemy enemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy00" + Random.Range(1, 6));
+        enemy.cachedTransform.position = cachedTransform.position + new Vector3(7.5f + m_currentEnemies.Count + enemy.Offset, 0.0f);
         enemy.Init();
 
         m_currentEnemies.Add(enemy);
@@ -169,23 +170,37 @@ public class GameManager : MonoSingleton<GameManager>
         
         return enemy;
     }
+
+    public void RemoveEnemy(CharacterEnemy enemy)
+    {
+        m_currentEnemies.Remove(enemy);
+
+        if(m_currentEnemies.Count <= 0)
+        {
+            NextWave();
+        }
+    }
     
     public void NextWave()
     {
         m_nCurrentWave++;
 
-        cachedTransform.position += new Vector3(5.625f, 0.0f);
+        cachedTransform.position = new Vector3(PlayerList[0].cachedTransform.position.x, 0.0f);
         
-        
+        for(int i = 0; i < 3; ++i)
+        {
+            SpawnEnemy();
+        }
+
         // if(m_nCurrentWave > WAVE_COUNT)
         // {
         //     m_nCurrentWave = 0;
         // }
         // else
-        m_InGameState = StateInGame.IDLE;
+        // m_InGameState = StateInGame.IDLE;
         
         
-        StartCoroutine("_waitIdle");
+        // StartCoroutine("_waitIdle");
         // for(int i = 0; i < PlayerList.Count; ++i)
         // {
         //     PlayerList[i].State = Character.STATE.IDLE;
@@ -239,8 +254,6 @@ public class GameManager : MonoSingleton<GameManager>
         Wave.text = ((m_nCurrentWave - 1) % WAVE_COUNT + 1) + "/" + WAVE_COUNT;
 
         while(m_InGameState == StateInGame.MOVE) yield return null;
-
-        HPGauge.UpdateRatio();
     }
 
     // IEnumerator _timer(float timeLimit)

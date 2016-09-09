@@ -25,7 +25,7 @@ public abstract class CharacterEnemy : Character
     
     public virtual float HPFactor
     {
-        get { return 1000.0f; }
+        get { return 1.0f; }
     }
 
     private int m_nCachedLayer = 0;
@@ -47,6 +47,18 @@ public abstract class CharacterEnemy : Character
         get;
     }
     protected Castable m_castAttack;
+
+    protected override void LateUpdate()
+    {
+        if((position.x - (GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
+        {
+            Vector3 pos = position;
+            pos.x = GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction;
+            position = pos;
+        }
+
+        base.LateUpdate();
+    }
 
     public override void Init()
     {
@@ -95,20 +107,16 @@ public abstract class CharacterEnemy : Character
         base.Dead();
         State = STATE.DEAD;
 
-        //UILevelInfo.Instance.SetBoss(false);
-        //UILevelInfo.Instance.SetLeaveBoss(false);
-
-        GameManager.Instance.NextWave();
-        
-        if(IsBoss == true)
-        {
-            GameManager.Instance.StopCoroutine("_timer");
-        }
+        GameManager.Instance.RemoveEnemy(this);
     }
 
     public virtual void SetCamera()
     {
         CameraController.Instance.TargetScale = 1.0f;
-        CameraController.Instance.Offset = new Vector2(-0.2f, 1.65f);
+    }
+
+    public override string GetBeatenAnimation()
+    {
+        return "dmg_01";
     }
 }

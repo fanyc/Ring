@@ -23,19 +23,6 @@ public class CastPlayerWarriorSkill : Castable
         }
     }
 
-    public override Character[] GetTargets()
-    {
-        int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + Rect, m_Buffer, TargetMask);
-
-        Character[] ret = new Character[count];
-        for(int i = 0; i < count; ++i)
-        {
-            ret[i] = Character.GetCharacter(m_Buffer[i]);
-        }
-
-        return ret;
-    }
-
     public CastPlayerWarriorSkill(Character caster) : base(caster)
     {
     }
@@ -63,6 +50,7 @@ public class CastPlayerWarriorSkill : Castable
     {
         m_caster.WeightBonus -= 100.0f;
         m_caster.RemoveAnimationEvent(Hit);
+        base.Release();
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
@@ -73,14 +61,14 @@ public class CastPlayerWarriorSkill : Castable
         {
             Character target = targets[i];
 
-            if(target == null) return;
+            if(target == null) continue;
             target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("WarriorSkillDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.WARRIOR, true);
             target.KnockBack(new Vector2(20.0f, 4.6f));
         }
 
-        ObjectPool<Effect>.Spawn("@Effect_Lightning01").Init(m_caster.cachedTransform.position + new Vector3(2.0f, 0.0f));
-        ObjectPool<Effect>.Spawn("@Effect_Lightning02").Init(m_caster.cachedTransform.position + new Vector3(2.0f, 0.0f));
-        ObjectPool<Effect>.Spawn("@Effect_Flash01").Init(m_caster.cachedTransform.position + new Vector3(2.0f, 0.0f));
+        ObjectPool<Effect>.Spawn("@Effect_Lightning01").Init(m_caster.position + new Vector3(2.0f, 0.0f));
+        ObjectPool<Effect>.Spawn("@Effect_Lightning02").Init(m_caster.position + new Vector3(2.0f, 0.0f));
+        ObjectPool<Effect>.Spawn("@Effect_Flash01").Init(m_caster.position + new Vector3(2.0f, 0.0f));
 
         CameraController.Instance.SetShake(0.35f, 0.075f, 0.3f);
     }

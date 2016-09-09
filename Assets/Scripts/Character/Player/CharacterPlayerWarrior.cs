@@ -13,7 +13,11 @@ public class CharacterPlayerWarrior : CharacterPlayer
 
     static CharacterPlayerWarrior()
     {
-        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "SkillIcon/btle_icskill_wri_01b", "CastPlayerWarriorSkill");
+        //m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill");
+        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Slash");
+        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Pierce");
+        
+        
     }
 
 
@@ -28,12 +32,18 @@ public class CharacterPlayerWarrior : CharacterPlayer
     {
         m_castAttack = new CastPlayerWarriorAttack(this);
         m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
-        UIAbilityIconSkill orig = Resources.Load<UIAbilityIconSkill>("Abilities/@AbilityIconSkill_Warrior");
-        ObjectPool<UIAbilityIcon>.CreatePool("Ability" + m_skillDataList[0].castableName, orig.cachedGameObject, 10, (UIAbilityIcon icon)=>
+
+        for(int i = 0; i < m_skillDataList.Count; ++i)
         {
-            ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[0]);
-        });
-        UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[0].castableName);
+            UIAbilityIconSkill orig = Resources.Load<UIAbilityIconSkill>("Abilities/@AbilityIconSkill_Warrior");
+            ObjectPool<UIAbilityIcon>.CreatePool("Ability" + m_skillDataList[i].castableName, orig.cachedGameObject, 10, (UIAbilityIcon icon)=>
+            {
+                ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[i]);
+            });
+            UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[i].castableName);
+        }
+
+        m_fHP = MaxHP = 10.0f;
 
         base.Init();
     }
@@ -63,9 +73,9 @@ public class CharacterPlayerWarrior : CharacterPlayer
                 break;
             }
             
-            Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.4f * GameManager.Instance.Direction, 0.0f);
+            Vector3 pos = position + new Vector3(11.25f * Time.smoothDeltaTime * 0.4f * GameManager.Instance.Direction, 0.0f);
             
-            cachedTransform.position = pos;
+            position = pos;
             
             yield return null;
         }

@@ -15,25 +15,16 @@ public class CastEnemyMeleeAttack : Castable
     {
         get
         {
-            return new Vector2(1.0f * m_caster.Direction, 1.5f);
+            return new Vector2(m_vecRect.x * m_caster.Direction, m_vecRect.y);
         }
     }
 
-    public override Character[] GetTargets()
+    private Vector2 m_vecRect;
+
+    public CastEnemyMeleeAttack(Character caster, Vector2 rect) : base(caster)
     {
-        int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + Rect, m_Buffer, TargetMask);
+        m_vecRect = rect;
 
-        Character[] ret = new Character[count];
-        for(int i = 0; i < count; ++i)
-        {
-            ret[i] = Character.GetCharacter(m_Buffer[i]);
-        }
-
-        return ret;
-    }
-
-    public CastEnemyMeleeAttack(Character caster) : base(caster)
-    {
     }
     public override bool Condition()
     {
@@ -68,8 +59,8 @@ public class CastEnemyMeleeAttack : Castable
             Character target = targets[i];
             if(target == null) continue;
             //target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue, Character.DAMAGE_TYPE.WARRIOR);
-            target.KnockBack(new Vector2(15.0f * m_caster.Direction, 0.0f));
-            //ObjectPool<Effect>.Spawn("@Warrior_" + m_caster.GetAnimationName()).Init(m_caster.cachedTransform.position);
+            target.KnockBack(new Vector2(10.0f * m_caster.Direction, 0.0f));
+            //ObjectPool<Effect>.Spawn("@Warrior_" + m_caster.GetAnimationName()).Init(m_caster.position);
         }
     }
 }

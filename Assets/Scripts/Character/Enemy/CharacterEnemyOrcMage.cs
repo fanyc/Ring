@@ -24,7 +24,7 @@ public class CharacterEnemyOrcMage : CharacterEnemy
         BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / 6.0f * 2.0f / 15.0f;
         for(int i = 0; i < 15; ++i)
         {
-            ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position + new Vector3(0.0f, 1.0f)).Init(reward);
+            ObjectPool<ItemGold>.Spawn("@ItemGold", position + new Vector3(0.0f, 1.0f)).Init(reward);
         }
 
         base.Dead();

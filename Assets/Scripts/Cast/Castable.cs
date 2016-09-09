@@ -10,11 +10,11 @@ public class Castable
 
         if(count <= 0) return null;
         Character target = targets[0];
-        float distX = Mathf.Abs(target.cachedTransform.position.x - caster.cachedTransform.position.x);
+        float distX = Mathf.Abs(target.position.x - caster.position.x);
         for(int i = 1; i < count; ++i)
         {
             if(targets[i] == null) continue;
-            float dist = Mathf.Abs(targets[i].cachedTransform.position.x - caster.cachedTransform.position.x);
+            float dist = Mathf.Abs(targets[i].position.x - caster.position.x);
             if(dist < distX)
             {
                 target = targets[i];
@@ -28,6 +28,7 @@ public class Castable
     protected static Collider2D[] m_Buffer = new Collider2D[100];
 
     public Action OnCoolTime;
+    public Action ReleaseAction;
     protected Coroutine CachedCoroutine;
     protected IEnumerator m_enumCast;
     
@@ -100,18 +101,31 @@ public class Castable
     {
         get
         {
-            return m_caster.cachedTransform.position;
+            return m_caster.position;
         }
         
         set
         {
-            m_caster.cachedTransform.position = value;
+            m_caster.position = value;
         }
     }
 
-    public virtual Character[] GetTargets()
+    public Character[] GetTargets()
     {
-        return null;
+        return GetTargets(position, Rect);
+    }
+
+    public virtual Character[] GetTargets(Vector3 position, Vector2 rect)
+    {
+        int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + rect, m_Buffer, TargetMask);
+
+        Character[] ret = new Character[count];
+        for(int i = 0; i < count; ++i)
+        {
+            ret[i] = Character.GetCharacter(m_Buffer[i]);
+        }
+
+        return ret;
     }
     
     public Character GetNearestTarget(Character[] targets)
@@ -170,6 +184,9 @@ public class Castable
 
     protected virtual void Release()
     {
+        if(ReleaseAction != null)
+            ReleaseAction();
+        ReleaseAction = null;
     }
 
     public void SetCoolTime(float coolTime)

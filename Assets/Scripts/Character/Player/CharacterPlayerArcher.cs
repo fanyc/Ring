@@ -13,7 +13,7 @@ public class CharacterPlayerArcher : CharacterPlayer
 
     static CharacterPlayerArcher()
     {
-        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "SkillIcon/btle_icskill_elf_01b", "CastPlayerArcherSkill");
+        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "Icons/btle_icskill_elf_01b", "CastPlayerArcherSkill_Rope");
     }
 
     public new static float AttackPerSecond
@@ -29,7 +29,15 @@ public class CharacterPlayerArcher : CharacterPlayer
     {
         m_castAttack = new CastPlayerArcherAttack(this);
         m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
-        
+         UIAbilityIconSkill orig = Resources.Load<UIAbilityIconSkill>("Abilities/@AbilityIconSkill_Archer");
+        ObjectPool<UIAbilityIcon>.CreatePool("Ability" + m_skillDataList[0].castableName, orig.cachedGameObject, 10, (UIAbilityIcon icon)=>
+        {
+            ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[0]);
+        });
+        UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[0].castableName);
+
+        m_fHP = MaxHP = 10.0f;
+
         base.Init();
     }
 
@@ -42,9 +50,9 @@ public class CharacterPlayerArcher : CharacterPlayer
             Character target = Castable.GetNearestTarget(this, targets);
             float minDistance =
             Mathf.Min(m_castAttack.MinDistance - 1.0f,
-                      Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.cachedTransform.position.x));
+                      Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.position.x));
                                 
-            if(minDistance <= Mathf.Abs(target.cachedTransform.position.x - cachedTransform.position.x))
+            if(minDistance <= Mathf.Abs(target.position.x - position.x))
             {
                 Attack();
                 return;
@@ -60,18 +68,18 @@ public class CharacterPlayerArcher : CharacterPlayer
         PlayAnimation(GetRunAnimation(), false, true);
         while(State == STATE.MOVE)
         {
-            Vector3 pos = cachedTransform.position;
+            Vector3 pos = position;
             float step = 11.25f * Time.smoothDeltaTime * 0.4f;
             Character[] targets = m_castAttack.GetTargets();
             if(targets?.Length > 0)
             {
                 Character target = Castable.GetNearestTarget(this, targets);
-                float dist = target.cachedTransform.position.x - pos.x;
+                float dist = target.position.x - pos.x;
                 float dest = Mathf.Min(m_castAttack.MinDistance,
-                Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.cachedTransform.position.x));
+                Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.position.x));
                 if(Mathf.Abs(Mathf.Abs(dist) - dest) <= step)
                 {
-                    pos.x = target.cachedTransform.position.x + (dest * Mathf.Sign(dist));
+                    pos.x = target.position.x + (dest * Mathf.Sign(dist));
                     Direction = GameManager.Instance.Direction;
                     Attack();
                     yield return null;
@@ -89,11 +97,11 @@ public class CharacterPlayerArcher : CharacterPlayer
             
             pos += new Vector3(step * Direction, 0.0f);
             
-            cachedTransform.position = pos;
+            position = pos;
             
             yield return null;
         }
-        
+        Direction = GameManager.Instance.Direction;
         NextState();
     }
 

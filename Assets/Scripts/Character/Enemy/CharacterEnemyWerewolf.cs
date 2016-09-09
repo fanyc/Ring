@@ -47,6 +47,5 @@ public class CharacterEnemyWerewolf : CharacterEnemy
     public override void SetCamera()
     {
         CameraController.Instance.TargetScale = 1.0f;
-        CameraController.Instance.Offset = new Vector2(-0.2f, 1.65f);
     }
 }

@@ -1,4 +1,6 @@
-﻿Shader "Hidden/Skill/BrushPreview"      
+﻿// Upgrade NOTE: replaced '_Projector' with 'unity_Projector'
+
+Shader "Hidden/Skill/BrushPreview"      
     {
         Properties
         {
@@ -30,14 +32,14 @@
                     float4 pos : SV_POSITION;
                 };
              
-                float4x4 _Projector;
+                float4x4 unity_Projector;
                 fixed4 _Color;
              
                 v2f vert (float4 vertex : POSITION)
                 {
                     v2f o;
                     o.pos = mul (UNITY_MATRIX_MVP, vertex);
-                    o.uv = mul (_Projector, vertex);
+                    o.uv = mul (unity_Projector, vertex);
                     return o;
                 }
              

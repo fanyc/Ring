@@ -60,19 +60,20 @@ public class UIAbilityIcon : ObjectBase {
     {
         RectTransform rt = GetComponent<RectTransform>();
         Vector2 position = rt.anchoredPosition;
-        float dist = position.x - 159.0f * m_nSlot;
+        int slot = (UIAbilitySlot.Instance.Slot - m_nSlot) - 1;
+        float dist = 159.0f * slot - position.x;
         float speed = 159.0f * 15.0f;
         yield return null;
         
         while(dist > speed * Time.deltaTime)
         {
-            position -= new Vector2(speed * Time.deltaTime, 0.0f);
-            dist = position.x - 159.0f * m_nSlot;
+            position += new Vector2(speed * Time.deltaTime, 0.0f);
+            dist = 159.0f * slot - position.x;
             rt.anchoredPosition = position;
             yield return null;
         }   
 
-        rt.anchoredPosition = new Vector2(159.0f * m_nSlot, 0.0f);
+        rt.anchoredPosition = new Vector2(159.0f * slot, 0.0f);
         m_State = STATE.READY;
 
     }

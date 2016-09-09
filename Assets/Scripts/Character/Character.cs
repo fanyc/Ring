@@ -56,8 +56,26 @@ public abstract class Character : ObjectBase
         ETC,
     }
     
+    protected bool m_bPositionUpdate = false;
+    protected Vector3 m_vecPosition;
+    public Vector3 position
+    {
+        get
+        {
+            return m_vecPosition;
+        }
+
+        set
+        {
+            m_vecPosition = value;
+            m_bPositionUpdate = true;
+        }
+    }
+
     protected STATE m_currentState = STATE.IDLE;
     protected Castable m_CurrentCast;
+    protected Castable m_PrepareCast;
+    
 
     public const int LEFT = -1;
     public const int RIGHT = 1;
@@ -102,6 +120,10 @@ public abstract class Character : ObjectBase
     }
     public BigDecimal MaxHP = BigDecimal.Zero;
 
+    protected HPGauge m_HPGauge;
+    public float HPGaugeHeight = 400.0f;
+
+    protected float m_fStun = 0.0f;
     protected float m_fKnockBack = 0.0f;
     protected float m_fWeight = 0.0f;
     public float WeightBonus = 0.0f;
@@ -114,9 +136,20 @@ public abstract class Character : ObjectBase
 
         m_cachedCollider2D = GetComponent<Collider2D>();
     }
+
+    protected virtual void LateUpdate()
+    {
+        if(m_bPositionUpdate)
+        {
+            cachedTransform.position = position;
+            m_bPositionUpdate = false;
+        }
+    } 
     
     public virtual void Init()
     {
+        position = cachedTransform.position;
+        
         m_cachedCollider2D.enabled = true;
         m_dictColliderMap.Add(m_cachedCollider2D, this);
         m_listCharacter.Add(this);
@@ -124,6 +157,14 @@ public abstract class Character : ObjectBase
         
         cachedTransform.localScale = new Vector3(m_nDirection, 1.0f, 1.0f);
         m_fKnockBack = 0.0f;
+
+        if(m_HPGauge != null)
+        {
+            m_HPGauge.Recycle();
+            m_HPGauge = null;
+        }
+        m_HPGauge = ObjectPool<HPGauge>.Spawn("@HPGauge");
+        m_HPGauge.Init(this);
 
         m_currentState = STATE.IDLE;
         NextState();
@@ -152,9 +193,15 @@ public abstract class Character : ObjectBase
     
     public void Cast(Castable cast)
     {
+        if(State == STATE.BEATEN)
+        {
+            m_PrepareCast = cast;
+            return;
+        }
+
         if(cast.Condition() == false)
             return;
-            
+        
         CastCancel();
         m_CurrentCast = cast;
         m_CurrentCast.StartCast();
@@ -183,10 +230,20 @@ public abstract class Character : ObjectBase
 
     IEnumerator BEATEN()
     {
-        PlayIdleAnimation();
-        while(m_fKnockBack > 0.0f || cachedTransform.position.y > 0.0f) yield return null;
-        yield return new WaitForSeconds(0.2f);
-        State = STATE.IDLE;
+        PlayAnimation(GetBeatenAnimation(), true, false);
+        while(State != STATE.DEAD && (m_fStun > 0.0f || m_fKnockBack > 0.0f || position.y > 0.0f)) yield return null;
+        if(State != STATE.DEAD)
+        {
+            yield return new WaitForSeconds(0.2f);
+            State = STATE.IDLE;
+            PlayIdleAnimation();
+            if(m_PrepareCast != null)
+            {
+                Cast(m_PrepareCast);
+                m_PrepareCast = null;
+            }
+        }
+        
         NextState();
     }
     public virtual void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
@@ -229,22 +286,41 @@ public abstract class Character : ObjectBase
             break;
         }
 
-        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(cachedTransform.position.x + 0.8f, 2.0f)).Init(damage.ToUnit(), offset, startColor, endColor, outlineColor);
+        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(position.x + 0.8f, 2.0f)).Init(damage.ToUnit(), offset, startColor, endColor, outlineColor);
 
         m_fHP -= damage;
         //if(Type != TYPE.StageBoss || isSmash == true)
-            PlayBeatenAnimation();
+            //PlayBeatenAnimation();
         //m_cachedAnimation.state.AddAnimation(1, "stand_01", true, 0.233f);
         if(m_fHP <= 0.0f)
         {
             m_fHP = 0.0f;
-            HPGauge.UpdateRatio();
+            m_HPGauge?.UpdateRatio();
             Dead();
         }
         else
         {
-            HPGauge.UpdateRatio();
+            m_HPGauge?.UpdateRatio();
         }
+    }
+
+    public void Stun(float duration)
+    {
+        m_fStun = Mathf.Max(m_fStun, duration);
+
+        StopCoroutine("_stun");
+        StartCoroutine("_stun");
+    }
+
+    IEnumerator _stun()
+    {
+        while(m_fStun > 0.0f)
+        {
+            yield return null;
+            m_fStun -= Time.deltaTime;
+        }
+
+        m_fStun = 0.0f;
     }
 
     public void KnockBack(Vector2 power)
@@ -268,7 +344,7 @@ public abstract class Character : ObjectBase
             return;
         }
 
-        State = STATE.BEATEN;
+        //State = STATE.BEATEN;
         StopCoroutine("_knockBack");
         StartCoroutine("_knockBack");
         StartCoroutine(_airborne(power.y));
@@ -280,10 +356,10 @@ public abstract class Character : ObjectBase
         {
             yield return null;
             Vector3 center = GameManager.Instance.cachedTransform.position;
-            Vector3 pos = cachedTransform.position;
+            Vector3 pos = position;
             pos += new Vector3(m_fKnockBack * Time.deltaTime, 0.0f, 0.0f);
             pos.x = Mathf.Clamp(pos.x, center.x - GameManager.Instance.LimitDistance, center.x + GameManager.Instance.LimitDistance);
-            cachedTransform.position = pos;
+            position = pos;
             if(100.0f * Time.deltaTime >= Mathf.Abs(m_fKnockBack))
             {
                 break;
@@ -296,13 +372,13 @@ public abstract class Character : ObjectBase
 
     IEnumerator _airborne(float power)
     {
-        while(power > 0.0f || cachedTransform.position.y > 0.0f)
+        while(power > 0.0f || position.y > 0.0f)
         {
             yield return null;
-            Vector3 pos = cachedTransform.position;
+            Vector3 pos = position;
             pos += new Vector3(0.0f, power * Time.deltaTime);
             if(pos.y < 0.0f) pos.y = 0.0f;
-            cachedTransform.position = pos;
+            position = pos;
             power -= 9.8f * Time.deltaTime;
         }
     }
@@ -374,7 +450,7 @@ public abstract class Character : ObjectBase
     {
         if(State == STATE.IDLE)
         {
-            PlayAnimation("hit_01", true, false);
+            PlayAnimation(GetBeatenAnimation(), true, false);
             m_cachedAnimation.state.AddAnimation(0, "stand_01", true, 0.0f);
         }
     }
@@ -393,4 +469,9 @@ public abstract class Character : ObjectBase
     {
         return "atk_01";
     }
-}
+
+    public virtual string GetBeatenAnimation()
+    {
+        return "stand_01";
+    }
+} 

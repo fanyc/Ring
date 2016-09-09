@@ -24,21 +24,8 @@ public class CastPlayerArcherAttack : Castable
     {
         get
         {
-            return 4.0f;
+            return 3.0f;
         }
-    }
-
-    public override Character[] GetTargets()
-    {
-        int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + Rect, m_Buffer, TargetMask);
-
-        Character[] ret = new Character[count];
-        for(int i = 0; i < count; ++i)
-        {
-            ret[i] = Character.GetCharacter(m_Buffer[i]);
-        }
-
-        return ret;
     }
 
     public CastPlayerArcherAttack(Character caster) : base(caster)
@@ -72,6 +59,7 @@ public class CastPlayerArcherAttack : Castable
     protected override void Release()
     {
         m_caster.RemoveAnimationEvent(Hit);
+        base.Release();
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
@@ -85,9 +73,9 @@ public class CastPlayerArcherAttack : Castable
         Spine.Bone bone = m_caster.GetAnimationBone("wp_elf_c01_c");
         Projectile proj = ObjectPool<Projectile>.Spawn("@Proj_Arrow_Normal");
         float angle = bone.AppliedRotation + Random.Range(-2.5f, 2.5f);
-        float dist = (m_cachedTarget.cachedTransform.position.x - m_caster.cachedTransform.position.x) + Random.Range(-0.25f, 0.25f);
-        proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
-        Vector2 pos = (Vector2)m_caster.cachedTransform.position + new Vector2(bone.WorldX, bone.WorldY);
+        float dist = (m_cachedTarget.position.x - m_caster.position.x) + Random.Range(-0.25f, 0.25f);
+        //proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
+        Vector2 pos = (Vector2)m_caster.position + new Vector2(bone.WorldX, bone.WorldY);
         Vector2 dest = new Vector2(dist, dist * Mathf.Tan(angle * Mathf.Deg2Rad));
         proj.Init((Vector3)pos, pos + dest, ()=>
         {

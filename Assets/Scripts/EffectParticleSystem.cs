@@ -17,10 +17,25 @@ public class EffectParticleSystem : Effect
 		StartCoroutine(_recycle());
 	}
 
-	IEnumerator _recycle()
+	public override void Pause()
 	{
-		yield return new WaitForSeconds((m_particle.duration + m_particle.startLifetime) / m_particle.playbackSpeed);
-		m_particle?.Stop(true);
+		m_particle?.Pause();
+	}
+	public override void Resume()
+	{
+		if(m_particle.isPaused)
+			m_particle.Play();	
+	}
+
+	IEnumerator _recycle()
+	{	
+		if(m_particle != null)
+		{
+			while(m_particle.isPlaying)
+				yield return null;
+			m_particle?.Stop(true);
+		}
+
 		Recycle();
 	}
 }

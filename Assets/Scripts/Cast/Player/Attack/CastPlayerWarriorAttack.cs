@@ -19,19 +19,6 @@ public class CastPlayerWarriorAttack : Castable
         }
     }
 
-    public override Character[] GetTargets()
-    {
-        int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + Rect, m_Buffer, TargetMask);
-
-        Character[] ret = new Character[count];
-        for(int i = 0; i < count; ++i)
-        {
-            ret[i] = Character.GetCharacter(m_Buffer[i]);
-        }
-
-        return ret;
-    }
-
     public CastPlayerWarriorAttack(Character caster) : base(caster)
     {
     }
@@ -57,6 +44,7 @@ public class CastPlayerWarriorAttack : Castable
     protected override void Release()
     {
         m_caster.RemoveAnimationEvent(Hit);
+        base.Release();
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
@@ -69,9 +57,9 @@ public class CastPlayerWarriorAttack : Castable
             Character target = GetNearestTarget(targets);
             if(target == null) return;
             target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue, Character.DAMAGE_TYPE.WARRIOR);
-            target.KnockBack(new Vector2(15.0f, 2.3f));
-            //ObjectPool<Effect>.Spawn("@Warrior_" + m_caster.GetAnimationName()).Init(m_caster.cachedTransform.position);
-            ObjectPool<Effect>.Spawn("@Effect_Sword_Atk").Init(m_caster.cachedTransform.position);
+            target.KnockBack(new Vector2(10.0f, 0.0f));
+            //ObjectPool<Effect>.Spawn("@Warrior_" + m_caster.GetAnimationName()).Init(m_caster.position);
+            ObjectPool<Effect>.Spawn("@Effect_Sword_Atk").Init(m_caster.position);
         }
     }
 }

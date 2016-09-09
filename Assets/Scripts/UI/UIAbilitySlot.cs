@@ -11,6 +11,13 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
     public Image MPGauge;
     protected List<string> m_listAbilityKey = new List<string>();
 
+    public int Slot
+    {
+        get
+        {
+            return m_nSlotCount;
+        }
+    }
     protected int m_nSlotCount = 6;
 
     protected List<UIAbilityIcon> m_listSlot;
@@ -54,7 +61,7 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
         UIAbilityIcon icon = ObjectPool<UIAbilityIcon>.Spawn(m_listAbilityKey[Random.Range(0, m_listAbilityKey.Count)]);
         RectTransform rt = icon.GetComponent<RectTransform>();
         rt.SetParent(cachedTransform, false);
-        rt.anchoredPosition = new Vector2(159.0f * m_nSlotCount, 0.0f);
+        rt.anchoredPosition = new Vector2(-159.0f, 0.0f);
 
         icon.Slot = m_listSlot.Count;
         icon.Move();

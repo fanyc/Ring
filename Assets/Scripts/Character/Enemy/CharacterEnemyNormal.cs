@@ -8,11 +8,17 @@ public class CharacterEnemyNormal : CharacterEnemy
     {
         get { return TYPE.Normal; }
     }
+    
+    public override float HPFactor
+    {
+        get { return 5.0f; }
+    }
 
-
+    public float Range = 1.0f;
+    
     public override void Init()
     {
-        m_castAttack = new CastEnemyMeleeAttack(this);
+        m_castAttack = new CastEnemyMeleeAttack(this, new Vector2(Range, 1.5f));
         base.Init();
     }
     
@@ -41,9 +47,9 @@ public class CharacterEnemyNormal : CharacterEnemy
                 break;
             }
             
-            Vector3 pos = cachedTransform.position + new Vector3(11.25f * Time.smoothDeltaTime * 0.25f * -GameManager.Instance.Direction, 0.0f);
+            Vector3 pos = position + new Vector3(11.25f * Time.smoothDeltaTime * 0.25f * -GameManager.Instance.Direction, 0.0f);
             
-            cachedTransform.position = pos;
+            position = pos;
             
             yield return null;
         }
@@ -56,7 +62,7 @@ public class CharacterEnemyNormal : CharacterEnemy
         BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / (6.0f * 8.0f);
         for(int i = 0; i < 8; ++i)
         {
-            ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position + new Vector3(0.0f, 1.0f)).Init(reward);
+            ObjectPool<ItemGold>.Spawn("@ItemGold", position + new Vector3(0.0f, 1.0f)).Init(reward);
         }
 
         base.Dead();

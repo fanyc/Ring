@@ -1,0 +1,160 @@
+
+fairy_01.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+acc_01
+  rotate: false
+  xy: 954, 90
+  size: 62, 36
+  orig: 62, 36
+  offset: 0, 0
+  index: -1
+arm_01
+  rotate: false
+  xy: 884, 87
+  size: 68, 39
+  orig: 68, 39
+  offset: 0, 0
+  index: -1
+arm_02
+  rotate: true
+  xy: 884, 59
+  size: 26, 71
+  orig: 26, 71
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 605, 70
+  size: 56, 71
+  orig: 56, 71
+  offset: 0, 0
+  index: -1
+dress
+  rotate: false
+  xy: 820, 78
+  size: 62, 48
+  orig: 62, 48
+  offset: 0, 0
+  index: -1
+ear_01
+  rotate: true
+  xy: 188, 2
+  size: 22, 26
+  orig: 22, 26
+  offset: 0, 0
+  index: -1
+eyes_01
+  rotate: false
+  xy: 152, 5
+  size: 34, 22
+  orig: 34, 22
+  offset: 0, 0
+  index: -1
+eyes_02
+  rotate: false
+  xy: 397, 80
+  size: 36, 22
+  orig: 36, 22
+  offset: 0, 0
+  index: -1
+eyes_03
+  rotate: false
+  xy: 115, 5
+  size: 35, 22
+  orig: 35, 22
+  offset: 0, 0
+  index: -1
+face_01
+  rotate: true
+  xy: 957, 40
+  size: 48, 52
+  orig: 48, 52
+  offset: 0, 0
+  index: -1
+hair_01
+  rotate: true
+  xy: 299, 64
+  size: 38, 96
+  orig: 38, 96
+  offset: 0, 0
+  index: -1
+hair_02
+  rotate: true
+  xy: 393, 2
+  size: 60, 38
+  orig: 60, 38
+  offset: 0, 0
+  index: -1
+hair_bk_01
+  rotate: false
+  xy: 750, 77
+  size: 68, 49
+  orig: 68, 49
+  offset: 0, 0
+  index: -1
+hair_bk_02
+  rotate: false
+  xy: 207, 34
+  size: 90, 92
+  orig: 90, 92
+  offset: 0, 0
+  index: -1
+hair_bk_03
+  rotate: true
+  xy: 299, 26
+  size: 36, 92
+  orig: 36, 92
+  offset: 0, 0
+  index: -1
+hair_bk_04
+  rotate: false
+  xy: 115, 29
+  size: 90, 97
+  orig: 90, 97
+  offset: 0, 0
+  index: -1
+leg_01
+  rotate: true
+  xy: 436, 86
+  size: 40, 88
+  orig: 40, 88
+  offset: 0, 0
+  index: -1
+leg_02
+  rotate: true
+  xy: 526, 78
+  size: 48, 77
+  orig: 48, 77
+  offset: 0, 0
+  index: -1
+mouth_01
+  rotate: true
+  xy: 2, 2
+  size: 8, 13
+  orig: 8, 13
+  offset: 0, 0
+  index: -1
+wing_01
+  rotate: false
+  xy: 2, 12
+  size: 111, 114
+  orig: 111, 114
+  offset: 0, 0
+  index: -1
+wing_02
+  rotate: false
+  xy: 678, 74
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+wing_03
+  rotate: true
+  xy: 299, 104
+  size: 22, 135
+  orig: 22, 135
+  offset: 0, 0
+  index: -1

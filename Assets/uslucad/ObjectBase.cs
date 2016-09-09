@@ -48,7 +48,7 @@ public class ObjectBase : MonoBehaviour
         }
     }
 
-    public void Recycle()
+    public virtual void Recycle()
     {
         if(m_callbackRecycle != null)
         {
