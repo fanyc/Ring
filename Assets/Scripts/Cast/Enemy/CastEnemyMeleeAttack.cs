@@ -60,7 +60,9 @@ public class CastEnemyMeleeAttack : Castable
             if(target == null) continue;
             //target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue, Character.DAMAGE_TYPE.WARRIOR);
             target.KnockBack(new Vector2(7.5f * m_caster.Direction, 0.0f));
-            //ObjectPool<Effect>.Spawn("@Warrior_" + m_caster.GetAnimationName()).Init(m_caster.position);
+            target.Stun(0.2f);
+            
+            ObjectPool<Effect>.Spawn("@Effect_Hit_Enemy").Init(target.position + new Vector3(0.2f * -m_caster.Direction, 0.5f));
         }
     }
 }

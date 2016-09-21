@@ -35,7 +35,7 @@ public class CharacterEnemyWerewolf : CharacterEnemy
         if(State == STATE.IDLE)
         {
             PlayAnimation("hit_01", true, false);
-            m_cachedAnimation.state.AddAnimation(0, "stand", true, 0.0f);
+            cachedAnimation.state.AddAnimation(0, "stand", true, 0.0f);
         }
     }
 

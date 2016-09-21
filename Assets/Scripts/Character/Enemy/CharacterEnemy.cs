@@ -50,10 +50,10 @@ public abstract class CharacterEnemy : Character
 
     protected override void LateUpdate()
     {
-        if(State != STATE.DEAD && (position.x - (GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
+        if(State != STATE.DEAD && (position.x - (CharacterPlayer.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
         {
             Vector3 pos = position;
-            pos.x = GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction;
+            pos.x = CharacterPlayer.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction;
             position = pos;
         }
 
@@ -64,7 +64,7 @@ public abstract class CharacterEnemy : Character
     {
         Direction = LEFT;
         MaxHP = m_fHP = (UpgradeManager.Instance.GetUpgrade("EnemyHP").currentValue + new BigDecimal(8.0f)) * HPFactor;
-        m_cachedAnimation.skeleton.a = 1.0f;
+        cachedAnimation.skeleton.a = 1.0f;
 
         SetCamera();
         base.Init();
@@ -84,11 +84,9 @@ public abstract class CharacterEnemy : Character
             Cast(m_castAttack);
     }
     
-    
-
-    protected IEnumerator DEAD()
+    protected override IEnumerator DEAD()
     {
-        PlayIdleAnimation();
+        PlayDeadAnimation();
 
         float t = 0.0f;
         
@@ -96,16 +94,15 @@ public abstract class CharacterEnemy : Character
         {
             yield return null;
             t += Time.smoothDeltaTime * 2.0f;
-            m_cachedAnimation.skeleton.a = 1.0f - t;
+            cachedAnimation.skeleton.a = 1.0f - t;
         }
-        m_cachedAnimation.skeleton.a = 0.0f;
+        cachedAnimation.skeleton.a = 0.0f;
         Recycle();
     }
     
     public override void Dead()
     {
         base.Dead();
-        State = STATE.DEAD;
 
         GameManager.Instance.RemoveEnemy(this);
     }
@@ -115,7 +112,7 @@ public abstract class CharacterEnemy : Character
         CameraController.Instance.TargetScale = 1.0f;
     }
 
-    public override string GetBeatenAnimation()
+    public override string GetDeadAnimation()
     {
         return "dmg_01";
     }

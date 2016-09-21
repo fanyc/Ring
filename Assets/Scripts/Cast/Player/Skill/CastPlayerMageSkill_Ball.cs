@@ -22,7 +22,7 @@ public class CastPlayerMageSkill_Ball : Castable
     {
         get
         {
-            return new Vector2(2.0f, 1.5f);
+            return new Vector2(2.5f, 1.5f);
         }
     }
 
@@ -130,6 +130,8 @@ public class CastPlayerMageSkill_Ball : Castable
                     target.Beaten(damage, CharacterEnemy.DAMAGE_TYPE.SORCERESS, true);
                     target.KnockBack(new Vector2(5.0f, 0.0f));
                     target.Stun(interval * 2.0f);
+                    ObjectPool<Effect>.Spawn("@Effect_Hit").Init(target.position + new Vector3(0.0f, 0.5f));
+
                 }
 
                 if(targets.Length > 0)

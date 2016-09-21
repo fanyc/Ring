@@ -138,6 +138,7 @@ public class CharacterEnemyGoblinArcher : CharacterEnemy, IProjectile
             {
                 m_cachedTarget.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.ELF);
                 ObjectPool<Effect>.Spawn("@Effect_Arrow_Normal").Init(pos + dest);
+                m_cachedTarget.Stun(0.2f);
             });
         }
     }

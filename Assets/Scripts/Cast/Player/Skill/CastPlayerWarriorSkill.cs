@@ -50,7 +50,8 @@ public class CastPlayerWarriorSkill : Castable
         // {
         //     eff.Skeleton.state.Event -= _event;
         // };
-        while(m_caster.IsEndAnimation() != true) yield return null;
+        while(eff.IsEndAnimation() != true) yield return null;
+        eff.Recycle();
         State = Character.STATE.IDLE;
     }
     
@@ -67,6 +68,16 @@ public class CastPlayerWarriorSkill : Castable
         {
             case "hit_01":
             {
+                Character[] targets = GetTargets();
+
+                for(int j = 0; j < targets.Length; ++j)
+                {
+                    Character target = targets[j];
+
+                    if(target == null) continue;
+                    target.Beaten(1.0f, CharacterEnemy.DAMAGE_TYPE.WARRIOR, true);
+                    target.Stun(0.5f);
+                }
                 break;
             }
             case "light_01":

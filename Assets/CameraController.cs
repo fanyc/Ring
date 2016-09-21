@@ -162,7 +162,7 @@ public class CameraController : MonoSingleton<CameraController> {
 
         if(target == null)
         {
-            List<CharacterPlayer> players = GameManager.Instance.PlayerList;
+            List<CharacterPlayer> players = CharacterPlayer.PlayerList;
             target = players[0].cachedTransform;
 
             for(int i = 1, c = players.Count; i < c; ++i )

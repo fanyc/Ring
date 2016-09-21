@@ -74,7 +74,7 @@ public class CharacterPlayerFairy : CharacterPlayer
             //     break;
             // }
             
-            Vector3 pos = Vector3.Lerp(position, m_following.position + m_vecOffset, 3.0f * Time.smoothDeltaTime);
+            Vector3 pos = Vector3.Lerp(position, CharacterPlayer.PlayerList[0].position + m_vecOffset, 3.0f * Time.smoothDeltaTime);
             position = pos;
             
             yield return null;

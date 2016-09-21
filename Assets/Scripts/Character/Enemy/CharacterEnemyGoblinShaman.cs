@@ -85,7 +85,7 @@ public class CharacterEnemyGoblinShaman : CharacterEnemy, IProjectile
         {
             get
             {
-                return new Vector2(4.0f * m_caster.Direction, 1.5f);
+                return new Vector2(8.0f * m_caster.Direction, 1.5f);
             }
         }
 
@@ -149,6 +149,7 @@ public class CharacterEnemyGoblinShaman : CharacterEnemy, IProjectile
                     float knockback = 20.0f * distFactor;
                     float airborne = 0.0f;//2.3f + 4.6f * Mathf.Abs(distFactor);
                     //target.KnockBack(new Vector2(knockback, airborne));
+                    target.Stun(0.2f);
                 }
             });
         }

@@ -32,7 +32,20 @@ public abstract class Character : ObjectBase
     }
 
     //end static
-    protected SkeletonAnimation m_cachedAnimation; 
+    protected SkeletonAnimation m_cachedAnimation;
+    public SkeletonAnimation cachedAnimation
+    {
+        get
+        {
+            if(m_cachedAnimation == null)
+            {
+                m_cachedAnimation = GetComponentInChildren<SkeletonAnimation>();
+                m_cachedAnimation.Initialize(false);
+            } 
+
+            return m_cachedAnimation;
+        }
+    } 
     protected Collider2D m_cachedCollider2D;
     
     public enum STATE
@@ -131,8 +144,7 @@ public abstract class Character : ObjectBase
     
     protected virtual void Awake()
     {
-        m_cachedAnimation = GetComponentInChildren<SkeletonAnimation>();
-        m_cachedAnimation.Initialize(false);
+        
 
         m_cachedCollider2D = GetComponent<Collider2D>();
     }
@@ -230,10 +242,10 @@ public abstract class Character : ObjectBase
 
     IEnumerator BEATEN()
     {
+        PlayBeatenAnimation();
         while(State != STATE.DEAD && (m_fStun > 0.0f /*|| m_fKnockBack > 0.0f || position.y > 0.0f*/)) yield return null;
         if(State != STATE.DEAD)
         {
-            yield return new WaitForSeconds(0.2f);
             State = STATE.IDLE;
             PlayIdleAnimation();
             if(m_PrepareCast != null)
@@ -249,7 +261,6 @@ public abstract class Character : ObjectBase
     {
         if(State == STATE.DEAD || State == STATE.NULL) return;
 
-        PlayBeatenAnimation();
 
         Color startColor = Color.white;
         Color endColor = Color.white;
@@ -309,6 +320,12 @@ public abstract class Character : ObjectBase
     {
         m_fStun = Mathf.Max(m_fStun, duration);
 
+        if(m_fWeight + WeightBonus > Mathf.Abs(m_fStun))
+        {
+            m_fStun = 0.0f;
+            return;
+        }
+
         StopCoroutine("_stun");
         StartCoroutine("_stun");
     }
@@ -347,6 +364,8 @@ public abstract class Character : ObjectBase
             return;
         }
 
+        CastCancel();
+        PlayBeatenAnimation();
         //State = STATE.BEATEN;
         StopCoroutine("_knockBack");
         StartCoroutine("_knockBack");
@@ -391,6 +410,8 @@ public abstract class Character : ObjectBase
         m_dictColliderMap.Remove(m_cachedCollider2D);
         m_listCharacter.Remove(this);
         m_cachedCollider2D.enabled = false;
+
+        State = STATE.DEAD;
     }
     
     public virtual void PlayAnimation(string name, bool isReset = false, bool isLoop = false, float timeScale = 1.0f)
@@ -401,39 +422,45 @@ public abstract class Character : ObjectBase
             SetAnimationTimeScale(timeScale);
             if(isReset)
             {
-                m_cachedAnimation.state.ClearTrack(0);
+                cachedAnimation.state.ClearTrack(0);
             }
             //m_cachedAnimation.AnimationName = name;
-            m_cachedAnimation.state.SetAnimation(0, name, isLoop);
+            cachedAnimation.state.SetAnimation(0, name, isLoop);
             
             
         }
     }
 
+    protected virtual IEnumerator DEAD()
+    {
+        PlayDeadAnimation();
+        yield break;
+    }
+
     public Spine.Bone GetAnimationBone(string boneName)
     {
 
-        return m_cachedAnimation.Skeleton.FindBone(boneName);
+        return cachedAnimation.Skeleton.FindBone(boneName);
     }
 
     public bool IsEndAnimation(float offset = 0.0f)
     {
-        return m_cachedAnimation.state.GetCurrent(0) == null || m_cachedAnimation.state.GetCurrent(0).Time + offset >= m_cachedAnimation.state.GetCurrent(0).EndTime;
+        return cachedAnimation.state.GetCurrent(0) == null || cachedAnimation.state.GetCurrent(0).Time + offset >= cachedAnimation.state.GetCurrent(0).EndTime;
     }
 
     public float GetAnimationTimeScale()
     {
-        return m_cachedAnimation.timeScale;
+        return cachedAnimation.timeScale;
     }
 
     public void SetAnimationTimeScale(float timeScale)
     {
-        m_cachedAnimation.timeScale = timeScale;
+        cachedAnimation.timeScale = timeScale;
     }
     
     public string GetAnimationName()
     {
-        return m_cachedAnimation.AnimationName;
+        return cachedAnimation.AnimationName;
     }
 
     
@@ -441,12 +468,12 @@ public abstract class Character : ObjectBase
 
     public void AddAnimationEvent(Spine.AnimationState.EventDelegate listener)
     {
-        m_cachedAnimation.state.Event += listener;
+        cachedAnimation.state.Event += listener;
     } 
 
     public void RemoveAnimationEvent(Spine.AnimationState.EventDelegate listener)
     {
-        m_cachedAnimation.state.Event -= listener;
+        cachedAnimation.state.Event -= listener;
     } 
 
     public virtual void PlayBeatenAnimation()
@@ -463,6 +490,12 @@ public abstract class Character : ObjectBase
         PlayAnimation("stand_01", false, true);
     }
 
+    public virtual void PlayDeadAnimation()
+    {
+        PlayAnimation(GetDeadAnimation(), true, false);
+    }
+
+
     public virtual string GetRunAnimation()
     {
         return "run_01";
@@ -475,6 +508,11 @@ public abstract class Character : ObjectBase
 
     public virtual string GetBeatenAnimation()
     {
-        return "stand_01";
+        return "dmg_01";
+    }
+
+    public virtual string GetDeadAnimation()
+    {
+        return "dead_01";
     }
 } 

@@ -1,250 +1,257 @@
 
 sorceress_01.png
-size: 1024,512
+size: 2048,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 eq_sor_c01_arm_01
   rotate: false
-  xy: 2, 11
+  xy: 1721, 195
   size: 90, 59
   orig: 90, 59
   offset: 0, 0
   index: -1
 eq_sor_c01_arm_02
   rotate: true
-  xy: 94, 21
+  xy: 1028, 84
   size: 49, 73
   orig: 49, 73
   offset: 0, 0
   index: -1
 eq_sor_c01_arm_03
-  rotate: false
-  xy: 853, 347
+  rotate: true
+  xy: 1123, 131
   size: 38, 46
   orig: 38, 46
   offset: 0, 0
   index: -1
 eq_sor_c01_arm_04
   rotate: false
-  xy: 348, 193
+  xy: 1556, 175
   size: 82, 79
   orig: 82, 79
   offset: 0, 0
   index: -1
 eq_sor_c01_arm_05
   rotate: true
-  xy: 348, 130
+  xy: 650, 61
   size: 25, 74
   orig: 25, 74
   offset: 0, 0
   index: -1
 eq_sor_c01_arm_06
-  rotate: true
-  xy: 432, 193
+  rotate: false
+  xy: 1640, 181
   size: 79, 73
   orig: 79, 73
   offset: 0, 0
   index: -1
 eq_sor_c01_arm_07
-  rotate: true
-  xy: 309, 98
+  rotate: false
+  xy: 780, 50
   size: 38, 36
   orig: 38, 36
   offset: 0, 0
   index: -1
 eq_sor_c01_belt_01
   rotate: false
-  xy: 255, 113
+  xy: 726, 63
   size: 52, 23
   orig: 52, 23
   offset: 0, 0
   index: -1
 eq_sor_c01_boots_01
   rotate: false
-  xy: 586, 282
+  xy: 586, 26
   size: 51, 38
   orig: 51, 38
   offset: 0, 0
   index: -1
 eq_sor_c01_boots_02
   rotate: false
-  xy: 586, 282
+  xy: 586, 26
   size: 51, 38
   orig: 51, 38
   offset: 0, 0
   index: -1
 eq_sor_c01_bottom_01
-  rotate: true
-  xy: 255, 138
+  rotate: false
+  xy: 1179, 163
   size: 132, 91
   orig: 132, 91
   offset: 0, 0
   index: -1
 eq_sor_c01_ear_01
   rotate: true
-  xy: 252, 81
+  xy: 1652, 149
   size: 30, 46
   orig: 30, 46
   offset: 0, 0
   index: -1
 eq_sor_c01_earring_01
   rotate: false
-  xy: 385, 101
+  xy: 858, 66
   size: 27, 27
   orig: 27, 27
   offset: 0, 0
   index: -1
 eq_sor_c01_eye_01
   rotate: false
-  xy: 348, 157
+  xy: 850, 95
   size: 94, 34
   orig: 94, 34
   offset: 0, 0
   index: -1
 eq_sor_c01_eye_02
-  rotate: true
-  xy: 507, 178
+  rotate: false
+  xy: 1027, 135
   size: 94, 34
   orig: 94, 34
   offset: 0, 0
   index: -1
 eq_sor_c01_eye_03
-  rotate: true
-  xy: 543, 178
+  rotate: false
+  xy: 1891, 220
+  size: 94, 34
+  orig: 94, 34
+  offset: 0, 0
+  index: -1
+eq_sor_c01_eye_04
+  rotate: false
+  xy: 1556, 139
   size: 94, 34
   orig: 94, 34
   offset: 0, 0
   index: -1
 eq_sor_c01_eyebrow_01
   rotate: false
-  xy: 94, 2
+  xy: 1891, 201
   size: 76, 17
   orig: 76, 17
   offset: 0, 0
   index: -1
 eq_sor_c01_face_01
-  rotate: false
-  xy: 775, 395
+  rotate: true
+  xy: 1439, 140
   size: 114, 115
   orig: 114, 115
   offset: 0, 0
   index: -1
 eq_sor_c01_hair_01
   rotate: true
-  xy: 321, 274
+  xy: 321, 18
   size: 46, 177
   orig: 46, 177
   offset: 0, 0
   index: -1
 eq_sor_c01_hair_02
-  rotate: true
-  xy: 170, 120
+  rotate: false
+  xy: 1027, 171
   size: 150, 83
   orig: 150, 83
   offset: 0, 0
   index: -1
 eq_sor_c01_hair_03
-  rotate: false
-  xy: 2, 72
+  rotate: true
+  xy: 650, 88
   size: 166, 198
   orig: 166, 198
   offset: 0, 0
   index: -1
 eq_sor_c01_hair_04
-  rotate: false
-  xy: 650, 335
+  rotate: true
+  xy: 850, 131
   size: 123, 175
   orig: 123, 175
   offset: 0, 0
   index: -1
 eq_sor_c01_hat_01
   rotate: false
-  xy: 321, 322
+  xy: 321, 66
   size: 327, 188
   orig: 327, 188
   offset: 0, 0
   index: -1
 eq_sor_c01_leg_01
   rotate: true
-  xy: 500, 274
+  xy: 500, 18
   size: 46, 84
   orig: 46, 84
   offset: 0, 0
   index: -1
 eq_sor_c01_leg_03
   rotate: true
-  xy: 500, 274
+  xy: 500, 18
   size: 46, 84
   orig: 46, 84
   offset: 0, 0
   index: -1
 eq_sor_c01_leg_02
   rotate: true
-  xy: 170, 76
+  xy: 946, 87
   size: 42, 80
   orig: 42, 80
   offset: 0, 0
   index: -1
 eq_sor_c01_leg_04
   rotate: true
-  xy: 170, 76
+  xy: 946, 87
   size: 42, 80
   orig: 42, 80
   offset: 0, 0
   index: -1
 eq_sor_c01_lip_01
   rotate: false
-  xy: 650, 325
+  xy: 1103, 125
   size: 18, 8
   orig: 18, 8
   offset: 0, 0
   index: -1
 eq_sor_c01_lip_02
   rotate: false
-  xy: 424, 140
+  xy: 1969, 203
   size: 16, 15
   orig: 16, 15
   offset: 0, 0
   index: -1
 eq_sor_c01_manteau_01
   rotate: false
-  xy: 775, 338
+  xy: 1813, 199
   size: 76, 55
   orig: 76, 55
   offset: 0, 0
   index: -1
 eq_sor_c01_manteau_02
   rotate: true
-  xy: 444, 153
+  xy: 1987, 216
   size: 38, 46
   orig: 38, 46
   offset: 0, 0
   index: -1
 eq_sor_c01_neck_01
   rotate: false
-  xy: 347, 92
+  xy: 820, 50
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 eq_sor_c01_nose_01
   rotate: true
-  xy: 891, 396
+  xy: 321, 2
   size: 14, 30
   orig: 14, 30
   offset: 0, 0
   index: -1
 eq_sor_c01_top_01
   rotate: false
-  xy: 891, 412
+  xy: 1313, 156
   size: 124, 98
   orig: 124, 98
   offset: 0, 0
   index: -1
 wp_sor_c01
   rotate: false
-  xy: 2, 272
+  xy: 2, 16
   size: 317, 238
   orig: 317, 238
   offset: 0, 0

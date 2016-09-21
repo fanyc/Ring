@@ -128,7 +128,7 @@ public abstract class CharacterPlayer : Character
 
     public override void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
     {
-        //base.Beaten(damage);
+        base.Beaten(damage, type, isSmash);
         //MP = 0.0f;
     }
 

@@ -5,22 +5,38 @@ public class ProjectileCurve : Projectile
 {
 	public AnimationCurve[] Curve;
 
-	public Transform RotateObject;
-	public ParticleSystem Particle;
+	public Transform MainObject;
+	public bool IsRotate = false;
+	public ParticleSystem[] m_listParticle;
 	protected ParticleSystem.EmitParams m_origParticle;
-	protected ParticleSystem.Particle[] m_particles;
+	protected ParticleSystem.Particle[] m_buffer;
 
 	void Awake()
 	{
-		ParticleSystem.EmissionModule em = Particle.emission;
-		em.enabled = false;
-		
-		m_origParticle.startColor = Particle.startColor;
-		m_origParticle.startLifetime = Particle.startLifetime;
-		m_origParticle.startSize = Particle.startSize;
+		m_listParticle = GetComponentsInChildren<ParticleSystem>();
 
-		m_particles = new ParticleSystem.Particle[Particle.maxParticles];
+		int bufSize = 0;
+		for(int i = 0; i < m_listParticle.Length; ++i)
+		{
+			if(m_listParticle[i].emission.type != ParticleSystemEmissionType.Distance) continue;
+			ParticleSystem.EmissionModule em = m_listParticle[i].emission;
+			em.enabled = false;
+
+			if(bufSize < m_listParticle[i].maxParticles)
+			{
+				bufSize = m_listParticle[i].maxParticles;
+			}
+		}
+
+		m_buffer = new ParticleSystem.Particle[bufSize];
 	}
+
+	public override void Init(Vector3 startPos, Vector3 targetPos, System.Action callback)
+	{
+		base.Init(startPos, targetPos, callback);
+		MainObject?.gameObject.SetActive(true);
+	}
+
 	protected override IEnumerator _move(Vector3 targetPos)
 	{
 		AnimationCurve curve = Curve[Random.Range(0, Curve.Length)];
@@ -46,29 +62,48 @@ public class ProjectileCurve : Projectile
 
 			if(per > 0.0f)
 			{
-				int size = Particle.GetParticles(m_particles);
-				Particle.Clear();
-				int count = Mathf.CeilToInt(Particle.emission.rate.constantMax * fDist * step);
-				Particle.Emit(count);
-				ParticleSystem.Particle[] buf = new ParticleSystem.Particle[count];
-				Particle.GetParticles(buf);
-				
-				for(int i = 0; i < count; ++i)
+				for(int i = 0; i < m_listParticle.Length; ++i)
 				{
-					float p = (1.0f - i / (float)count);
-					
-					Vector3 newPos = pos + vecDist * (per - (step * p)) + new Vector3(0.0f, curve.Evaluate(per - (step * p)));
-					float angle = 0.0f;
-					Vector3 vecStep = newPos - m_origParticle.position;
-					angle = Mathf.Atan2(vecStep.y, vecStep.x) * Mathf.Rad2Deg;
+					if(m_listParticle[i].emission.type != ParticleSystemEmissionType.Distance) continue;
+					System.Array.Clear(m_buffer, 0, m_buffer.Length);
+					int size = m_listParticle[i].GetParticles(m_buffer);
+					m_listParticle[i].Clear();
+					int count = 0;
+					switch(m_listParticle[i].emission.type)
+					{
+						case ParticleSystemEmissionType.Distance:
+						{
+							count = Mathf.CeilToInt(m_listParticle[i].emission.rate.constantMax * fDist * step);
+							break;
+						}
 
-					buf[i].position = newPos;
-					buf[i].lifetime -= (Time.smoothDeltaTime * p);
-					buf[i].velocity = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.2f;//Particle.velocityOverLifetime.x.Evaluate();
+						case ParticleSystemEmissionType.Time:
+						{
+							count = Mathf.CeilToInt(m_listParticle[i].emission.rate.constantMax * Time.smoothDeltaTime);
+							break;
+						}
+					}
+					m_listParticle[i].Emit(count);
+					ParticleSystem.Particle[] buf = new ParticleSystem.Particle[count];
+					m_listParticle[i].GetParticles(buf);
+					
+					for(int j = 0; j < count; ++j)
+					{
+						float p = (1.0f - j / (float)count);
+						
+						Vector3 newPos = pos + vecDist * (per - (step * p)) + new Vector3(0.0f, curve.Evaluate(per - (step * p)));
+						float angle = 0.0f;
+						Vector3 vecStep = newPos - m_origParticle.position;
+						angle = Mathf.Atan2(vecStep.y, vecStep.x) * Mathf.Rad2Deg;
+
+						buf[j].position = newPos;
+						buf[j].lifetime -= (Time.smoothDeltaTime * p);
+						buf[j].velocity = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * 0.2f;//Particle.velocityOverLifetime.x.Evaluate();
+					}
+					
+					System.Array.ConstrainedCopy(buf, 0, m_buffer, size, count);
+					m_listParticle[i].SetParticles(m_buffer, size + count);
 				}
-				
-				System.Array.ConstrainedCopy(buf, 0, m_particles, size, count);
-				Particle.SetParticles(m_particles, size + count);
 			}
 
 			cachedTransform.position = pos + vecDist * per + new Vector3(0.0f, curve.Evaluate(per));
@@ -76,17 +111,24 @@ public class ProjectileCurve : Projectile
 		}
 
 		cachedTransform.position = targetPos;
+		MainObject?.gameObject.SetActive(false);
 	}
 
 	protected override IEnumerator _afterMove()
 	{
-		Particle.Stop();
-		if(Particle != null)
+		float wait = 0.0f;
+
+		for(int i = 0; i < m_listParticle.Length; ++i)
 		{
-			while(Particle.isPlaying)
-				yield return null;
+			m_listParticle[i].Stop();
+
+			if(wait < m_listParticle[i].startLifetime)
+			{
+				wait = m_listParticle[i].startLifetime;
+			}
 		}
 
-		System.Array.Clear(m_particles, 0, m_particles.Length);
+		yield return new WaitForSeconds(wait);
+		Recycle();
 	}
 }

@@ -1,5 +1,5 @@
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:36:02                     *
+*                    Wednesday, 21 September 2016 21:49:35                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -12,9 +12,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-9bd2c997998214639ae9f25a2299e880
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-549e6ca44ae6944ef8423ae1af5a9b72
 Exit code: 0
-Elapsed time: 2.12 sec
+Elapsed time: 2.59 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 49 warning(s)
@@ -71,7 +71,7 @@ Elapsed time: 2.12 sec
 48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
 49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:36:05                     *
+*                    Wednesday, 21 September 2016 21:49:38                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -84,9 +84,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-4148a97d4f1554af0b6b1c4f04eaf1e8
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-c80c4473337144e2bb1e09af88fa7224
 Exit code: 0
-Elapsed time: 1.70 sec
+Elapsed time: 1.79 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 18 warning(s)
@@ -111,7 +111,7 @@ Elapsed time: 1.70 sec
 16: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
 17: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:36:48                     *
+*                    Wednesday, 21 September 2016 21:50:41                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -124,9 +124,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-3446e6112dd514e3e8e5dc96f179b9de
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-d3bca0920d8a345abb2cf0b89cd016e7
 Exit code: 0
-Elapsed time: 2.40 sec
+Elapsed time: 2.03 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 49 warning(s)
@@ -183,7 +183,7 @@ Elapsed time: 2.40 sec
 48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
 49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:36:51                     *
+*                    Wednesday, 21 September 2016 21:50:44                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -196,9 +196,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-a6556eefca5594dd69305da6fa2fc92b
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-c809553437ef94bc89bcd1b3e8e97b63
 Exit code: 0
-Elapsed time: 1.93 sec
+Elapsed time: 2.08 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 18 warning(s)
@@ -223,7 +223,7 @@ Elapsed time: 1.93 sec
 16: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
 17: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:41:33                     *
+*                    Wednesday, 21 September 2016 21:53:24                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -236,9 +236,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-1a3863a4820344e3e8cc499356458d07
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-2cfc5a9b9b30c48ee81e3af1ba1ee894
 Exit code: 0
-Elapsed time: 2.11 sec
+Elapsed time: 2.58 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 49 warning(s)
@@ -295,7 +295,7 @@ Elapsed time: 2.11 sec
 48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
 49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:41:36                     *
+*                    Wednesday, 21 September 2016 21:53:27                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -308,9 +308,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-9f69da3cbe1424fefa559a4042469f22
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-11a488c5888a44be08c4f5297bc53c79
 Exit code: 0
-Elapsed time: 1.74 sec
+Elapsed time: 2.00 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 18 warning(s)
@@ -335,7 +335,7 @@ Elapsed time: 1.74 sec
 16: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
 17: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:42:23                     *
+*                    Wednesday, 21 September 2016 21:55:24                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -348,9 +348,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-67b4fa6a23a2c44f9b6fe709229c8734
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-4aa1bee49da1746e28a95623ea268a95
 Exit code: 0
-Elapsed time: 2.17 sec
+Elapsed time: 2.43 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 49 warning(s)
@@ -407,7 +407,7 @@ Elapsed time: 2.17 sec
 48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
 49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:42:26                     *
+*                    Wednesday, 21 September 2016 21:55:27                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -420,9 +420,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-fb6feee06b6964e6890afebccc6a2d24
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-29c863e850ac64fd9b17773a41b0d910
 Exit code: 0
-Elapsed time: 1.81 sec
+Elapsed time: 1.62 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 18 warning(s)
@@ -447,7 +447,7 @@ Elapsed time: 1.81 sec
 16: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
 17: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:44:04                     *
+*                    Wednesday, 21 September 2016 21:55:32                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -460,9 +460,9 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-b3c8febdef90b438c97a6d415208daad
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-271b4e8dfc8f24e51b91602cad20ece5
 Exit code: 0
-Elapsed time: 2.96 sec
+Elapsed time: 2.44 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 49 warning(s)
@@ -519,7 +519,7 @@ Elapsed time: 2.96 sec
 48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
 49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
 ********************************************************************************
-*                    Wednesday, 21 September 2016 16:44:08                     *
+*                    Wednesday, 21 September 2016 21:55:35                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -532,9 +532,121 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-42a968b91afaf4ca2958f382883a9696
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-79ee591f4adea478a8f8c5b650187fed
 Exit code: 0
-Elapsed time: 2.06 sec
+Elapsed time: 2.08 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 18 warning(s)
+
+- Compiler errors (18 lines):
+0: Assets/Skill/Editor/Audio/AudioUtility.cs(23,38): warning CS0618: `UnityEngine.RuntimePlatform.OSXWebPlayer' is obsolete: `WebPlayer export is no longer supported in Unity 5.4+.'
+1: Assets/Skill/Editor/Audio/AudioUtility.cs(24,38): warning CS0618: `UnityEngine.RuntimePlatform.WindowsWebPlayer' is obsolete: `WebPlayer export is no longer supported in Unity 5.4+.'
+2: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
+3: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
+4: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+5: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+6: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+7: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+13: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+14: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+15: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+16: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+17: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+********************************************************************************
+*                    Wednesday, 21 September 2016 22:00:31                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-0409542248f28498a83c094640acf8ad
+Exit code: 0
+Elapsed time: 3.08 sec
+
+- Compiler output (1 line):
+0: Compilation succeeded - 49 warning(s)
+
+- Compiler errors (50 lines):
+0: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(11,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+1: Assets/Skill/Framework/Effects/Rain/RainController.cs(14,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+2: Assets/Skill/Framework/Sequence/BuiltinEvents/Emit.cs(16,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+3: Assets/Skill/Framework/Sequence/BuiltinEvents/Emit.cs(32,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+4: Assets/Skill/Framework/Sequence/BuiltinEvents/Emit.cs(32,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+5: Assets/Skill/Framework/Sequence/BuiltinEvents/EmitSingle.cs(14,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+6: Assets/Skill/Framework/Sequence/BuiltinEvents/EmitSingle.cs(35,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+7: Assets/Skill/Framework/Sequence/BuiltinEvents/EmitSingle.cs(35,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+8: Assets/Skill/Framework/Sequence/BuiltinEvents/StartStopEmitter.cs(14,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+9: Assets/Skill/Framework/Sequence/BuiltinEvents/StartStopEmitter.cs(27,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+10: Assets/Skill/Framework/Sequence/BuiltinEvents/StartStopEmitter.cs(27,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+11: Assets/uslucad/ModifiedShadow.cs(56,17): warning CS0114: `ModifiedShadow.ModifyMesh(UnityEngine.UI.VertexHelper)' hides inherited member `UnityEngine.UI.Shadow.ModifyMesh(UnityEngine.UI.VertexHelper)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword
+12: /Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll (Location of the symbol related to previous warning)
+13: Assets/Scripts/Cast/Player/Skill/CastPlayerWarriorSkill_Slash.cs(98,16): warning CS0219: The variable `pierce' is assigned but its value is never used
+14: Assets/Scripts/Cast/Player/Skill/CastPlayerWarriorSkill_Slash.cs(53,16): warning CS0219: The variable `pierce' is assigned but its value is never used
+15: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(131,19): warning CS0219: The variable `dist' is assigned but its value is never used
+16: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(149,27): warning CS0219: The variable `knockback' is assigned but its value is never used
+17: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(150,27): warning CS0219: The variable `airborne' is assigned but its value is never used
+18: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+19: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(16,17): warning CS0219: The variable `speed' is assigned but its value is never used
+20: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(5,30): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+21: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(15,37): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+22: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(21,13): warning CS0618: `UnityEngine.Particle' is obsolete: `This is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+23: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(38,37): warning CS0618: `UnityEngine.Particle' is obsolete: `This is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
+24: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+25: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+26: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+27: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+28: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+29: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+30: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+31: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+32: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+33: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+34: Assets/spine-unity/Modules/SkeletonRenderSeparator/SkeletonRenderSeparator.cs(79,44): warning CS0618: `UnityEngine.Renderer.useLightProbes' is obsolete: `useLightProbes property is deprecated. Use lightProbeUsage instead.'
+35: Assets/spine-unity/Modules/SkeletonRenderSeparator/SkeletonRenderSeparator.cs(87,9): warning CS0618: `UnityEngine.Renderer.useLightProbes' is obsolete: `useLightProbes property is deprecated. Use lightProbeUsage instead.'
+36: Assets/uslucad/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
+37: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
+38: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
+39: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
+40: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
+41: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
+42: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
+43: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+44: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
+45: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
+46: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
+47: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
+48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
+49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+********************************************************************************
+*                    Wednesday, 21 September 2016 22:00:35                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.7.0.0
+Platform: Mac
+Target assembly: /Assembly-CSharp-Editor.dll
+Project directory: /Users/uslucad/Desktop/Unity Workspace/Ring
+Unity 'Data' or 'Frameworks' directory: /Applications/Unity/Unity.app/Contents
+Microsoft C# 6.0 compiler found, but it is not supported on the current platform. Looking for another compiler...
+Compiler: Mono C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: /usr/local/bin/mono
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-b8adf2fb437074709a4dac264fb0f69e
+Exit code: 0
+Elapsed time: 1.99 sec
 
 - Compiler output (1 line):
 0: Compilation succeeded - 18 warning(s)
