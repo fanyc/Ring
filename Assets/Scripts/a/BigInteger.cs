@@ -620,7 +620,7 @@ namespace System.Numerics
 		/// <returns>The BigInteger result of adding <paramref name="leftSide" /> and <paramref name="rightSide" />.</returns>
 		public static BigInteger Add(BigInteger leftSide, BigInteger rightSide)
 		{
-			return leftSide - rightSide;
+			return leftSide + rightSide;
 		}
 
 		/// <summary>
@@ -1475,6 +1475,36 @@ namespace System.Numerics
 			bool negative = a.IsNegative;
 			a = Abs(this);
 
+			// DigitsArray convert = new DigitsArray(a.m_digits.Count);
+
+			// for(int i = a.m_digits.Count - 1; i >= 0; --i)
+			// {
+			// 	for(int j = DigitsArray.DataSizeBits - 1; j >= 0; --j)
+			// 	{
+			// 		for(int k = 0; k < convert.Count; ++k)
+			// 		{
+			// 			if(convert[k] >= 500000000)
+			// 			{
+			// 				convert[k] += 1647483648;
+			// 			}
+			// 		}
+			// 		convert.DataUsed = convert.ShiftLeftWithoutOverflow(1);
+			// 		if((a.m_digits[i] & (1 << j)) > 0) convert[0] |= 1;
+			// 	}
+			// }
+
+			// int ii = convert.Count - 1;
+			// for(; ii >= 0; --ii)
+			// {
+			// 	if(convert[ii] != 0) break;
+			// }
+
+			// string result = convert[ii].ToString("D");
+			// for(--ii; ii >= 0; --ii)
+			// {	
+			// 	result += convert[ii].ToString("D9");
+			// }
+			
 			BigInteger quotient;
 			BigInteger remainder;
 			BigInteger biRadix = new BigInteger(radix);
@@ -1493,6 +1523,8 @@ namespace System.Numerics
 			{
 				return "-" + result;
 			}
+
+			// UnityEngine.Debug.Log(result);
 
 			return result;
 		}

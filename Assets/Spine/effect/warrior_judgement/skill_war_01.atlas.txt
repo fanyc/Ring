@@ -1,0 +1,124 @@
+
+skill_war_01.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fx_a_01
+  rotate: false
+  xy: 1472, 2
+  size: 518, 518
+  orig: 518, 518
+  offset: 0, 0
+  index: -1
+sword-copy-3
+  rotate: true
+  xy: 2, 14
+  size: 275, 579
+  orig: 275, 579
+  offset: 0, 0
+  index: -1
+sword_02
+  rotate: true
+  xy: 583, 14
+  size: 275, 579
+  orig: 275, 579
+  offset: 0, 0
+  index: -1
+thunder_01
+  rotate: false
+  xy: 2, 1425
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_02
+  rotate: false
+  xy: 2, 858
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_03
+  rotate: false
+  xy: 737, 1425
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_04
+  rotate: false
+  xy: 2, 291
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_05
+  rotate: false
+  xy: 737, 858
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_06
+  rotate: true
+  xy: 1472, 1257
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_07
+  rotate: false
+  xy: 737, 291
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_08
+  rotate: true
+  xy: 1472, 522
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+
+skill_war_012.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fx_a_02
+  rotate: false
+  xy: 737, 1136
+  size: 518, 518
+  orig: 518, 518
+  offset: 0, 0
+  index: -1
+fx_a_03
+  rotate: false
+  xy: 2, 2
+  size: 518, 518
+  orig: 518, 518
+  offset: 0, 0
+  index: -1
+fx_a_04
+  rotate: false
+  xy: 737, 616
+  size: 518, 518
+  orig: 518, 518
+  offset: 0, 0
+  index: -1
+thunder_09
+  rotate: false
+  xy: 2, 1089
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1
+thunder_10
+  rotate: false
+  xy: 2, 522
+  size: 733, 565
+  orig: 733, 565
+  offset: 0, 0
+  index: -1

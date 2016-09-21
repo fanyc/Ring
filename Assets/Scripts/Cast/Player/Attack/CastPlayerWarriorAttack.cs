@@ -57,7 +57,7 @@ public class CastPlayerWarriorAttack : Castable
             Character target = GetNearestTarget(targets);
             if(target == null) return;
             target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue, Character.DAMAGE_TYPE.WARRIOR);
-            target.KnockBack(new Vector2(10.0f, 0.0f));
+            target.KnockBack(new Vector2(7.5f, 0.0f));
             //ObjectPool<Effect>.Spawn("@Warrior_" + m_caster.GetAnimationName()).Init(m_caster.position);
             ObjectPool<Effect>.Spawn("@Effect_Sword_Atk").Init(m_caster.position);
         }

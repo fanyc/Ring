@@ -1,41 +1,51 @@
-﻿// using UnityEngine;
-// using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
+using Spine.Unity;
 
-// public class EffectParticleSystem : Effect
-// {
-// 	protected ParticleSystem m_particle;
+public class EffectSpine : Effect
+{
+	protected SkeletonAnimation m_cachedAnimation;
+	public SkeletonAnimation SpineAnimation
+	{
+		get
+		{
+			return m_cachedAnimation;
+		}
+	}
+    protected float timeScale = 1.0f;
+	void Awake()
+	{
+		m_cachedAnimation = GetComponent<SkeletonAnimation>();
+	}
 
-// 	void Awake()
-// 	{
-// 		m_particle = GetComponent<ParticleSystem>();
-// 	}
+	public override void Init(Vector3 position)
+	{
+		base.Init(position);
+        timeScale = m_cachedAnimation.timeScale;
+	}
 
-// 	public override void Init(Vector3 position)
-// 	{
-// 		base.Init(position);
-// 		m_particle?.Play(true);
-// 		StartCoroutine(_recycle());
-// 	}
+	public override void Pause()
+	{
+        timeScale = m_cachedAnimation.timeScale;
+		m_cachedAnimation.timeScale = 0.0f;
+	}
+	public override void Resume()
+	{
+        m_cachedAnimation.timeScale = timeScale;
+	}
 
-// 	public override void Pause()
-// 	{
-// 		m_particle?.Pause();
-// 	}
-// 	public override void Resume()
-// 	{
-// 		if(m_particle.isPaused)
-// 			m_particle.Play();	
-// 	}
+	public void PlayAnimation(string name, bool isLoop = false)
+	{
+		m_cachedAnimation.state.SetAnimation(0, name, isLoop);
+	}
 
-// 	IEnumerator _recycle()
-// 	{	
-// 		if(m_particle != null)
-// 		{
-// 			while(m_particle.isPlaying)
-// 				yield return null;
-// 			m_particle?.Stop(true);
-// 		}
+	public void AddAnimation(string name, bool isLoop = false)
+	{
+		m_cachedAnimation.state.AddAnimation(0, name, isLoop, 0.0f);
+	}
 
-// 		Recycle();
-// 	}
-// }
+	public bool IsEndAnimation()
+	{
+		return m_cachedAnimation.state.GetCurrent(0) == null || m_cachedAnimation.state.GetCurrent(0).Time >= m_cachedAnimation.state.GetCurrent(0).EndTime;
+	}
+}

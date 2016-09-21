@@ -34,42 +34,51 @@ public class CastPlayerWarriorSkill : Castable
 
     protected override void Prepare()
     {
-        m_caster.AddAnimationEvent(Hit);
+        base.Prepare();
         m_caster.WeightBonus += 100.0f;
+
+        CameraController.Instance.SetBackgroundFadeOut();
     }
     protected override IEnumerator Cast()
     {
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerWarrior.AttackPerSecond / GameManager.Instance.PlayerSpeed);
-        m_caster.PlayAnimation("skill_a01", false, false);
-        yield return new WaitForSeconds(0.767f);
+        m_caster.PlayAnimation("skill_02", false, false);
+        EffectSpine eff = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Judgement", position + new Vector3(0.0f, 6.7f));
+        eff.SpineAnimation.state.Event += _event;
+        // ReleaseAction += ()=>
+        // {
+        //     eff.Skeleton.state.Event -= _event;
+        // };
+        while(m_caster.IsEndAnimation() != true) yield return null;
         State = Character.STATE.IDLE;
     }
     
     protected override void Release()
     {
+        CameraController.Instance.SetBackgroundFadeIn();
         m_caster.WeightBonus -= 100.0f;
-        m_caster.RemoveAnimationEvent(Hit);
         base.Release();
     }
 
-    void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
+    void _event(Spine.AnimationState state, int trackIndex, Spine.Event e)
     {
-        Character[] targets = GetTargets();
-
-        for(int i = 0; i < targets.Length; ++i)
+        switch(e.Data.name)
         {
-            Character target = targets[i];
-
-            if(target == null) continue;
-            target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("WarriorSkillDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.WARRIOR, true);
-            target.KnockBack(new Vector2(20.0f, 4.6f));
+            case "hit_01":
+            {
+                break;
+            }
+            case "light_01":
+            {
+                ObjectPool<Effect>.Spawn("@Effect_Flash01").Init(m_caster.position + new Vector3(2.0f, 0.0f));
+                break;
+            }
+            case "shake_01":
+            {
+                CameraController.Instance.SetShake(0.3f, 0.075f, 0.75f);
+                break;
+            }
         }
-
-        ObjectPool<Effect>.Spawn("@Effect_Lightning01").Init(m_caster.position + new Vector3(2.0f, 0.0f));
-        ObjectPool<Effect>.Spawn("@Effect_Lightning02").Init(m_caster.position + new Vector3(2.0f, 0.0f));
-        ObjectPool<Effect>.Spawn("@Effect_Flash01").Init(m_caster.position + new Vector3(2.0f, 0.0f));
-
-        CameraController.Instance.SetShake(0.35f, 0.075f, 0.3f);
     }
 }

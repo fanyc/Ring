@@ -14,7 +14,7 @@ public class CharacterPlayerWarrior : CharacterPlayer
     static CharacterPlayerWarrior()
     {
         //m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill");
-        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Slash");
+        //m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Slash");
         m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Pierce");
         
         

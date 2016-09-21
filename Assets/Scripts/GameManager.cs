@@ -75,9 +75,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TMPro.TextMeshProUGUI TimerText;
     public Image TimerGauge;
-    
-    
-    
+ 
     //====================Properties End====================
     //====================Functions Start====================
     void Awake()

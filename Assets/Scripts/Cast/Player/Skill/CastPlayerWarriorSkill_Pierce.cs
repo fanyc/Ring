@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Spine.Unity;
 using UnityEngine;
 
@@ -50,21 +51,24 @@ public class CastPlayerWarriorSkill_Pierce : Castable
         yield return new WaitForSeconds(0.2f);
         
         m_caster.PlayAnimation("atk_01", false, false);
-        Effect pierce = ObjectPool<Effect>.Spawn("@Effect_Pierce", position + new Vector3(1.75f, 0.75f));
-        SkeletonAnimation sword = pierce.GetComponentInChildren<SkeletonAnimation>();
+        EffectSpine pierce = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Pierce", position + new Vector3(1.75f, 0.75f));
+        SkeletonAnimation sword = pierce.SpineAnimation;
         sword.skeleton.A = 1.0f;
         ReleaseAction += ()=>
         {
             pierce.Resume();
-            sword.StartCoroutine(_fadeout(sword));
+            sword.StartCoroutine(_fadeout(pierce));
             CameraController.Instance.SetBackgroundFadeIn();
             CameraController.Instance.UnsetZoom();
             //sword["PierceSword"].speed = 1.0f;
         };
         
+        int cycle = 10;
+        BigDecimal damage = (UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("WarriorSkillDamage").currentValue) / (BigDecimal)cycle;
+
         float t = 0.0f;
-        float d = 0.05f;
-        for(int i = 0; i < 10; ++i)
+        float d = 0.025f;
+        for(int i = 0; i < cycle; ++i)
         {
             t = 0.0f;
 
@@ -76,8 +80,9 @@ public class CastPlayerWarriorSkill_Pierce : Castable
                 {
                     Character target = Character.GetCharacter(m_Buffer[j]);
                     if(target == null) continue;
-                    target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("WarriorSkillDamage").currentValue * 0.166667f, CharacterEnemy.DAMAGE_TYPE.WARRIOR, true);
+                    target.Beaten(damage, CharacterEnemy.DAMAGE_TYPE.WARRIOR, true);
                     target.KnockBack(new Vector2(5.0f, 0.0f));
+                    target.Stun(0.2f);
                     ObjectPool<Effect>.Spawn("@Effect_Arrow_Normal").Init(target.position + new Vector3(0.0f, 0.75f));
                 }
             
@@ -87,12 +92,6 @@ public class CastPlayerWarriorSkill_Pierce : Castable
                 yield return new WaitForSeconds(0.025f);
                 pierce.Resume();
                 //sword["PierceSword"].speed = 1.0f;
-
-                d = 0.025f;
-            }
-            else
-            {
-                d = 0.025f;
             }
 
             while(t < d)
@@ -154,8 +153,10 @@ public class CastPlayerWarriorSkill_Pierce : Castable
         // CameraController.Instance.SetShake(0.35f, 0.075f, 0.3f);
     }
 
-    IEnumerator _fadeout(SkeletonAnimation skeleton)
+    IEnumerator _fadeout(EffectSpine pierce)
     {
+        SkeletonAnimation skeleton = pierce.SpineAnimation;
+        
         float f = 1.0f;
         while(f > 0.0f)
         {
@@ -165,5 +166,7 @@ public class CastPlayerWarriorSkill_Pierce : Castable
         }
 
         skeleton.skeleton.A = 0.0f;
+
+        pierce.Recycle();
     }
 }

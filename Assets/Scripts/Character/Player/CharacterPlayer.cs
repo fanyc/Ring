@@ -79,7 +79,6 @@ public abstract class CharacterPlayer : Character
             return 0.0f;
         }
     }
-    public float Offset;
     protected Castable m_castAttack;
     protected Castable m_castSkill;
     
@@ -91,7 +90,7 @@ public abstract class CharacterPlayer : Character
     public override void Init()
     {
         PlayerList.Add(this);
-        position = new Vector3(Offset, 0.0f);
+        position = cachedTransform.position;
         base.Init();
     }
 
@@ -107,22 +106,6 @@ public abstract class CharacterPlayer : Character
     
     protected override void IdleThought()
     {
-        switch (GameManager.Instance.InGameState)
-        {
-            case GameManager.StateInGame.MOVE:
-            {
-                if(GameManager.Instance.cachedTransform.position.x + Offset > position.x)
-                {
-                    State = STATE.MOVE;
-                }
-            }
-            break;
-            case GameManager.StateInGame.BATTLE:
-            {
-                Attack();
-            }
-            break;
-        }
     }
     
     protected virtual void Attack()
@@ -138,23 +121,7 @@ public abstract class CharacterPlayer : Character
 
     protected virtual IEnumerator MOVE()
     {
-        PlayAnimation(GetRunAnimation(), false, true);
-        while(State == STATE.MOVE)
-        {
-            Vector3 pos = position + new Vector3(11.25f * Time.smoothDeltaTime * 0.5f, 0.0f);
-            
-            if(GameManager.Instance.cachedTransform.position.x + Offset < pos.x)
-            {
-                position = new Vector3(GameManager.Instance.cachedTransform.position.x + Offset, 0.0f);
-                break;
-            }
-            
-            position = pos;
-            
-            yield return null;
-        }
-        
-        GameManager.Instance.MoveCount--;
+        yield return null;
         State = STATE.IDLE;
         NextState();
     }

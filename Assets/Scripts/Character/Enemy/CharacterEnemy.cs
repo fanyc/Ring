@@ -50,7 +50,7 @@ public abstract class CharacterEnemy : Character
 
     protected override void LateUpdate()
     {
-        if((position.x - (GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
+        if(State != STATE.DEAD && (position.x - (GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
         {
             Vector3 pos = position;
             pos.x = GameManager.Instance.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction;

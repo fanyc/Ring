@@ -60,6 +60,8 @@ public class CameraController : MonoSingleton<CameraController> {
     protected PositionProcess m_followProc;
     protected PositionProcess m_SetPositionProc;
     protected PositionProcess m_PostPositionProc;
+
+    protected int m_nFadeEffectCount = 0;
     
     
     
@@ -85,6 +87,8 @@ public class CameraController : MonoSingleton<CameraController> {
         m_SetPositionProc = SetPositionLerp;
 
         m_fBackgroundFade = 1.0f;
+
+        m_nFadeEffectCount = 0;
     }
 
     void LateUpdate()
@@ -234,16 +238,26 @@ public class CameraController : MonoSingleton<CameraController> {
 
     public void SetBackgroundFadeOut()
     {
-        StopCoroutine("_fadeIn");
-        StopCoroutine("_fadeOut");
-        StartCoroutine("_fadeOut");
+        if(m_nFadeEffectCount == 0)
+        {
+            StopCoroutine("_fadeIn");
+            StopCoroutine("_fadeOut");
+            StartCoroutine("_fadeOut");
+        }
+
+        ++m_nFadeEffectCount;
     }
 
     public void SetBackgroundFadeIn()
     {
-        StopCoroutine("_fadeOut");
-        StopCoroutine("_fadeIn");
-        StartCoroutine("_fadeIn");
+        --m_nFadeEffectCount;
+
+        if(m_nFadeEffectCount == 0)
+        {
+            StopCoroutine("_fadeOut");
+            StopCoroutine("_fadeIn");
+            StartCoroutine("_fadeIn");
+        }
     }
 
     IEnumerator _fadeOut()

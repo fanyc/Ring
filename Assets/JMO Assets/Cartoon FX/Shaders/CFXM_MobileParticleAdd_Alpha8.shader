@@ -12,6 +12,7 @@ Shader "Cartoon FX/Particles Additive Alpha8"
 Properties
 {
 	_MainTex ("Particle Texture (Alpha8)", 2D) = "white" {}
+	_Color ("Color", Color) = (1,1,1,1)
 }
 
 Category
@@ -33,7 +34,8 @@ Category
 		{
 			SetTexture [_MainTex]
 			{
-				combine primary, texture * primary
+				constantColor [_Color]
+				combine primary * constant, texture * primary
 			}
 		}
 	}

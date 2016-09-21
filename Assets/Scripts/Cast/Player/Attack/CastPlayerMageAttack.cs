@@ -95,7 +95,7 @@ public class CastPlayerMageAttack : Castable
             {
                 Character t = Character.GetCharacter(m_Buffer[i]);
                 t.Beaten(damage, CharacterEnemy.DAMAGE_TYPE.SORCERESS);
-                t.KnockBack(new Vector2(15.0f, 0.0f));
+                t.KnockBack(new Vector2(7.5f, 0.0f));
             }
 
             ObjectPool<Effect>.Spawn("@Effect_Fireball_Explosion").Init(proj.cachedTransform.position);

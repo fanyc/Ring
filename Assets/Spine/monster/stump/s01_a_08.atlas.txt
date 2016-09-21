@@ -1,0 +1,118 @@
+
+s01_a_08.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_01
+  rotate: true
+  xy: 201, 63
+  size: 91, 50
+  orig: 91, 50
+  offset: 0, 0
+  index: -1
+arm_02
+  rotate: false
+  xy: 460, 107
+  size: 80, 143
+  orig: 80, 143
+  offset: 0, 0
+  index: -1
+arm_03
+  rotate: false
+  xy: 542, 138
+  size: 111, 112
+  orig: 111, 112
+  offset: 0, 0
+  index: -1
+body_01
+  rotate: true
+  xy: 2, 2
+  size: 152, 197
+  orig: 152, 197
+  offset: 0, 0
+  index: -1
+body_03
+  rotate: true
+  xy: 261, 98
+  size: 152, 197
+  orig: 152, 197
+  offset: 0, 0
+  index: -1
+leaf_01
+  rotate: false
+  xy: 201, 23
+  size: 31, 38
+  orig: 31, 38
+  offset: 0, 0
+  index: -1
+leaf_02
+  rotate: true
+  xy: 655, 139
+  size: 32, 37
+  orig: 32, 37
+  offset: 0, 0
+  index: -1
+leaf_03
+  rotate: false
+  xy: 716, 177
+  size: 30, 18
+  orig: 30, 18
+  offset: 0, 0
+  index: -1
+leaf_04
+  rotate: false
+  xy: 946, 221
+  size: 28, 29
+  orig: 28, 29
+  offset: 0, 0
+  index: -1
+leaf_05
+  rotate: true
+  xy: 542, 109
+  size: 27, 37
+  orig: 27, 37
+  offset: 0, 0
+  index: -1
+leaf_06
+  rotate: false
+  xy: 234, 29
+  size: 12, 32
+  orig: 12, 32
+  offset: 0, 0
+  index: -1
+leg_01
+  rotate: true
+  xy: 716, 197
+  size: 53, 82
+  orig: 53, 82
+  offset: 0, 0
+  index: -1
+leg_02
+  rotate: false
+  xy: 655, 173
+  size: 59, 77
+  orig: 59, 77
+  offset: 0, 0
+  index: -1
+leg_03
+  rotate: true
+  xy: 882, 210
+  size: 40, 62
+  orig: 40, 62
+  offset: 0, 0
+  index: -1
+leg_04
+  rotate: true
+  xy: 800, 197
+  size: 53, 80
+  orig: 53, 80
+  offset: 0, 0
+  index: -1
+slash_01
+  rotate: false
+  xy: 2, 156
+  size: 257, 94
+  orig: 257, 94
+  offset: 0, 0
+  index: -1

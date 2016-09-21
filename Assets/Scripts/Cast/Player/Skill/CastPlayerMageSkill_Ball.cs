@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class CastPlayerMageSkill_Ball : Castable
@@ -66,7 +67,6 @@ public class CastPlayerMageSkill_Ball : Castable
     {
         eff?.Recycle();
         m_caster.RemoveAnimationEvent(Hit);
-        CameraController.Instance.SetBackgroundFadeIn();
 
         base.Release();
     }
@@ -80,35 +80,56 @@ public class CastPlayerMageSkill_Ball : Castable
 
     IEnumerator _move()
     {
-        Effect ball = ObjectPool<Effect>.Spawn("@Effect_Ball");
-        ball.Init(position + new Vector3(5.0f * m_caster.Direction, 1.0f));
+        EffectSpine ball = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Ball");
+        ball.Init(position + new Vector3(1.0f * m_caster.Direction, 1.5f));
+
+        Vector3 start = ball.cachedTransform.position;
+        Vector3 dist = new Vector3(1.5f * m_caster.Direction, 0.0f);
+        const float time = 0.5f;
+        const float speed = 1.0f / time;
+        float per = 0.0f;
+        while(per < 1.0f)
+        {
+            per += Time.deltaTime * speed;
+            ball.cachedTransform.position = start + dist * (per * per);
+            yield return null;
+        }
+        
         ball.StartCoroutine(_hit(ball));
         while(ball.IsPlaying)
         {
-            ball.cachedTransform.position += new Vector3(2.5f * m_caster.Direction * Time.smoothDeltaTime, 0.0f);
+            ball.cachedTransform.position += new Vector3(1.5f * m_caster.Direction * Time.smoothDeltaTime, 0.0f);
             yield return null;
         }
     }
 
-    IEnumerator _hit(Effect eff)
+    IEnumerator _hit(EffectSpine ball)
     {
-        float timer = 0.0f;
-        while(eff.IsPlaying)
-        {
-            timer += Time.deltaTime;
-            if(timer > 0.2f)
-            {
-                timer -= 0.2f;
+        ball.PlayAnimation("on_01");
+        ball.AddAnimation("play_01", true);
+        ball.GetComponent<Animation>().Play("PlazmaBall_Start");
 
-                Character[] targets = GetTargets(eff.cachedTransform.position + new Vector3(Rect.x * -0.5f, 0.0f), new Vector2(Rect.x * 0.5f, Rect.y));
+        float duration = 5.0f;
+        float interval = 0.2f;
+        BigDecimal damage = 1.0f;
+        float timer = 0.0f;
+        while(duration > 0.0f)
+        {
+            duration -= Time.deltaTime;
+            timer += Time.deltaTime;
+            if(timer > interval)
+            {
+                timer -= interval;
+
+                Character[] targets = GetTargets(ball.cachedTransform.position + new Vector3(Rect.x * -0.5f, 0.0f), new Vector2(Rect.x * 0.5f, Rect.y));
 
                 for(int i = 0; i < targets.Length; ++i)
                 {
                     Character target = targets[i];
                     if(target == null) continue;
-                    target.Beaten(1.0f, CharacterEnemy.DAMAGE_TYPE.SORCERESS, true);
+                    target.Beaten(damage, CharacterEnemy.DAMAGE_TYPE.SORCERESS, true);
                     target.KnockBack(new Vector2(5.0f, 0.0f));
-                    target.Stun(0.5f);
+                    target.Stun(interval * 2.0f);
                 }
 
                 if(targets.Length > 0)
@@ -116,5 +137,15 @@ public class CastPlayerMageSkill_Ball : Castable
             }
             yield return null;
         }
+
+        ball.PlayAnimation("off_01");
+        ball.GetComponent<Animation>().Play("PlazmaBall_End");
+        
+        while(ball.IsEndAnimation() == false) yield return null;
+        
+        CameraController.Instance.SetBackgroundFadeIn();
+        yield return new WaitForSeconds(1.0f);
+        
+        ball.Recycle();
     }
 }

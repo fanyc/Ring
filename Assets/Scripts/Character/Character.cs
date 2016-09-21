@@ -230,8 +230,7 @@ public abstract class Character : ObjectBase
 
     IEnumerator BEATEN()
     {
-        PlayAnimation(GetBeatenAnimation(), true, false);
-        while(State != STATE.DEAD && (m_fStun > 0.0f || m_fKnockBack > 0.0f || position.y > 0.0f)) yield return null;
+        while(State != STATE.DEAD && (m_fStun > 0.0f /*|| m_fKnockBack > 0.0f || position.y > 0.0f*/)) yield return null;
         if(State != STATE.DEAD)
         {
             yield return new WaitForSeconds(0.2f);
@@ -249,6 +248,8 @@ public abstract class Character : ObjectBase
     public virtual void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
     {
         if(State == STATE.DEAD || State == STATE.NULL) return;
+
+        PlayBeatenAnimation();
 
         Color startColor = Color.white;
         Color endColor = Color.white;
@@ -314,6 +315,8 @@ public abstract class Character : ObjectBase
 
     IEnumerator _stun()
     {
+        State = STATE.BEATEN;
+        
         while(m_fStun > 0.0f)
         {
             yield return null;
@@ -448,10 +451,10 @@ public abstract class Character : ObjectBase
 
     public virtual void PlayBeatenAnimation()
     {
-        if(State == STATE.IDLE)
+        if(State == STATE.IDLE || State == STATE.BEATEN)
         {
             PlayAnimation(GetBeatenAnimation(), true, false);
-            m_cachedAnimation.state.AddAnimation(0, "stand_01", true, 0.0f);
+            //m_cachedAnimation.state.AddAnimation(0, "stand_01", true, 0.0f);
         }
     }
 
