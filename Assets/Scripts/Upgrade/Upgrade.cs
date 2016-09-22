@@ -1,19 +1,17 @@
 using System;
-using System.Numerics;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Upgrade
 {
-    protected Dictionary<int, BigDecimal> m_dictCache = new Dictionary<int, BigDecimal>();
-    protected Func<int, BigDecimal> m_Eval;
+    protected Dictionary<int, float> m_dictCache = new Dictionary<int, float>();
+    protected Func<int, float> m_Eval;
     public int Level
     {
         get;
         set;
     } = 1;
     
-    public BigDecimal currentValue
+    public float currentValue
     {
         get
         {
@@ -21,7 +19,7 @@ public class Upgrade
         }
     }
     
-    public BigDecimal prevValue
+    public float prevValue
     {
         get
         {
@@ -29,7 +27,7 @@ public class Upgrade
         }
     }
     
-    public BigDecimal nextValue
+    public float nextValue
     {
         get
         {
@@ -37,9 +35,9 @@ public class Upgrade
         }
     }
     
-    public virtual BigDecimal GetValue(int level)
+    public virtual float GetValue(int level)
     {
-        BigDecimal val;
+        float val;
         if(m_dictCache.TryGetValue(level, out val) == false)
         {
             val = m_Eval(level);
@@ -48,7 +46,7 @@ public class Upgrade
         return val;
     }
     
-    public Upgrade(Func<int, BigDecimal> eval)
+    public Upgrade(Func<int, float> eval)
     {
         m_Eval = eval;
         m_dictCache.Clear();

@@ -1,5 +1,3 @@
-using System.Numerics;
-
 public class UIItemSkill : UIItem {
     
     protected CharacterPlayer.SkillData m_SkillData;
@@ -18,15 +16,15 @@ public class UIItemSkill : UIItem {
         Upgrade price = UpgradeManager.Instance.GetUpgrade(m_SkillData.upgradeGroup + "Price");
         
         Name.text = $"<color=#6F5151FF>{m_SkillData.name}</color>\n<size=+2>Lv. <color=#D75A23FF>{damage.Level}</color>";
-        Desc.text = $"<size=42><sprite=1></size> {(damage.currentValue.ToType<float>()):0%}";
+        Desc.text = $"<size=42><sprite=1></size> {(damage.currentValue):0%}";
         
         ButtonText.text =
-        $"<size=42><sprite=1></size>+{(damage.nextValue - damage.currentValue).ToType<float>():0%} \n<pos=-6><size=44><sprite=2><size=16> <size=30><color=#391E0EFF>{price.currentValue.ToUnit()}</color></size>";
+        $"<size=42><sprite=1></size>+{(damage.nextValue - damage.currentValue):0%} \n<pos=-6><size=44><sprite=2><size=16> <size=30><color=#391E0EFF>{price.currentValue.ToString()}</color></size>";
     }
 
     public override void _Function()
     {
-        BigDecimal price = UpgradeManager.Instance.GetUpgrade(m_SkillData.upgradeGroup + "Price").currentValue;
+        float price = UpgradeManager.Instance.GetUpgrade(m_SkillData.upgradeGroup + "Price").currentValue;
         
         if(UIWallet.Instance.Gold >= price)
         {

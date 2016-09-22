@@ -46,12 +46,14 @@ public class CastPlayerWarriorSkill : Castable
         m_caster.PlayAnimation("skill_02", false, false);
         EffectSpine eff = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Judgement", position + new Vector3(0.0f, 6.7f));
         eff.SpineAnimation.state.Event += _event;
+        eff.PlayAnimation("atk_01");
         // ReleaseAction += ()=>
         // {
         //     eff.Skeleton.state.Event -= _event;
         // };
+        eff.StartCoroutine(_release(eff));
         while(eff.IsEndAnimation() != true) yield return null;
-        eff.Recycle();
+        
         State = Character.STATE.IDLE;
     }
     
@@ -60,6 +62,12 @@ public class CastPlayerWarriorSkill : Castable
         CameraController.Instance.SetBackgroundFadeIn();
         m_caster.WeightBonus -= 100.0f;
         base.Release();
+    }
+
+    IEnumerator _release(EffectSpine eff)
+    {
+        while(eff.IsEndAnimation() != true) yield return null;
+        eff.Recycle();
     }
 
     void _event(Spine.AnimationState state, int trackIndex, Spine.Event e)

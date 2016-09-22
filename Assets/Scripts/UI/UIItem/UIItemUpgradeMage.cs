@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-public class UIItemUpgradeMage : UIItem {
+﻿public class UIItemUpgradeMage : UIItem {
     
     protected override void OnEnable()
     {
@@ -17,14 +15,14 @@ public class UIItemUpgradeMage : UIItem {
         Upgrade price = UpgradeManager.Instance.GetUpgrade("MageAttackPrice");
         
         Name.text = $"<color=#6F5151FF>Soceress</color>\n<size=+2>Lv. <color=#D75A23FF>{damage.Level}</color>";
-        Desc.text = $"<size=42><sprite=1></size> {(damage.currentValue + 5.0f).ToUnit()}";
+        Desc.text = $"<size=42><sprite=1></size> {(damage.currentValue + 5.0f).ToString()}";
         
         ButtonText.text =
-        $"<size=42><sprite=1></size>+{(damage.nextValue - damage.currentValue).ToUnit()} \n<pos=-6><size=44><sprite=2><size=16> <size=30><color=#391E0EFF>{price.currentValue.ToUnit()}</color></size>";
+        $"<size=42><sprite=1></size>+{(damage.nextValue - damage.currentValue).ToString()} \n<pos=-6><size=44><sprite=2><size=16> <size=30><color=#391E0EFF>{price.currentValue.ToString()}</color></size>";
     }
     public override void _Function()
     {
-        BigDecimal price = UpgradeManager.Instance.GetUpgrade("MageAttackPrice").currentValue;
+        float price = UpgradeManager.Instance.GetUpgrade("MageAttackPrice").currentValue;
         
         if(UIWallet.Instance.Gold >= price)
         {

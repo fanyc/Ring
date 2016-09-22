@@ -37,7 +37,7 @@ public class CharacterPlayerFairy : CharacterPlayer
         {
             ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[0]);
         });
-        //UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[0].castableName);
+        UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[0].castableName);
 
         m_fHP = MaxHP = 10.0f;
 

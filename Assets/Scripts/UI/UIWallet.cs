@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System.Numerics;
+
 
 public class UIWallet : MonoSingleton<UIWallet>
 {
@@ -12,8 +12,8 @@ public class UIWallet : MonoSingleton<UIWallet>
     public Image imgRuby;
     public TMPro.TextMeshProUGUI textRuby;
 
-    protected BigDecimal m_fGold = new BigDecimal(0);
-    public BigDecimal Gold
+    protected float m_fGold = 0.0f;
+    public float Gold
     {
         get
         {
@@ -22,12 +22,12 @@ public class UIWallet : MonoSingleton<UIWallet>
         set
         {
             m_fGold = value;
-            UIWallet.Instance.textGold.text = m_fGold.ToUnit();
+            UIWallet.Instance.textGold.text = m_fGold.ToString();
         }
     }
 
-    protected BigDecimal m_fCube= new BigDecimal(0);
-    public BigDecimal Cube
+    protected float m_fCube= 0.0f;
+    public float Cube
     {
         get
         {
@@ -36,12 +36,12 @@ public class UIWallet : MonoSingleton<UIWallet>
         set
         {
             m_fCube = value;
-            UIWallet.Instance.textCube.text = m_fCube.ToUnit();
+            UIWallet.Instance.textCube.text = m_fCube.ToString();
         }
     }
 
-    protected BigDecimal m_fRuby = new BigDecimal(0);
-    public BigDecimal Ruby
+    protected float m_fRuby = 0.0f;
+    public float Ruby
     {
         get
         {
@@ -50,14 +50,14 @@ public class UIWallet : MonoSingleton<UIWallet>
         set
         {
             m_fRuby = value;
-            UIWallet.Instance.textRuby.text = m_fRuby.ToUnit();
+            UIWallet.Instance.textRuby.text = m_fRuby.ToString();
         }
     }
 
     public void Init()
     {
-        Gold = new BigDecimal(0);
-        Cube = new BigDecimal(0);
-        Ruby = new BigDecimal(0);
+        Gold = 0.0f;
+        Cube = 0.0f;
+        Ruby = 0.0f;
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -31,20 +30,6 @@ public class GameManager : MonoSingleton<GameManager>
     
     protected bool m_bBossClear = true;
 
-    protected int m_nMoveCount;
-    public int MoveCount
-    {
-        get { return m_nMoveCount; }
-        set
-        {
-            m_nMoveCount = value;
-            if(m_nMoveCount <= 0)
-            { 
-                m_InGameState = StateInGame.BATTLE;
-            }
-            
-        }
-    }
     
     public float PlayerSpeed
     {
@@ -132,7 +117,6 @@ public class GameManager : MonoSingleton<GameManager>
         m_InGameState = StateInGame.IDLE;
         m_nLevel = 1;
         m_nCurrentWave = 0;
-        m_nMoveCount = 0;
 
         BossInfo.SetActive(false);
         NormalInfo.SetActive(true);
@@ -241,7 +225,6 @@ public class GameManager : MonoSingleton<GameManager>
         // }
 
         m_InGameState = StateInGame.MOVE;
-        m_nMoveCount = PlayerList.Count;
 
         for(int i = 0; i < 3; ++i)
         {

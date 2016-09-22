@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 
 public class CharacterEnemyWerewolf : CharacterEnemy
@@ -21,7 +20,7 @@ public class CharacterEnemyWerewolf : CharacterEnemy
 
     public override void Dead()
     {
-        BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / 6.0f * 2.0f / 15.0f;
+        float reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / 6.0f * 2.0f / 15.0f;
         for(int i = 0; i < 15; ++i)
         {
             ObjectPool<ItemGold>.Spawn("@ItemGold", cachedTransform.position + new Vector3(0.0f, 1.0f)).Init(reward);

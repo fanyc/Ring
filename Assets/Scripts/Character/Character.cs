@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using Spine.Unity;
 
 public abstract class Character : ObjectBase
@@ -123,15 +122,15 @@ public abstract class Character : ObjectBase
         }
     }
 
-    protected BigDecimal m_fHP = BigDecimal.Zero;
-    public BigDecimal HP
+    protected float m_fHP = 0.0f;
+    public float HP
     {
         get
         {
             return m_fHP;
         }
     }
-    public BigDecimal MaxHP = BigDecimal.Zero;
+    public float MaxHP = 0.0f;
 
     protected HPGauge m_HPGauge;
     public float HPGaugeHeight = 400.0f;
@@ -257,7 +256,7 @@ public abstract class Character : ObjectBase
         
         NextState();
     }
-    public virtual void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
+    public virtual void Beaten(float damage, DAMAGE_TYPE type, bool isSmash = false)
     {
         if(State == STATE.DEAD || State == STATE.NULL) return;
 
@@ -298,7 +297,7 @@ public abstract class Character : ObjectBase
             break;
         }
 
-        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(position.x + 0.8f, 2.0f)).Init(damage.ToUnit(), offset, startColor, endColor, outlineColor);
+        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(position.x + 0.8f, 2.0f)).Init(damage.ToString("F0"), offset, startColor, endColor, outlineColor);
 
         m_fHP -= damage;
         //if(Type != TYPE.StageBoss || isSmash == true)
@@ -403,6 +402,13 @@ public abstract class Character : ObjectBase
             position = pos;
             power -= 9.8f * Time.deltaTime;
         }
+    }
+
+    public virtual void Heal(float heal)
+    {
+        m_fHP += heal;
+        if(m_fHP > MaxHP) m_fHP = MaxHP;
+        m_HPGauge?.UpdateRatio();
     }
 
     public virtual void Dead()

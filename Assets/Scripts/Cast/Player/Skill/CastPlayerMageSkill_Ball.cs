@@ -1,6 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
+
 using UnityEngine;
 
 public class CastPlayerMageSkill_Ball : Castable
@@ -111,7 +110,7 @@ public class CastPlayerMageSkill_Ball : Castable
 
         float duration = 5.0f;
         float interval = 0.2f;
-        BigDecimal damage = 1.0f;
+        float damage = 1.0f;
         float timer = 0.0f;
         while(duration > 0.0f)
         {

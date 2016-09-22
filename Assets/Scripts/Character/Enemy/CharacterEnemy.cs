@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Numerics;
 
 public abstract class CharacterEnemy : Character
 {
@@ -63,7 +62,7 @@ public abstract class CharacterEnemy : Character
     public override void Init()
     {
         Direction = LEFT;
-        MaxHP = m_fHP = (UpgradeManager.Instance.GetUpgrade("EnemyHP").currentValue + new BigDecimal(8.0f)) * HPFactor;
+        MaxHP = m_fHP = (UpgradeManager.Instance.GetUpgrade("EnemyHP").currentValue + 8.0f) * HPFactor;
         cachedAnimation.skeleton.a = 1.0f;
 
         SetCamera();

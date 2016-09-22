@@ -1,5 +1,3 @@
-
-using System.Numerics;
 using UnityEngine;
 using System.Collections;
 using IProjectileExtension;
@@ -62,7 +60,7 @@ public class CharacterEnemyGoblinShaman : CharacterEnemy, IProjectile
 
     public override void Dead()
     {
-        BigDecimal reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / (6.0f * 8.0f);
+        float reward = UpgradeManager.Instance.GetUpgrade("Reward").currentValue / (6.0f * 8.0f);
         for(int i = 0; i < 8; ++i)
         {
             ObjectPool<ItemGold>.Spawn("@ItemGold", position + new Vector3(0.0f, 1.0f)).Init(reward);

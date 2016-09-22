@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using Spine.Unity;
 using UnityEngine;
 
@@ -50,7 +48,7 @@ public class CastPlayerWarriorSkill_Pierce : Castable
 
         yield return new WaitForSeconds(0.2f);
         
-        m_caster.PlayAnimation("atk_01", false, false);
+        m_caster.PlayAnimation("skill_01", false, false);
         EffectSpine pierce = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Pierce", position + new Vector3(1.75f, 0.75f));
         SkeletonAnimation sword = pierce.SpineAnimation;
         sword.skeleton.A = 1.0f;
@@ -64,7 +62,7 @@ public class CastPlayerWarriorSkill_Pierce : Castable
         };
         
         int cycle = 10;
-        BigDecimal damage = (UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("WarriorSkillDamage").currentValue) / (BigDecimal)cycle;
+        float damage = (UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("WarriorSkillDamage").currentValue) / (float)cycle;
 
         float t = 0.0f;
         float d = 0.025f;

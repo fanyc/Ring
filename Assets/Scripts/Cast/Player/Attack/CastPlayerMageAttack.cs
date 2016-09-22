@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class CastPlayerMageAttack : Castable
@@ -90,7 +88,7 @@ public class CastPlayerMageAttack : Castable
         {
             int count = Physics2D.OverlapCircleNonAlloc((Vector2)proj.cachedTransform.position, 2.0f, m_Buffer, TargetMask);
 
-            BigDecimal damage = UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue;
+            float damage = UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue;
             for(int i = 0; i < count; ++i)
             {
                 Character t = Character.GetCharacter(m_Buffer[i]);

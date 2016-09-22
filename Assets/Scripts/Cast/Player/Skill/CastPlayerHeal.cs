@@ -34,23 +34,21 @@ public class CastPlayerHeal : Castable
     
     protected override void Prepare()
     {
-        m_caster.AddAnimationEvent(Hit);
     }
     protected override IEnumerator Cast()
     {
-        State = Character.STATE.CAST;
-        yield return new WaitForSeconds(1.133f);
-        State = Character.STATE.IDLE;
+        List<CharacterPlayer> list = CharacterPlayer.PlayerList;
+
+        for(int i = 0, c = list.Count; i < c; ++i)
+        {
+            list[i].Heal(10.0f);
+        }
+
+        yield break;
     }
     
     protected override void Release()
     {
-        m_caster.RemoveAnimationEvent(Hit);
         base.Release();
-    }
-
-    void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
-    {
-        
     }
 }

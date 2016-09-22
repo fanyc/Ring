@@ -1,15 +1,12 @@
-﻿using System.Numerics;
-using UnityEngine;
-
-public class ItemGold : Item {
+﻿public class ItemGold : Item {
     
-    protected BigDecimal m_fAmount;
+    protected float m_fAmount;
     
     void Awake()
     {
         m_tfTarget = UIWallet.Instance.imgGold.transform;
     }
-    public void Init(BigDecimal amount)
+    public void Init(float amount)
     {
         base.Init();
         m_fAmount = amount;

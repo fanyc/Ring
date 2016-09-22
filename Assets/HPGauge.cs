@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Numerics;
 
 public class HPGauge : ObjectBase {
 
@@ -70,7 +69,7 @@ public class HPGauge : ObjectBase {
 	{
 		if(m_Target != null)
 		{
-			Gauge.fillAmount = BigDecimal.Ratio(m_Target.HP, m_Target.MaxHP);
+			Gauge.fillAmount = m_Target.HP / m_Target.MaxHP;
 		}
 	}
 

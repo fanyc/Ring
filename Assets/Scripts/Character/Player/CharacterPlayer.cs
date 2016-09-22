@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Numerics;
 using System.Collections.Generic;
 
 public abstract class CharacterPlayer : Character
@@ -126,7 +125,7 @@ public abstract class CharacterPlayer : Character
         NextState();
     }
 
-    public override void Beaten(BigDecimal damage, DAMAGE_TYPE type, bool isSmash = false)
+    public override void Beaten(float damage, DAMAGE_TYPE type, bool isSmash = false)
     {
         base.Beaten(damage, type, isSmash);
         //MP = 0.0f;
