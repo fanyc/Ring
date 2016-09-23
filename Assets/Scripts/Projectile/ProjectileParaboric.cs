@@ -3,49 +3,140 @@ using System.Collections;
 
 public class ProjectileParaboric : Projectile
 {
+	public GameObject MainObject;
+	public ParticleSystem[] m_listParticle;
+	protected ParticleSystem.EmitParams m_origParticle;
+	protected ParticleSystem.Particle[] m_buffer;
+
+	void Awake()
+	{
+		m_listParticle = GetComponentsInChildren<ParticleSystem>();
+
+		int bufSize = 0;
+		for(int i = 0; i < m_listParticle.Length; ++i)
+		{
+			if(m_listParticle[i].emission.type != ParticleSystemEmissionType.Distance) continue;
+			ParticleSystem.EmissionModule em = m_listParticle[i].emission;
+			em.enabled = false;
+
+			if(bufSize < m_listParticle[i].maxParticles)
+			{
+				bufSize = m_listParticle[i].maxParticles;
+			}
+		}
+
+		m_buffer = new ParticleSystem.Particle[bufSize];
+	}
+
 	protected override IEnumerator _move(Vector3 targetPos)
 	{
-		Vector3 dist = targetPos - cachedTransform.position;
-		float time = dist.x / Speed;
-		float rotateTime = Random.Range(0.75f, 1.0f) * time;
-		float delay = Random.Range(0.0f, 1.0f) * (time - rotateTime);
-
-		float angle = cachedTransform.eulerAngles.z;
-		float destAngle = 0.0f;
-
-		while(delay > 0.0f)
-		{
-			delay -= Time.smoothDeltaTime;
-			cachedTransform.position += new Vector3(Speed, Speed * Mathf.Tan(angle * Mathf.Deg2Rad)) * Time.smoothDeltaTime;
-			yield return null;
-		}
-		Vector3 vecDestAngle = (targetPos - (cachedTransform.position + new Vector3(rotateTime * Speed, 0.0f))).normalized;
-		destAngle = Mathf.Atan2(vecDestAngle.y, vecDestAngle.x) * Mathf.Rad2Deg;
-
-		Debug.Log(rotateTime);
-		float per = 0.0f;
-		while(per < 1.0f)
-		{ 
-			cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.LerpAngle(angle, destAngle, per));//angle + (destAngle - angle) * per
-
-			per = Mathf.Clamp01(per + Time.smoothDeltaTime / rotateTime);
-			cachedTransform.position += new Vector3(Speed, Speed * Mathf.Tan(cachedTransform.eulerAngles.z * Mathf.Deg2Rad)) * Time.smoothDeltaTime;
-			
-			yield return null;
-		}
-
-		Debug.Log(cachedTransform.position + "	" + cachedTransform.eulerAngles.z);
+		MainObject?.SetActive(true);
 		
+		Vector3 vecDist = targetPos - cachedTransform.position;
+		float fDist = vecDist.magnitude;
+		float angle = (cachedTransform.eulerAngles.z + 360.0f) % 360.0f;
+		Debug.Log(angle);
 
-		dist = targetPos - cachedTransform.position;
-		while(dist.sqrMagnitude > (Speed * Time.smoothDeltaTime) * (Speed * Time.smoothDeltaTime))
+		float cross;
+		Vector3 center;
+
+		float direction = ((vecDist.x > 0.0f) ^ (angle > 180.0f) ? 1.0f : -1.0f);
+		
+		cross = (angle - 90.0f * direction);
+		center = new Vector3(fDist * direction, fDist * direction * Mathf.Tan(cross * Mathf.Deg2Rad));
+		Debug.DrawRay(cachedTransform.position, center);
+
+		float radius = center.magnitude;
+		float arcAngle = (Mathf.Abs(180.0f - Mathf.Abs(cross) * 2.0f) + 360.0f) % 360.0f;
+		float arcLength = 2.0f * Mathf.PI * radius * (arcAngle / 360.0f);
+		float stepAngle = arcAngle * (Speed / arcLength);
+		float stepLength = 2.0f * Mathf.PI * radius * (stepAngle / 360.0f);
+		
+		angle = cross + 180.0f;
+		Vector3 start = cachedTransform.position;
+		Vector3 position;
+		while(true)
 		{
-			cachedTransform.position += dist.normalized * (Speed * Time.smoothDeltaTime);
-			dist = targetPos - cachedTransform.position;
+			angle += stepAngle * Time.smoothDeltaTime * -direction;
+			position = start + center + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * radius;
+			cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle - 90.0f * direction );
+			cachedTransform.position = position;
+			Debug.DrawLine(start + center, position);
+
+			for(int i = 0; i < m_listParticle.Length; ++i)
+			{
+				if(m_listParticle[i].emission.type != ParticleSystemEmissionType.Distance) continue;
+				System.Array.Clear(m_buffer, 0, m_buffer.Length);
+				int size = m_listParticle[i].GetParticles(m_buffer);
+				m_listParticle[i].Clear();
+				int count = 0;
+				switch(m_listParticle[i].emission.type)
+				{
+					case ParticleSystemEmissionType.Distance:
+					{
+						count = Mathf.CeilToInt(m_listParticle[i].emission.rate.constantMax * stepLength * Time.smoothDeltaTime);
+						break;
+					}
+
+					case ParticleSystemEmissionType.Time:
+					{
+						count = Mathf.CeilToInt(m_listParticle[i].emission.rate.constantMax * Time.smoothDeltaTime);
+						break;
+					}
+				}
+				
+				if(count > 0)
+				{
+					m_listParticle[i].Emit(count);
+					ParticleSystem.Particle[] buf = new ParticleSystem.Particle[count];
+					m_listParticle[i].GetParticles(buf);
+					
+					for(int j = 0; j < count; ++j)
+					{
+						float p = (1.0f - j / (float)count);
+
+						float a = (angle - stepAngle * Time.smoothDeltaTime * -direction * p);
+						Vector3 newPos = start + center + new Vector3(Mathf.Cos(a * Mathf.Deg2Rad), Mathf.Sin(a * Mathf.Deg2Rad)) * radius;
+						a -= 90.0f * direction;
+						buf[j].position = newPos;
+						buf[j].lifetime -= (Time.smoothDeltaTime * p);
+						buf[j].velocity = new Vector3(Mathf.Cos(a * Mathf.Deg2Rad), Mathf.Sin(a * Mathf.Deg2Rad)) * 0.2f;//Particle.velocityOverLifetime.x.Evaluate();
+					}
+					
+					System.Array.ConstrainedCopy(buf, 0, m_buffer, size, count);
+					m_listParticle[i].SetParticles(m_buffer, size + count);
+				}
+			}
+			
+			if(Mathf.Abs(targetPos.x - position.x) < Mathf.Abs(stepLength * Time.smoothDeltaTime))
+			{
+				break;
+			}
+
 			yield return null;
 		}
 
-		cachedTransform.position = targetPos;
+		yield return null;
+		MainObject?.SetActive(false);
+
+		yield break;
 	}
 	
+	protected override IEnumerator _afterMove()
+	{
+		float wait = 0.0f;
+
+		for(int i = 0; i < m_listParticle.Length; ++i)
+		{
+			m_listParticle[i].Stop();
+
+			if(wait < m_listParticle[i].startLifetime)
+			{
+				wait = m_listParticle[i].startLifetime;
+			}
+		}
+
+		yield return new WaitForSeconds(wait);
+		Recycle();
+	}
 }

@@ -66,6 +66,14 @@ public class GameManager : MonoSingleton<GameManager>
         {
             ObjectPool<Projectile>.CreatePool(projectiles[i].name, projectiles[i].gameObject, 2);
         }
+
+        float sum = 0;
+        for(int i = 0; i < 1000000; ++i)
+        {
+            float r = Random.Range(0.0f, 1.0f);
+            sum += Mathf.Pow(r, 2.0f) * 0.5f + 0.5f * r;
+        }
+        Debug.Log(sum / 1000000);
     }
     
     void Start()

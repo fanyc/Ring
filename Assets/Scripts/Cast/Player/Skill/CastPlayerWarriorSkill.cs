@@ -47,10 +47,10 @@ public class CastPlayerWarriorSkill : Castable
         EffectSpine eff = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Judgement", position + new Vector3(0.0f, 6.7f));
         eff.SpineAnimation.state.Event += _event;
         eff.PlayAnimation("atk_01");
-        // ReleaseAction += ()=>
-        // {
-        //     eff.Skeleton.state.Event -= _event;
-        // };
+        ReleaseAction += ()=>
+        {
+            eff.SpineAnimation.state.Event -= _event;
+        };
         eff.StartCoroutine(_release(eff));
         while(eff.IsEndAnimation() != true) yield return null;
         

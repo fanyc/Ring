@@ -32,7 +32,7 @@ namespace IProjectileExtension
         public static MuzzleData GetMuzzleData(this IProjectile _base)
         {
             Spine.Bone bone = ((Character)_base).GetAnimationBone(_base.MuzzleName);
-            return new MuzzleData(bone.AppliedRotation, new Vector2(bone.WorldX, bone.WorldY));
+            return new MuzzleData(bone.WorldRotationX, new Vector2(bone.WorldX, bone.WorldY));
         }
     }
 }

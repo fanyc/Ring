@@ -129,8 +129,10 @@ public class CharacterEnemyGoblinArcher : CharacterEnemy, IProjectile
             IProjectile ProjectileData = (m_caster as IProjectile);
             Projectile proj = ObjectPool<Projectile>.Spawn(ProjectileData.ProjectileName);
             float dist = (m_cachedTarget.position.x - m_caster.position.x) + Random.Range(-0.25f, 0.25f);
+            // var b = m_caster.GetAnimationBone(ProjectileData.MuzzleName);
+            // Debug.Log(b.AppliedRotation + " " + b.Rotation + " " + b.WorldRotationX + " " + b.WorldRotationY);
             MuzzleData muzzle = ProjectileData.GetMuzzleData();
-            //proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, muzzle.angle);
+            proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, muzzle.angle);
             Vector2 pos = (Vector2)m_caster.position + muzzle.worldPosition;
             Vector2 dest = new Vector2(dist, dist * Mathf.Tan(muzzle.angle * Mathf.Deg2Rad));
             proj.Init((Vector3)pos, pos + dest, ()=>
