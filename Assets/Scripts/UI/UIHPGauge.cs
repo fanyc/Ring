@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HPGauge : ObjectBase {
+public class UIHPGauge : ObjectBase {
 
 	protected static RectTransform m_Root;
 	

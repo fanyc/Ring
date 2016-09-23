@@ -120,7 +120,7 @@ public class CastPlayerMageSkill_Ball : Castable
             {
                 timer -= interval;
 
-                Character[] targets = GetTargets(ball.cachedTransform.position + new Vector3(Rect.x * -0.5f, 0.0f), new Vector2(Rect.x * 0.5f, Rect.y));
+                Character[] targets = GetTargets(ball.cachedTransform.position + new Vector3(Rect.x * -0.5f, 0.0f), Rect);
 
                 for(int i = 0; i < targets.Length; ++i)
                 {

@@ -132,7 +132,7 @@ public abstract class Character : ObjectBase
     }
     public float MaxHP = 0.0f;
 
-    protected HPGauge m_HPGauge;
+    protected UIHPGauge m_HPGauge;
     public float HPGaugeHeight = 400.0f;
 
     protected float m_fStun = 0.0f;
@@ -174,7 +174,7 @@ public abstract class Character : ObjectBase
             m_HPGauge.Recycle();
             m_HPGauge = null;
         }
-        m_HPGauge = ObjectPool<HPGauge>.Spawn("@HPGauge");
+        m_HPGauge = ObjectPool<UIHPGauge>.Spawn("@HPGauge");
         m_HPGauge.Init(this);
 
         m_currentState = STATE.IDLE;

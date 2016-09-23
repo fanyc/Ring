@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager>
 {
     //====================Properties Start====================
-    protected int m_nLevel;
-    protected int m_nCurrentWave;
-    protected const int WAVE_COUNT = 8;
     public enum StateInGame
     {
         IDLE,
@@ -28,9 +25,6 @@ public class GameManager : MonoSingleton<GameManager>
         get { return m_currentEnemies; }
     }
     
-    protected bool m_bBossClear = true;
-
-    
     public float PlayerSpeed
     {
         get
@@ -39,28 +33,12 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
     
-    public float Timer
-    {
-        get; set;
-    }
-
     public int Direction = 1;
 
     public float LimitDistance = 500.0f;
 
     public List<CharacterPlayer> PlayerList;
 
-    public GameObject NormalInfo;
-    public GameObject BossInfo;
-    public GameObject BossButton;
-    
-
-    public TMPro.TextMeshProUGUI Level;
-    public TMPro.TextMeshProUGUI Wave;
-
-    public TMPro.TextMeshProUGUI TimerText;
-    public Image TimerGauge;
- 
     //====================Properties End====================
     //====================Functions Start====================
     void Awake()
@@ -75,7 +53,7 @@ public class GameManager : MonoSingleton<GameManager>
         ObjectPool<ItemGold>.CreatePool("@ItemGold", Resources.Load<GameObject>("Item/@ItemGold"), 20);
         ObjectPool<DamageText>.CreatePool("@DamageText", Resources.Load<GameObject>("@DamageText"), 20);
         ObjectPool<UIItemSkill>.CreatePool("@ItemSkill", Resources.Load<GameObject>("@ItemSkill"), 16);
-        ObjectPool<HPGauge>.CreatePool("@HPGauge", Resources.Load<GameObject>("@HPGauge"), 10);
+        ObjectPool<UIHPGauge>.CreatePool("@HPGauge", Resources.Load<GameObject>("@HPGauge"), 10);
         
         Effect[] effects = Resources.LoadAll<Effect>("Effects/");
         for(int i = 0; i < effects.Length; ++i)
@@ -115,17 +93,7 @@ public class GameManager : MonoSingleton<GameManager>
         
         UIWallet.Instance.Init();
         m_InGameState = StateInGame.IDLE;
-        m_nLevel = 1;
-        m_nCurrentWave = 0;
 
-        BossInfo.SetActive(false);
-        NormalInfo.SetActive(true);
-
-        Level.text = "Level 1";
-        Wave.text = "1/" + WAVE_COUNT;
-
-        m_bBossClear = true;
-        
         NextWave();
     }
     
@@ -147,8 +115,6 @@ public class GameManager : MonoSingleton<GameManager>
         enemy.Init();
 
         m_currentEnemies.Add(enemy);
-
-        m_bBossClear = false;
         
         return enemy;
     }
@@ -165,8 +131,6 @@ public class GameManager : MonoSingleton<GameManager>
     
     public void NextWave()
     {
-        m_nCurrentWave++;
-
         cachedTransform.position = new Vector3(PlayerList[0].cachedTransform.position.x, 0.0f);
         
         for(int i = 0; i < 3; ++i)
@@ -232,8 +196,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         //Level.text = "Level " + m_nLevel;
-        Wave.text = ((m_nCurrentWave - 1) % WAVE_COUNT + 1) + "/" + WAVE_COUNT;
-
         while(m_InGameState == StateInGame.MOVE) yield return null;
     }
 
