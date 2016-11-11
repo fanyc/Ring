@@ -22,7 +22,7 @@ public class UIWallet : MonoSingleton<UIWallet>
         set
         {
             m_fGold = value;
-            UIWallet.Instance.textGold.text = m_fGold.ToString();
+            UIWallet.Instance.textGold.text = ((int)m_fGold).ToString();
         }
     }
 

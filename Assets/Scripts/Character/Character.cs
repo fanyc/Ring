@@ -45,6 +45,18 @@ public abstract class Character : ObjectBase
             return m_cachedAnimation;
         }
     } 
+
+    public Color Color
+    {
+        get
+        {
+            return m_cachedAnimation.skeleton.GetColor();
+        }
+        set
+        {
+            m_cachedAnimation.skeleton.SetColor(value);
+        }
+    }
     protected Collider2D m_cachedCollider2D;
     
     public enum STATE
@@ -85,8 +97,10 @@ public abstract class Character : ObjectBase
     }
 
     protected STATE m_currentState = STATE.IDLE;
+
+    protected Castable m_castAttack;
     protected Castable m_CurrentCast;
-    protected Castable m_PrepareCast;
+    protected Queue<Castable> m_PrepareCast = new Queue<Castable>();
     
 
     public const int LEFT = -1;
@@ -133,6 +147,8 @@ public abstract class Character : ObjectBase
     public float MaxHP = 0.0f;
 
     protected UIHPGauge m_HPGauge;
+
+    public Vector2 BasePosition = new Vector2(0.0f, 0.75f);
     public float HPGaugeHeight = 400.0f;
 
     protected float m_fStun = 0.0f;
@@ -143,8 +159,6 @@ public abstract class Character : ObjectBase
     
     protected virtual void Awake()
     {
-        
-
         m_cachedCollider2D = GetComponent<Collider2D>();
     }
 
@@ -191,9 +205,15 @@ public abstract class Character : ObjectBase
         PlayIdleAnimation();
         while(State == STATE.IDLE)
         {
+            if(m_PrepareCast.Count > 0)
+            {
+                Cast(m_PrepareCast.Dequeue());
+                break;
+            }
             IdleThought();
             yield return null;
         }
+
         NextState();
     }
     
@@ -204,14 +224,24 @@ public abstract class Character : ObjectBase
     
     public void Cast(Castable cast)
     {
-        if(State == STATE.BEATEN)
+        if(State == STATE.DEAD) return;
+        if(cast != m_castAttack)
         {
-            m_PrepareCast = cast;
-            return;
+            if(State == STATE.BEATEN ||
+                (State == STATE.CAST && m_CurrentCast != m_castAttack))
+            {
+                m_PrepareCast.Enqueue(cast);
+                return;
+            }
         }
 
         if(cast.Condition() == false)
             return;
+
+        if(cast.IsHighlight)
+        {
+            ObjectPool<Effect>.Spawn("@Effect_Skill", Vector3.zero, cachedTransform).Init((Vector3)BasePosition);
+        }
         
         CastCancel();
         m_CurrentCast = cast;
@@ -247,11 +277,6 @@ public abstract class Character : ObjectBase
         {
             State = STATE.IDLE;
             PlayIdleAnimation();
-            if(m_PrepareCast != null)
-            {
-                Cast(m_PrepareCast);
-                m_PrepareCast = null;
-            }
         }
         
         NextState();
@@ -363,7 +388,7 @@ public abstract class Character : ObjectBase
             return;
         }
 
-        CastCancel();
+        //CastCancel();
         PlayBeatenAnimation();
         //State = STATE.BEATEN;
         StopCoroutine("_knockBack");
@@ -409,6 +434,8 @@ public abstract class Character : ObjectBase
         m_fHP += heal;
         if(m_fHP > MaxHP) m_fHP = MaxHP;
         m_HPGauge?.UpdateRatio();
+
+        ObjectPool<DamageText>.Spawn("@DamageText", new Vector3(position.x + 0.8f, 2.0f)).Init(heal.ToString("F0"), new Vector3(0.0f, 0.0f, 4.0f), new Color32(210, 234, 74, 255), new Color32(116, 153, 39, 255), new Color32(59, 66, 15, 192));
     }
 
     public virtual void Dead()
@@ -521,4 +548,193 @@ public abstract class Character : ObjectBase
     {
         return "dead_01";
     }
+
+    Coroutine _doTint;
+    public virtual void SetTint(Color destColor, float time = 0.0f, System.Action Callback = null)
+    {
+        if(_doTint != null)
+            StopCoroutine(_doTint);
+        if(time > 0.0f)
+        {
+            _doTint = StartCoroutine(_tint(time, destColor, Callback));
+        }
+        else
+        {
+            Color = destColor;
+        }
+    }
+
+    IEnumerator _tint(float time, Color destColor, System.Action Callback)
+    {
+        Spine.Skeleton skeleton = m_cachedAnimation.skeleton;
+        Color diff = destColor - this.Color;
+        float timer = 0.0f;
+        while(timer < time)
+        {
+            Color = (destColor - diff * (1.0f - timer / time));
+            yield return null;
+            timer += Time.deltaTime;
+        }
+
+        Color = destColor;
+        
+        if(Callback != null)
+            Callback();
+    }
+
+    protected Dictionary<string, StatusEffect> m_dictStatusEffect = new Dictionary<string, StatusEffect>();
+
+    public void AddStatusEffect(StatusEffect statusEffect)
+    {
+        if(m_dictStatusEffect.ContainsKey(statusEffect.Name) == false)
+        {
+            m_dictStatusEffect.Add(statusEffect.Name, statusEffect);
+            statusEffect.Init();
+        }
+
+        m_dictStatusEffect[statusEffect.Name].Stack(statusEffect);
+    }
+
+    public class StatusEffect
+    {
+        public virtual string Name
+        {
+            get;
+        }
+        public Character Target
+        {
+            get;
+            protected set;
+        }
+        public Character Caster
+        {
+            get;
+            protected set;
+        }
+
+        public StatusEffect(Character caster, Character target)
+        {
+            Target = target;
+            Caster = caster;
+        }
+
+        public virtual void Init()
+        {
+
+        }
+
+        public virtual void Stack(StatusEffect statusEffect)
+        {
+
+        }
+
+        public virtual void Pop()
+        {
+
+        }
+
+        public virtual void Update()
+        {
+            
+        }
+
+        public virtual void Release()
+        {
+            Target.m_dictStatusEffect.Remove(Name);
+        }
+    }
+
+    public class StatusEffectDuration : StatusEffect
+    {
+        public float Duration
+        {
+            get;
+            protected set;
+        }
+
+        public StatusEffectDuration(Character caster, Character target, float duration) : base(caster, target)
+        {
+            Duration = duration;
+        }
+
+        public override void Stack(StatusEffect statusEffect)
+        {
+            this.Duration = ((StatusEffectDuration)statusEffect).Duration;
+        }
+
+        public override void Update()
+        {
+            Duration -= Time.deltaTime;
+            if(Duration <= 0.0f)
+            {
+                Release();
+            }
+        }
+    }
+
+    public class StatusEffectStun : StatusEffectDuration
+    {
+        public override string Name
+        {
+            get
+            {
+                return "stun";
+            }
+        }
+
+        public StatusEffectStun(Character caster, Character target, float duration) : base(caster, target, duration)
+        {
+        }
+
+        public override void Init()
+        {
+            Target.State = STATE.BEATEN;
+        }
+
+        public override void Release()
+        {
+            Target.State = STATE.IDLE;
+            base.Release();
+        }
+    }
+    
+    // public virtual void SetVibrate(float time)
+    // {
+    //     if(m_fVibrateTimer <= 0.0f)
+    //     {
+    //         m_fVibrateTimer = time;
+    //         StartCoroutine(_vibrate());
+    //     }
+    //     else
+    //     {
+    //         m_fVibrateTimer = time;
+    //     }        
+    // }
+    
+    // protected virtual IEnumerator _vibrate()
+    // {
+    //     float old = GetAnimationTimeScale();
+    //     SetAnimationTimeScale(0.0f);
+    //     Vector3 pos = m_tfZOffset.localPosition;
+    //     float amp = 0.03f;
+    //     float speed = 1.5f;
+        
+    //     while(m_fVibrateTimer > 0.0f)
+    //     {
+    //         pos = m_tfZOffset.localPosition;
+    //         if(Mathf.Abs(pos.x) >= amp)
+    //         {
+    //             speed = -speed;
+    //         }
+    //         pos.x = Mathf.Clamp(pos.x + speed * Time.deltaTime, -amp, amp);
+    //         m_tfZOffset.localPosition = pos;
+    //         m_fVibrateTimer -= Time.deltaTime;
+    //         yield return null;
+    //     }
+        
+    //     pos.x = 0.0f;
+    //     m_tfZOffset.localPosition = pos;
+    //     SetAnimationTimeScale(old);
+    //     m_fVibrateTimer = 0.0f;
+    // }
 } 

@@ -17,17 +17,23 @@ public class CastPlayerMageAttack : Castable
     {
         get
         {
-            return new Vector2((MinDistance + 0.0f) * GameManager.Instance.Direction, 10.0f);
+            return new Vector2((Distance + 0.0f) * GameManager.Instance.Direction, 10.0f);
         }
     }
 
-    public override float MinDistance
+    public override float Distance
     {
         get
         {
             return 5.0f;
         }
     }
+
+    public override bool IsHighlight
+    {
+        get { return false; }
+    }
+    
     public CastPlayerMageAttack(Character caster) : base(caster)
     {
     }

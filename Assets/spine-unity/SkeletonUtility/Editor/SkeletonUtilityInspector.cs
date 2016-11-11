@@ -1,9 +1,35 @@
+/******************************************************************************
+ * Spine Runtimes Software License v2.5
+ *
+ * Copyright (c) 2013-2016, Esoteric Software
+ * All rights reserved.
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable, and
+ * non-transferable license to use, install, execute, and perform the Spine
+ * Runtimes software and derivative works solely for personal or internal
+ * use. Without the written permission of Esoteric Software (see Section 2 of
+ * the Spine Software License Agreement), you may not (a) modify, translate,
+ * adapt, or develop new applications using the Spine Runtimes or otherwise
+ * create derivative works or improvements of the Spine Runtimes or (b) remove,
+ * delete, alter, or obscure any trademarks or any copyright, trademark, patent,
+ * or other intellectual property or proprietary rights notices on or in the
+ * Software, including any copy thereof. Redistributions in binary or source
+ * form must include this license and terms.
+ *
+ * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION, OR LOSS OF
+ * USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *****************************************************************************/
 
+// Contributed by: Mitch Thompson
 
-/*****************************************************************************
- * Skeleton Utility created by Mitch Thompson
- * Full irrevocable rights and permissions granted to Esoteric Software
-*****************************************************************************/
 using UnityEngine;
 using UnityEditor;
 
@@ -12,7 +38,6 @@ using UnityEditor;
 #else
 using UnityEditor.AnimatedValues;
 #endif
-using System.Collections;
 using System.Collections.Generic;
 using Spine;
 
@@ -99,24 +124,26 @@ namespace Spine.Unity.Editor {
 				return;
 			}
 				
+			var m = transform.localToWorldMatrix;
 			foreach (Bone b in skeleton.Bones) {
 				Vector3 pos = new Vector3(b.WorldX, b.WorldY, 0);
 				Quaternion rot = Quaternion.Euler(0, 0, b.WorldRotationX - 90f);
 				Vector3 scale = Vector3.one * b.Data.Length * b.WorldScaleX;
+				const float mx = 2.5f;
+				scale.x = Mathf.Clamp(scale.x, -mx, mx);
+				SpineEditorUtilities.DrawBone(m * Matrix4x4.TRS(pos, rot, scale));
+			}
 
-				SpineEditorUtilities.Icons.BoneMaterial.SetPass(0);
-				Graphics.DrawMeshNow(SpineEditorUtilities.Icons.BoneMesh, transform.localToWorldMatrix * Matrix4x4.TRS(pos, rot, scale));
+			foreach (Slot s in skeleton.DrawOrder) {
+				var p = s.Attachment as PathAttachment;
+				if (p != null) SpineEditorUtilities.DrawPath(s, p, transform);
 			}
 		}
 
 		void UpdateAttachments () {
 			attachmentTable = new Dictionary<Slot, List<Attachment>>();
-			Skin skin = skeleton.Skin;
 
-			if (skin == null) {
-				skin = skeletonRenderer.skeletonDataAsset.GetSkeletonData(true).DefaultSkin;
-			}
-
+			Skin skin = skeleton.Skin ?? skeletonRenderer.skeletonDataAsset.GetSkeletonData(true).DefaultSkin;
 			for (int i = skeleton.Slots.Count-1; i >= 0; i--) {
 				List<Attachment> attachments = new List<Attachment>();
 				skin.FindAttachmentsForSlot(i, attachments);
@@ -229,14 +256,14 @@ namespace Spine.Unity.Editor {
 						GUI.contentColor = Color.white;
 					}
 				}
-				#if UNITY_4_3
+			#if UNITY_4_3
 
-				#else
+			#else
 			}
 			EditorGUILayout.EndFadeGroup();
 			if (showSlots.isAnimating)
 				Repaint();
-				#endif
+			#endif
 		}
 
 		void SpawnHierarchyContextMenu () {

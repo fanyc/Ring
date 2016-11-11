@@ -87,6 +87,11 @@ public class CharacterEnemyGoblinShaman : CharacterEnemy, IProjectile
             }
         }
 
+        public override bool IsHighlight
+        {
+            get { return false; }
+        }
+
         public CastAttack(CharacterEnemy caster) : base(caster)
         {
         }
@@ -108,6 +113,7 @@ public class CharacterEnemyGoblinShaman : CharacterEnemy, IProjectile
             m_cachedTarget = GetNearestTarget(GetTargets());
             if(m_cachedTarget != null)
                 while(m_caster.IsEndAnimation() != true) yield return null;
+            SetCoolTime(1.0f);
             State = Character.STATE.IDLE;
         }
         
@@ -147,6 +153,7 @@ public class CharacterEnemyGoblinShaman : CharacterEnemy, IProjectile
                     float knockback = 20.0f * distFactor;
                     float airborne = 0.0f;//2.3f + 4.6f * Mathf.Abs(distFactor);
                     //target.KnockBack(new Vector2(knockback, airborne));
+                    target.Beaten(5.0f, CharacterEnemy.DAMAGE_TYPE.ETC);
                     target.Stun(0.2f);
                 }
             });

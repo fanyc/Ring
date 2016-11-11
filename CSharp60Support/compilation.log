@@ -1,5 +1,5 @@
 ********************************************************************************
-*                      Friday, 23 September 2016 22:43:39                      *
+*                     Thursday, 10 November 2016 19:16:53                      *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -12,66 +12,42 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-043148072d5a244648c6f70730bc5771
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-6e707c26b678b42bdaadc5126b18d3d5
 Exit code: 0
-Elapsed time: 2.28 sec
+Elapsed time: 1.33 sec
 
 - Compiler output (1 line):
-0: Compilation succeeded - 49 warning(s)
+0: Compilation succeeded - 25 warning(s)
 
-- Compiler errors (50 lines):
-0: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(11,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-1: Assets/Skill/Framework/Effects/Rain/RainController.cs(14,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-2: Assets/Skill/Framework/Sequence/BuiltinEvents/Emit.cs(16,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-3: Assets/Skill/Framework/Sequence/BuiltinEvents/Emit.cs(32,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-4: Assets/Skill/Framework/Sequence/BuiltinEvents/Emit.cs(32,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-5: Assets/Skill/Framework/Sequence/BuiltinEvents/EmitSingle.cs(14,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-6: Assets/Skill/Framework/Sequence/BuiltinEvents/EmitSingle.cs(35,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-7: Assets/Skill/Framework/Sequence/BuiltinEvents/EmitSingle.cs(35,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-8: Assets/Skill/Framework/Sequence/BuiltinEvents/StartStopEmitter.cs(14,17): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-9: Assets/Skill/Framework/Sequence/BuiltinEvents/StartStopEmitter.cs(27,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-10: Assets/Skill/Framework/Sequence/BuiltinEvents/StartStopEmitter.cs(27,16): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-11: Assets/uslucad/Scripts/ModifiedShadow.cs(56,17): warning CS0114: `ModifiedShadow.ModifyMesh(UnityEngine.UI.VertexHelper)' hides inherited member `UnityEngine.UI.Shadow.ModifyMesh(UnityEngine.UI.VertexHelper)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword
-12: /Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll (Location of the symbol related to previous warning)
-13: Assets/Scripts/Cast/Player/Skill/CastPlayerWarriorSkill_Slash.cs(98,16): warning CS0219: The variable `pierce' is assigned but its value is never used
-14: Assets/Scripts/Cast/Player/Skill/CastPlayerWarriorSkill_Slash.cs(53,16): warning CS0219: The variable `pierce' is assigned but its value is never used
-15: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(129,19): warning CS0219: The variable `dist' is assigned but its value is never used
-16: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(147,27): warning CS0219: The variable `knockback' is assigned but its value is never used
-17: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(148,27): warning CS0219: The variable `airborne' is assigned but its value is never used
-18: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(14,17): warning CS0219: The variable `speed' is assigned but its value is never used
-19: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(14,17): warning CS0219: The variable `speed' is assigned but its value is never used
-20: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(5,30): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-21: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(15,37): warning CS0618: `UnityEngine.ParticleEmitter' is obsolete: `This component is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-22: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(21,13): warning CS0618: `UnityEngine.Particle' is obsolete: `This is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-23: Assets/Skill/Framework/Effects/Rain/FindCollideParticles.cs(38,37): warning CS0618: `UnityEngine.Particle' is obsolete: `This is part of the legacy particle system, which is deprecated and will be removed in a future release. Use the ParticleSystem component instead.'
-24: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-25: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-26: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-27: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-28: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-29: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-30: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-31: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-32: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-33: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
-34: Assets/spine-unity/Modules/SkeletonRenderSeparator/SkeletonRenderSeparator.cs(79,44): warning CS0618: `UnityEngine.Renderer.useLightProbes' is obsolete: `useLightProbes property is deprecated. Use lightProbeUsage instead.'
-35: Assets/spine-unity/Modules/SkeletonRenderSeparator/SkeletonRenderSeparator.cs(87,9): warning CS0618: `UnityEngine.Renderer.useLightProbes' is obsolete: `useLightProbes property is deprecated. Use lightProbeUsage instead.'
-36: Assets/uslucad/Scripts/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
-37: Assets/Skill/Framework/Audio/SubRendererOnGUI.cs(15,50): warning CS0649: Field `Skill.Framework.Audio.SubRendererOnGUI._ScreenSizeChange' is never assigned to, and will always have its default value
-38: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(16,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ExplosionRect' is never assigned to, and will always have its default value
-39: Assets/Skill/Framework/Dynamics/ExplosionUIIndicator.cs(17,22): warning CS0649: Field `Skill.Framework.Dynamics.ExplosionUIIndicator._ArrowRect' is never assigned to, and will always have its default value
-40: Assets/Skill/Framework/Effects/Rain/RainScreen.cs(29,50): warning CS0649: Field `Skill.Framework.Effects.RainScreen._ScreenSizeChecker' is never assigned to, and will always have its default value
-41: Assets/Skill/Framework/IO/JoyStick.cs(19,22): warning CS0649: Field `Skill.Framework.IO.JoyStick._Boundary' is never assigned to, and will always have its default value
-42: Assets/Skill/Framework/ModernUI/DynamicScrollView.cs(21,50): warning CS0649: Field `Skill.Framework.ModernUI.DynamicScrollView._ScreenSizeChange' is never assigned to, and will always have its default value
-43: Assets/Skill/Framework/ModernUI/DynamicTextFontSize.cs(25,34): warning CS0649: Field `Skill.Framework.ModernUI.DynamicTextFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
-44: Assets/Skill/Framework/Modules/ObjectWrapper2D.cs(20,34): warning CS0649: Field `Skill.Framework.Modules.ObjectWrapper2D._ScreenSizeChange' is never assigned to, and will always have its default value
-45: Assets/Skill/Framework/Modules/ScreenQualityCamera.cs(22,34): warning CS0649: Field `Skill.Framework.Modules.ScreenQualityCamera._ScreenSizeChange' is never assigned to, and will always have its default value
-46: Assets/Skill/Framework/UI/DynamicFontSize.cs(17,34): warning CS0649: Field `Skill.Framework.UI.DynamicFontSize._ScreenSizeChange' is never assigned to, and will always have its default value
-47: Assets/Skill/Framework/UI/DynamicSkin.cs(28,34): warning CS0649: Field `Skill.Framework.DynamicSkin._ScreenSizeChange' is never assigned to, and will always have its default value
-48: Assets/Skill/Framework/Weapons/RaycastBullet.cs(12,21): warning CS0649: Field `Skill.Framework.Weapons.RaycastBullet._Ray' is never assigned to, and will always have its default value
-49: Assets/Skill/Framework/Weapons/Weapon.cs(861,21): warning CS0649: Field `Skill.Framework.Weapons.Weapon._Ray' is never assigned to, and will always have its default value
+- Compiler errors (26 lines):
+0: Assets/uslucad/Scripts/ModifiedShadow.cs(56,17): warning CS0114: `ModifiedShadow.ModifyMesh(UnityEngine.UI.VertexHelper)' hides inherited member `UnityEngine.UI.Shadow.ModifyMesh(UnityEngine.UI.VertexHelper)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword
+1: /Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll (Location of the symbol related to previous warning)
+2: Assets/Easy Outline/Behaviours/OutlineSystem.cs(114,13): warning CS0219: The variable `x' is assigned but its value is never used
+3: Assets/Easy Outline/Behaviours/OutlineSystem.cs(115,13): warning CS0219: The variable `y' is assigned but its value is never used
+4: Assets/Scripts/Cast/Player/Skill/CastPlayerArcherSkill_Guardian.cs(83,15): warning CS0219: The variable `c' is assigned but its value is never used
+5: Assets/Scripts/Cast/Player/Skill/CastPlayerArcherSkill_Rope.cs(72,15): warning CS0219: The variable `dist' is assigned but its value is never used
+6: Assets/Scripts/Cast/Player/Skill/CastPlayerWarriorSkill_Slash.cs(98,16): warning CS0219: The variable `pierce' is assigned but its value is never used
+7: Assets/Scripts/Cast/Player/Skill/CastPlayerWarriorSkill_Slash.cs(53,16): warning CS0219: The variable `pierce' is assigned but its value is never used
+8: Assets/Scripts/Character/Character.cs(569,24): warning CS0219: The variable `skeleton' is assigned but its value is never used
+9: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(135,19): warning CS0219: The variable `dist' is assigned but its value is never used
+10: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(153,27): warning CS0219: The variable `knockback' is assigned but its value is never used
+11: Assets/Scripts/Character/Enemy/CharacterEnemyGoblinShaman.cs(154,27): warning CS0219: The variable `airborne' is assigned but its value is never used
+12: Assets/Scripts/Character/Player/CharacterPlayerFairy.cs(57,19): warning CS0219: The variable `r' is assigned but its value is never used
+13: Assets/Scripts/UI/UIItem/UIItemUpgradeArcher.cs(14,17): warning CS0219: The variable `speed' is assigned but its value is never used
+14: Assets/Scripts/UI/UIItem/UIItemUpgradeMage.cs(14,17): warning CS0219: The variable `speed' is assigned but its value is never used
+15: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(82,54): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+16: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(84,89): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+17: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(115,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+18: Assets/TextMesh Pro/Examples/Scripts/TMP_TextSelector.cs(144,50): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+19: Assets/TextMesh Pro/Scripts/InlineGraphicManager.cs(241,43): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+20: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1250,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+21: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(1834,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+22: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(2931,34): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+23: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(3640,30): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+24: Assets/TextMesh Pro/Scripts/TMPro_UGUI_Private.cs(4102,26): warning CS0618: `UnityEngine.CanvasRenderer.SetVertices(UnityEngine.UIVertex[], int)' is obsolete: `UI System now uses meshes. Generate a mesh and use 'SetMesh' instead'
+25: Assets/uslucad/Scripts/TextOutline.cs(35,31): warning CS0618: `UnityEngine.Renderer.castShadows' is obsolete: `Property castShadows has been deprecated. Use shadowCastingMode instead.'
 ********************************************************************************
-*                      Friday, 23 September 2016 22:43:42                      *
+*                     Thursday, 10 November 2016 19:16:56                      *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.7.0.0
 Platform: Mac
@@ -84,29 +60,25 @@ Compiler: Mono C# 6.0
 - Compilation -----------------------------------------------
 
 Process: /usr/local/bin/mono
-Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-c630c7216852746548a32ec0205ac251
+Arguments: "/Users/uslucad/Desktop/Unity Workspace/Ring/CSharp60Support/mcs.exe" -sdk:2 -debug+ -langversion:Default @Temp/UnityTempFile-97445bfc8b1f5493ca7ce99643104a0f
 Exit code: 0
-Elapsed time: 2.27 sec
+Elapsed time: 1.03 sec
 
 - Compiler output (1 line):
-0: Compilation succeeded - 18 warning(s)
+0: Compilation succeeded - 14 warning(s)
 
-- Compiler errors (18 lines):
-0: Assets/Skill/Editor/Audio/AudioUtility.cs(23,38): warning CS0618: `UnityEngine.RuntimePlatform.OSXWebPlayer' is obsolete: `WebPlayer export is no longer supported in Unity 5.4+.'
-1: Assets/Skill/Editor/Audio/AudioUtility.cs(24,38): warning CS0618: `UnityEngine.RuntimePlatform.WindowsWebPlayer' is obsolete: `WebPlayer export is no longer supported in Unity 5.4+.'
-2: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,27): warning CS0168: The variable `minTime' is declared but never used
-3: Assets/Skill/Editor/Curve/FunctionTrack.cs(69,36): warning CS0168: The variable `maxTime' is declared but never used
-4: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-5: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-6: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-7: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
-8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
-9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-11: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-12: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-13: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-14: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-15: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
-16: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
-17: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value
+- Compiler errors (14 lines):
+0: Assets/TextMesh Pro/Editor/GlyphInfoDrawer.cs(34,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+1: Assets/TextMesh Pro/Editor/KerningPairDrawer.cs(74,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+2: Assets/TextMesh Pro/Editor/SpriteInfoDrawer.cs(57,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+3: Assets/TextMesh Pro/Editor/TMPro_CreateObjectMenu.cs(109,42): warning CS0618: `UnityEngine.EventSystems.TouchInputModule' is obsolete: `TouchInputModule is no longer required as Touch input is now handled in StandaloneInputModule.'
+4: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(27,20): warning CS0618: `UnityEditor.EditorWindow.title' is obsolete: `Use titleContent instead (it supports setting a title icon as well).'
+5: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(291,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+6: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(303,34): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+7: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(310,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+8: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(325,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+9: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(398,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+10: Assets/TextMesh Pro/Editor/TMPro_FontAssetCreatorWindow.cs(411,30): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+11: Assets/TextMesh Pro/Editor/TMPro_SDFMaterialEditor.cs(258,26): warning CS0618: `UnityEditor.EditorGUIUtility.LookLikeControls(float, float)' is obsolete: `LookLikeControls and LookLikeInspector modes are deprecated. Use EditorGUIUtility.labelWidth and EditorGUIUtility.fieldWidth to control label and field widths.'
+12: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(122,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorStartRegion' is never assigned to, and will always have its default value
+13: Assets/TextMesh Pro/Editor/TMPro_uiEditorPanel.cs(123,22): warning CS0649: Field `TMPro.EditorUtilities.TMPro_uiEditorPanel.m_inspectorEndRegion' is never assigned to, and will always have its default value

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIAbilityIconSkill : UIAbilityIcon {
     protected static Dictionary<string, Sprite> m_dictIconCache = new Dictionary<string, Sprite>();
+
     protected Character m_Caster;
     protected CharacterPlayer.SkillData m_SkillData; 
     protected Castable m_castSkill;
@@ -37,7 +38,6 @@ public class UIAbilityIconSkill : UIAbilityIcon {
     public override void Use()
     {
         base.Use();
-        ObjectPool<Effect>.Spawn("@Effect_Skill", Vector3.zero, m_Caster.cachedTransform).Init(Vector3.zero);
         m_Caster?.Cast(m_castSkill);
     }
 }

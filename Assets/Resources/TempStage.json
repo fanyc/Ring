@@ -1,0 +1,14 @@
+{
+    "Stage" :
+    {
+        "Wave" :
+        [
+            {
+                "SpawnData" :
+                [
+                    {"Name" : "@Boss001", "Min" : 1, "Max" : 1, "Factor" : 0.5, "Offset" : 0.0, "Spacing" : 0.1}
+                ]
+            }
+        ]
+    }
+}

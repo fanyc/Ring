@@ -6,6 +6,7 @@ public class Castable
 {
     public static Character GetNearestTarget(Character caster, Character[] targets)
     {
+        if(targets == null) return null;
         int count = targets.Length;
 
         if(count <= 0) return null;
@@ -69,7 +70,7 @@ public class Castable
         }
     }
 
-    public virtual float MinDistance
+    public virtual float Distance
     {
         get
         {
@@ -110,6 +111,11 @@ public class Castable
         }
     }
 
+    public virtual bool IsHighlight
+    {
+        get { return true; }
+    }
+
     public Character[] GetTargets()
     {
         return GetTargets(position, Rect);
@@ -118,7 +124,12 @@ public class Castable
     public virtual Character[] GetTargets(Vector3 position, Vector2 rect)
     {
         int count = Physics2D.OverlapAreaNonAlloc((Vector2)position, (Vector2)position + rect, m_Buffer, TargetMask);
-
+        Debug.DrawLine(position + new Vector3(  0.0f,   0.0f), position + new Vector3(rect.x,   0.0f));
+        Debug.DrawLine(position + new Vector3(rect.x,   0.0f), position + new Vector3(rect.x, rect.y));
+        Debug.DrawLine(position + new Vector3(rect.x, rect.y), position + new Vector3(0.0f, rect.y));
+        Debug.DrawLine(position + new Vector3(  0.0f, rect.y), position + new Vector3(0.0f, 0.0f));
+        
+        
         Character[] ret = new Character[count];
         for(int i = 0; i < count; ++i)
         {
@@ -161,7 +172,6 @@ public class Castable
     IEnumerator _coroutine()
     {
         Prepare();
-        
         m_enumCast = Cast();
         while(m_enumCast != null && m_enumCast.MoveNext())
             yield return m_enumCast.Current;

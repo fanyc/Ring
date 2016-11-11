@@ -22,7 +22,8 @@ public class Projectile : ObjectBase
 		coroutine = _move(targetPos);
 		while(coroutine.MoveNext()) yield return coroutine.Current;
 
-		callback();
+		if(callback != null)
+			callback();
 
 		coroutine = _afterMove();
 		while(coroutine.MoveNext()) yield return coroutine.Current;

@@ -5,6 +5,12 @@ using UnityEngine;
 public class CastEnemyOgerAttack : Castable
 {
     Effect eff;
+
+    public override bool IsHighlight
+    {
+        get { return false; }
+    }
+    
     public CastEnemyOgerAttack(Character caster) : base(caster)
     {
     }

@@ -13,9 +13,9 @@ public class CharacterPlayerWarrior : CharacterPlayer
 
     static CharacterPlayerWarrior()
     {
-        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill");
+        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/icskill_war_02", "CastPlayerWarriorSkill");
         //m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Slash");
-        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/btle_icskill_wri_01b", "CastPlayerWarriorSkill_Pierce");
+        m_skillDataList.AddSkillData("파 크라이", "WarriorSkill", "skill_a01", "Icons/icskill_war_01", "CastPlayerWarriorSkill_Pierce");
         
         
     }
@@ -43,7 +43,7 @@ public class CharacterPlayerWarrior : CharacterPlayer
             UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[i].castableName);
         }
 
-        m_fHP = MaxHP = 10.0f;
+        m_fHP = MaxHP = 250.0f;
 
         base.Init();
     }

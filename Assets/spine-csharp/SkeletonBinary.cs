@@ -1,32 +1,31 @@
 /******************************************************************************
- * Spine Runtimes Software License
- * Version 2.3
- * 
- * Copyright (c) 2013-2015, Esoteric Software
+ * Spine Runtimes Software License v2.5
+ *
+ * Copyright (c) 2013-2016, Esoteric Software
  * All rights reserved.
- * 
- * You are granted a perpetual, non-exclusive, non-sublicensable and
- * non-transferable license to use, install, execute and perform the Spine
- * Runtimes Software (the "Software") and derivative works solely for personal
- * or internal use. Without the written permission of Esoteric Software (see
- * Section 2 of the Spine Software License Agreement), you may not (a) modify,
- * translate, adapt or otherwise create derivative works, improvements of the
- * Software or develop new applications using the Software or (b) remove,
- * delete, alter or obscure any trademarks or any copyright, trademark, patent
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable, and
+ * non-transferable license to use, install, execute, and perform the Spine
+ * Runtimes software and derivative works solely for personal or internal
+ * use. Without the written permission of Esoteric Software (see Section 2 of
+ * the Spine Software License Agreement), you may not (a) modify, translate,
+ * adapt, or develop new applications using the Spine Runtimes or otherwise
+ * create derivative works or improvements of the Spine Runtimes or (b) remove,
+ * delete, alter, or obscure any trademarks or any copyright, trademark, patent,
  * or other intellectual property or proprietary rights notices on or in the
  * Software, including any copy thereof. Redistributions in binary or source
  * form must include this license and terms.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
  * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION, OR LOSS OF
+ * USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
 #if (UNITY_5 || UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_WSA || UNITY_WP8 || UNITY_WP8_1)
@@ -75,7 +74,7 @@ namespace Spine {
 			this.attachmentLoader = attachmentLoader;
 			Scale = 1;
 		}
-			
+
 		#if !ISUNITY && WINDOWS_STOREAPP
 		private async Task<SkeletonData> ReadFile(string path) {
 			var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
@@ -128,7 +127,7 @@ namespace Spine {
 				String name = ReadString(input);
 				BoneData parent = i == 0 ? null : skeletonData.bones.Items[ReadVarint(input, true)];
 				BoneData data = new BoneData(i, name, parent);
-				data.rotation = ReadFloat(input);		
+				data.rotation = ReadFloat(input);
 				data.x = ReadFloat(input) * scale;
 				data.y = ReadFloat(input) * scale;
 				data.scaleX = ReadFloat(input);
@@ -172,7 +171,7 @@ namespace Spine {
 			for (int i = 0, n = ReadVarint(input, true); i < n; i++) {
 				TransformConstraintData data = new TransformConstraintData(ReadString(input));
 				for (int ii = 0, nn = ReadVarint(input, true); ii < nn; ii++)
-				    data.bones.Add(skeletonData.bones.Items[ReadVarint(input, true)]);
+					data.bones.Add(skeletonData.bones.Items[ReadVarint(input, true)]);
 				data.target = skeletonData.bones.Items[ReadVarint(input, true)];
 				data.offsetRotation = ReadFloat(input);
 				data.offsetX = ReadFloat(input) * scale;
@@ -278,7 +277,7 @@ namespace Spine {
 			switch (type) {
 			case AttachmentType.Region: {
 					String path = ReadString(input);
-					float rotation = ReadFloat(input);		
+					float rotation = ReadFloat(input);
 					float x = ReadFloat(input);
 					float y = ReadFloat(input);
 					float scaleX = ReadFloat(input);
@@ -309,18 +308,18 @@ namespace Spine {
 					int vertexCount = ReadVarint(input, true);
 					Vertices vertices = ReadVertices(input, vertexCount);
 					if (nonessential) ReadInt(input); //int color = nonessential ? ReadInt(input) : 0; // Avoid unused local warning.
-					
+
 					BoundingBoxAttachment box = attachmentLoader.NewBoundingBoxAttachment(skin, name);
 					if (box == null) return null;
 					box.worldVerticesLength = vertexCount << 1;
 					box.vertices = vertices.vertices;
-					box.bones = vertices.bones;                    
+					box.bones = vertices.bones;
 					return box;
 				}
 			case AttachmentType.Mesh: {
 					String path = ReadString(input);
 					int color = ReadInt(input);
-					int vertexCount = ReadVarint(input, true);					
+					int vertexCount = ReadVarint(input, true);
 					float[] uvs = ReadFloatArray(input, vertexCount << 1, 1);
 					int[] triangles = ReadShortArray(input);
 					Vertices vertices = ReadVertices(input, vertexCount);
@@ -401,8 +400,8 @@ namespace Spine {
 					path.vertices = vertices.vertices;
 					path.bones = vertices.bones;
 					path.lengths = lengths;
-					return path;                    
-				}			
+					return path;
+				}
 			}
 			return null;
 		}
@@ -541,7 +540,7 @@ namespace Spine {
 			}
 
 			// IK timelines.
-			for (int i = 0, n = ReadVarint(input, true); i < n; i++) {				
+			for (int i = 0, n = ReadVarint(input, true); i < n; i++) {
 				int index = ReadVarint(input, true);
 				int frameCount = ReadVarint(input, true);
 				IkConstraintTimeline timeline = new IkConstraintTimeline(frameCount);
@@ -588,7 +587,7 @@ namespace Spine {
 									if (data.positionMode == PositionMode.Fixed) timelineScale = scale;
 								}
 								timeline.pathConstraintIndex = index;
-								for (int frameIndex = 0; frameIndex < frameCount; frameIndex++) {                                    
+								for (int frameIndex = 0; frameIndex < frameCount; frameIndex++) {
 									timeline.SetFrame(frameIndex, ReadFloat(input), ReadFloat(input) * timelineScale);
 									if (frameIndex < frameCount - 1) ReadCurve(input, frameIndex, timeline);
 								}
@@ -652,7 +651,7 @@ namespace Spine {
 
 							timeline.SetFrame(frameIndex, time, deform);
 							if (frameIndex < frameCount - 1) ReadCurve(input, frameIndex, timeline);
-						}							
+						}
 						timelines.Add(timeline);
 						duration = Math.Max(duration, timeline.frames[frameCount - 1]);
 					}

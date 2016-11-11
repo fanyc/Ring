@@ -32,7 +32,6 @@ public class CharacterEnemyNormal : CharacterEnemy
             State = STATE.MOVE;
         }
     }
-
     protected IEnumerator MOVE()
     {
         PlayAnimation(GetRunAnimation(), false, true);

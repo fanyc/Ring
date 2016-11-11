@@ -78,7 +78,6 @@ public abstract class CharacterPlayer : Character
             return 0.0f;
         }
     }
-    protected Castable m_castAttack;
     protected Castable m_castSkill;
     
     public float MP

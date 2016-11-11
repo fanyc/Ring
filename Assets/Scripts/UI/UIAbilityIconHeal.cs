@@ -10,5 +10,6 @@ public class UIAbilityIconHeal : UIAbilityIcon {
     
     public override void Use()
     {
+        
     }
 }

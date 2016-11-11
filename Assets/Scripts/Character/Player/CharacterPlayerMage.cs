@@ -13,8 +13,8 @@ public class CharacterPlayerMage : CharacterPlayer
 
     static CharacterPlayerMage()
     {
-        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "Icons/btle_icskill_sor_01b", "CastPlayerMageSkill_Ball");
-        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "Icons/btle_icskill_sor_01b", "CastPlayerMageSkill");
+        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "Icons/icskill_sor_02", "CastPlayerMageSkill_Ball");
+        m_skillDataList.AddSkillData("미티어 스트라이크", "SoceressSkill", "skill_01", "Icons/icskill_sor_01", "CastPlayerMageSkill");
     }
 
 
@@ -41,7 +41,7 @@ public class CharacterPlayerMage : CharacterPlayer
             UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[i].castableName);
         }
 
-        m_fHP = MaxHP = 10.0f;
+        m_fHP = MaxHP = 100.0f;
 
         base.Init();
     }
@@ -53,7 +53,7 @@ public class CharacterPlayerMage : CharacterPlayer
         {
             Character target = Castable.GetNearestTarget(this, targets);
             float minDistance =
-            Mathf.Min(m_castAttack.MinDistance - 1.0f,
+            Mathf.Min(m_castAttack.Distance - 1.0f,
                       Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.position.x));
                                 
             if(minDistance <= Mathf.Abs(target.position.x - position.x))
@@ -79,7 +79,7 @@ public class CharacterPlayerMage : CharacterPlayer
             {
                 Character target = Castable.GetNearestTarget(this, targets);
                 float dist = target.position.x - pos.x;
-                float dest = Mathf.Min(m_castAttack.MinDistance,
+                float dest = Mathf.Min(m_castAttack.Distance,
                 Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.position.x));
                 if(Mathf.Abs(Mathf.Abs(dist) - dest) <= step)
                 {

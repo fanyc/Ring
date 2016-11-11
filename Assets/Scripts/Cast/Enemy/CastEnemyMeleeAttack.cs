@@ -21,14 +21,40 @@ public class CastEnemyMeleeAttack : Castable
 
     private Vector2 m_vecRect;
 
-    public CastEnemyMeleeAttack(Character caster, Vector2 rect) : base(caster)
+    public override float Distance
+    {
+        get
+        {
+            return m_fDistance;
+        }
+    }
+
+    private float m_fDistance;
+    
+    public override bool IsHighlight
+    {
+        get { return false; }
+    }
+    
+    public CastEnemyMeleeAttack(Character caster, Vector2 rect, float distance = -1.0f) : base(caster)
     {
         m_vecRect = rect;
-
+        if(distance == -1.0f)
+        {
+            m_fDistance = rect.x;
+        }
+        else
+        {
+            m_fDistance = distance;
+        }
     }
     public override bool Condition()
     {
         if(IsCoolTime()) return false;
+
+        Character target = Castable.GetNearestTarget(m_caster, GetTargets());
+        if(target == null || Mathf.Abs(target.position.x - position.x) > Distance) return false;
+
         return true;
     }
     
@@ -58,7 +84,7 @@ public class CastEnemyMeleeAttack : Castable
         {
             Character target = targets[i];
             if(target == null) continue;
-            //target.Beaten(UpgradeManager.Instance.GetUpgrade("WarriorAttackDamage").currentValue, Character.DAMAGE_TYPE.WARRIOR);
+            target.Beaten(2.0f, Character.DAMAGE_TYPE.ETC);
             target.KnockBack(new Vector2(7.5f * m_caster.Direction, 0.0f));
             target.Stun(0.2f);
             

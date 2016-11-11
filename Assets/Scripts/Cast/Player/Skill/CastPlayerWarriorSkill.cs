@@ -19,9 +19,11 @@ public class CastPlayerWarriorSkill : Castable
     {
         get
         {
-            return new Vector2(4.0f * m_caster.Direction, 1.5f);
+            return new Vector2(4.0f * m_caster.Direction, 10.0f);
         }
     }
+
+    protected int m_nHitCnt = 0;
 
     public CastPlayerWarriorSkill(Character caster) : base(caster)
     {
@@ -38,11 +40,18 @@ public class CastPlayerWarriorSkill : Castable
         m_caster.WeightBonus += 100.0f;
 
         CameraController.Instance.SetBackgroundFadeOut();
+
+        m_nHitCnt = 0;
     }
     protected override IEnumerator Cast()
     {
+        m_caster.PlayIdleAnimation();
+
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerWarrior.AttackPerSecond / GameManager.Instance.PlayerSpeed);
+
+        yield return new WaitForSeconds(0.2f);
+
         m_caster.PlayAnimation("skill_02", false, false);
         EffectSpine eff = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Judgement", position + new Vector3(0.0f, 6.7f));
         eff.SpineAnimation.state.Event += _event;
@@ -84,8 +93,11 @@ public class CastPlayerWarriorSkill : Castable
 
                     if(target == null) continue;
                     target.Beaten(1.0f, CharacterEnemy.DAMAGE_TYPE.WARRIOR, true);
+                    target.KnockBack(new Vector2(0.0f, m_nHitCnt < 2 ? 2.5f : 5.0f));
                     target.Stun(0.5f);
                 }
+
+                ++m_nHitCnt;
                 break;
             }
             case "light_01":

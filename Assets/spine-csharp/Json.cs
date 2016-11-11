@@ -1,32 +1,31 @@
 /******************************************************************************
- * Spine Runtimes Software License
- * Version 2.3
- * 
- * Copyright (c) 2013-2015, Esoteric Software
+ * Spine Runtimes Software License v2.5
+ *
+ * Copyright (c) 2013-2016, Esoteric Software
  * All rights reserved.
- * 
- * You are granted a perpetual, non-exclusive, non-sublicensable and
- * non-transferable license to use, install, execute and perform the Spine
- * Runtimes Software (the "Software") and derivative works solely for personal
- * or internal use. Without the written permission of Esoteric Software (see
- * Section 2 of the Spine Software License Agreement), you may not (a) modify,
- * translate, adapt or otherwise create derivative works, improvements of the
- * Software or develop new applications using the Software or (b) remove,
- * delete, alter or obscure any trademarks or any copyright, trademark, patent
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable, and
+ * non-transferable license to use, install, execute, and perform the Spine
+ * Runtimes software and derivative works solely for personal or internal
+ * use. Without the written permission of Esoteric Software (see Section 2 of
+ * the Spine Software License Agreement), you may not (a) modify, translate,
+ * adapt, or develop new applications using the Spine Runtimes or otherwise
+ * create derivative works or improvements of the Spine Runtimes or (b) remove,
+ * delete, alter, or obscure any trademarks or any copyright, trademark, patent,
  * or other intellectual property or proprietary rights notices on or in the
  * Software, including any copy thereof. Redistributions in binary or source
  * form must include this license and terms.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
  * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION, OR LOSS OF
+ * USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
 using System;
@@ -55,7 +54,7 @@ namespace Spine {
  *
  * Changes made:
  * 
- * 	- Optimized parser speed (deserialize roughly near 3x faster than original)
+ *  - Optimized parser speed (deserialize roughly near 3x faster than original)
  *  - Added support to handle lexer/parser error messages with line numbers
  *  - Added more fine grained control over type conversions during the parsing
  *  - Refactory API (Separate Lexer code from Parser code and the Encoder from Decoder)
@@ -134,19 +133,19 @@ namespace SharpJson
 		{
 			int idx = 0;
 			StringBuilder builder = null;
-			
+
 			SkipWhiteSpaces();
-			
+
 			// "
 			char c = json[index++];
-			
+
 			bool failed = false;
 			bool complete = false;
-			
+
 			while (!complete && !failed) {
 				if (index == json.Length)
 					break;
-				
+
 				c = json[index++];
 				if (c == '"') {
 					complete = true;
@@ -154,9 +153,9 @@ namespace SharpJson
 				} else if (c == '\\') {
 					if (index == json.Length)
 						break;
-					
+
 					c = json[index++];
-					
+
 					switch (c) {
 					case '"':
 						stringBuffer[idx++] = '"';
@@ -186,10 +185,10 @@ namespace SharpJson
 						int remainingLength = json.Length - index;
 						if (remainingLength >= 4) {
 							var hex = new string(json, index, 4);
-							
+
 							// XXX: handle UTF
 							stringBuffer[idx++] = (char) Convert.ToInt32(hex, 16);
-							
+
 							// skip 4 chars
 							index += 4;
 						} else {
@@ -200,38 +199,38 @@ namespace SharpJson
 				} else {
 					stringBuffer[idx++] = c;
 				}
-				
+
 				if (idx >= stringBuffer.Length) {
 					if (builder == null)
 						builder = new StringBuilder();
-					
+
 					builder.Append(stringBuffer, 0, idx);
 					idx = 0;
 				}
 			}
-			
+
 			if (!complete) {
 				success = false;
 				return null;
 			}
-			
+
 			if (builder != null)
 				return builder.ToString ();
 			else
 				return new string (stringBuffer, 0, idx);
 		}
-		
+
 		string GetNumberString()
 		{
 			SkipWhiteSpaces();
 
 			int lastIndex = GetLastIndexOfNumber(index);
 			int charLength = (lastIndex - index) + 1;
-			
+
 			var result = new string (json, index, charLength);
-			
+
 			index = lastIndex + 1;
-			
+
 			return result;
 		}
 
@@ -239,10 +238,10 @@ namespace SharpJson
 		{
 			float number;
 			var str = GetNumberString ();
-			
+
 			if (!float.TryParse (str, NumberStyles.Float, CultureInfo.InvariantCulture, out number))
 				return 0;
-			
+
 			return number;
 		}
 
@@ -250,25 +249,24 @@ namespace SharpJson
 		{
 			double number;
 			var str = GetNumberString ();
-			
+
 			if (!double.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out number))
 				return 0;
-			
+
 			return number;
 		}
-		
+
 		int GetLastIndexOfNumber(int index)
 		{
 			int lastIndex;
-			
+
 			for (lastIndex = index; lastIndex < json.Length; lastIndex++) {
 				char ch = json[lastIndex];
-				
-				if ((ch < '0' || ch > '9') && ch != '+' && ch != '-'
-				    && ch != '.' && ch != 'e' && ch != 'E')
+
+				if ((ch < '0' || ch > '9') && ch != '+' && ch != '-' && ch != '.' && ch != 'e' && ch != 'E')
 					break;
 			}
-			
+
 			return lastIndex - 1;
 		}
 
@@ -303,9 +301,9 @@ namespace SharpJson
 		{
 			if (index == json.Length)
 				return Token.None;
-			
+
 			char c = json[index++];
-			
+
 			switch (c) {
 			case '{':
 				return Token.CurlyOpen;
@@ -328,38 +326,41 @@ namespace SharpJson
 			}
 
 			index--;
-			
+
 			int remainingLength = json.Length - index;
-			
+
 			// false
 			if (remainingLength >= 5) {
 				if (json[index] == 'f' &&
-				    json[index + 1] == 'a' &&
-				    json[index + 2] == 'l' &&
-				    json[index + 3] == 's' &&
-				    json[index + 4] == 'e') {
+					json[index + 1] == 'a' &&
+					json[index + 2] == 'l' &&
+					json[index + 3] == 's' &&
+					json[index + 4] == 'e'
+				) {
 					index += 5;
 					return Token.False;
 				}
 			}
-			
+
 			// true
 			if (remainingLength >= 4) {
 				if (json[index] == 't' &&
-				    json[index + 1] == 'r' &&
-				    json[index + 2] == 'u' &&
-				    json[index + 3] == 'e') {
+					json[index + 1] == 'r' &&
+					json[index + 2] == 'u' &&
+					json[index + 3] == 'e'
+				) {
 					index += 4;
 					return Token.True;
 				}
 			}
-			
+
 			// null
 			if (remainingLength >= 4) {
 				if (json[index] == 'n' &&
-				    json[index + 1] == 'u' &&
-				    json[index + 2] == 'l' &&
-				    json[index + 3] == 'l') {
+					json[index + 1] == 'u' &&
+					json[index + 2] == 'l' &&
+					json[index + 3] == 'l'
+				) {
 					index += 4;
 					return Token.Null;
 				}
@@ -439,25 +440,25 @@ namespace SharpJson
 						TriggerError("Invalid token; expected ':'");
 						return null;
 					}
-					
+
 					// value
 					object value = ParseValue();
 
 					if (errorMessage != null)
 						return null;
-					
+
 					table[name] = value;
 					break;
 				}
 			}
-			
+
 			//return null; // Unreachable code
 		}
 
 		IList<object> ParseArray()
 		{
 			var array = new List<object>();
-			
+
 			// [
 			lexer.NextToken();
 
@@ -484,7 +485,7 @@ namespace SharpJson
 					break;
 				}
 			}
-			
+
 			//return null; // Unreachable code
 		}
 

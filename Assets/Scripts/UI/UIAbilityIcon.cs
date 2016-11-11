@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIAbilityIcon : ObjectBase {
     
+    protected RectTransform cachedRectTransform;
     public enum STATE
     {
         NULL = 0,
@@ -13,12 +14,12 @@ public class UIAbilityIcon : ObjectBase {
         RELEASE
     }
 
-    public CharacterPlayer Caster;
 	public Image ImageEnable;
 	public Image ImageDisable;
     
-    public Image InnerFrameEnable;
-    public Image InnerFrameDisable;
+    public Image Frame;
+
+    public Color[] FrameColor = new Color[2];
     public float Cost = 0.0f;
 
     protected int m_nSlot;
@@ -41,12 +42,14 @@ public class UIAbilityIcon : ObjectBase {
     
     protected virtual void Awake()
     {
+        cachedRectTransform = GetComponent<RectTransform>();
         m_cachedButton = GetComponent<Button>();
     }
 
     public virtual void Init()
     {
         m_State = STATE.INIT;
+        SetEnable(UIAbilitySlot.Instance.MP >= Cost);
     }
 
     public void Move()
@@ -61,19 +64,19 @@ public class UIAbilityIcon : ObjectBase {
         RectTransform rt = GetComponent<RectTransform>();
         Vector2 position = rt.anchoredPosition;
         int slot = (UIAbilitySlot.Instance.Slot - m_nSlot) - 1;
-        float dist = 159.0f * slot - position.x;
-        float speed = 159.0f * 15.0f;
+        float dist = 220.0f * slot - position.x;
+        float speed = 220.0f * 15.0f;
         yield return null;
         
         while(dist > speed * Time.deltaTime)
         {
             position += new Vector2(speed * Time.deltaTime, 0.0f);
-            dist = 159.0f * slot - position.x;
+            dist = 220.0f * slot - position.x;
             rt.anchoredPosition = position;
             yield return null;
         }   
 
-        rt.anchoredPosition = new Vector2(159.0f * slot, 0.0f);
+        rt.anchoredPosition = new Vector2(220.0f * slot, 0.0f);
         m_State = STATE.READY;
 
     }
@@ -82,19 +85,11 @@ public class UIAbilityIcon : ObjectBase {
     {
         UIAbilitySlot.Instance.MP -= Cost;
         UIAbilitySlot.Instance.Remove(this);
-        UIAbilitySlot.Instance.SpawnIcon();
     }
 
     public virtual void Update()
     {
-        if(UIAbilitySlot.Instance.MP >= Cost)
-        {
-            SetEnable(true);
-        }
-        else
-        {
-            SetEnable(false);
-        }
+        SetEnable(UIAbilitySlot.Instance.MP >= Cost);
     }
 
     public void SetEnable(bool enable)
@@ -106,8 +101,7 @@ public class UIAbilityIcon : ObjectBase {
             ImageEnable.enabled = enable;
             ImageDisable.enabled = !enable;
 
-            InnerFrameEnable.enabled = enable;
-            InnerFrameDisable.enabled = !enable;
+            Frame.color = FrameColor[(enable ? 0 : 1)];
         }
     }
 }

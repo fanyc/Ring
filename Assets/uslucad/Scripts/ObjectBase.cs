@@ -3,7 +3,7 @@ using System;
 
 public class ObjectBase : MonoBehaviour
 {
-
+    public uint UID;
     private Transform m_cachedTransform = null;
     private GameObject m_cachedGamaObject = null;
 

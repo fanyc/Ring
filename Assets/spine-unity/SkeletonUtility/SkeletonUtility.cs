@@ -1,9 +1,34 @@
+/******************************************************************************
+ * Spine Runtimes Software License v2.5
+ *
+ * Copyright (c) 2013-2016, Esoteric Software
+ * All rights reserved.
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable, and
+ * non-transferable license to use, install, execute, and perform the Spine
+ * Runtimes software and derivative works solely for personal or internal
+ * use. Without the written permission of Esoteric Software (see Section 2 of
+ * the Spine Software License Agreement), you may not (a) modify, translate,
+ * adapt, or develop new applications using the Spine Runtimes or otherwise
+ * create derivative works or improvements of the Spine Runtimes or (b) remove,
+ * delete, alter, or obscure any trademarks or any copyright, trademark, patent,
+ * or other intellectual property or proprietary rights notices on or in the
+ * Software, including any copy thereof. Redistributions in binary or source
+ * form must include this license and terms.
+ *
+ * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION, OR LOSS OF
+ * USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *****************************************************************************/
 
-
-/*****************************************************************************
- * Skeleton Utility created by Mitch Thompson
- * Full irrevocable rights and permissions granted to Esoteric Software
-*****************************************************************************/
+// Contributed by: Mitch Thompson
 
 using UnityEngine;
 using System.Collections;
@@ -229,17 +254,15 @@ namespace Spine.Unity {
 				for (int i = 0, n = ikConstraints.Count; i < n; i++)
 					constraintTargetNames.Add(ikConstraints.Items[i].Target.Data.Name);
 
-				foreach (var b in utilityBones) {
-					if (b.bone == null) {
-						return;
-					}
-					if (b.mode == SkeletonUtilityBone.Mode.Override) {
+				var utilityBones = this.utilityBones;
+				for (int i = 0, n = utilityBones.Count; i < n; i++) {
+					var b = utilityBones[i];
+					if (b.bone == null) return;
+					if (b.mode == SkeletonUtilityBone.Mode.Override)
 						hasTransformBones = true;
-					}
 
-					if (constraintTargetNames.Contains(b.bone.Data.Name)) {
+					if (constraintTargetNames.Contains(b.bone.Data.Name))
 						hasUtilityConstraints = true;
-					}
 				}
 
 				if (utilityConstraints.Count > 0)
@@ -267,25 +290,21 @@ namespace Spine.Unity {
 		}
 
 		void UpdateLocal (ISkeletonAnimation anim) {
-
 			if (needToReprocessBones)
 				CollectBones();
 
-			if (utilityBones == null)
-				return;
-
-			foreach (SkeletonUtilityBone b in utilityBones) {
-				b.transformLerpComplete = false;
-			}
+			var utilityBones = this.utilityBones;
+			if (utilityBones == null) return;
+			for (int i = 0, n = utilityBones.Count; i < n; i++)
+				utilityBones[i].transformLerpComplete = false;
 
 			UpdateAllBones();
 		}
 
 		void UpdateWorld (ISkeletonAnimation anim) {
 			UpdateAllBones();
-
-			foreach (SkeletonUtilityConstraint c in utilityConstraints)
-				c.DoUpdate();
+			for (int i = 0, n = utilityConstraints.Count; i < n; i++)
+				utilityConstraints[i].DoUpdate();
 		}
 
 		void UpdateComplete (ISkeletonAnimation anim) {
@@ -293,16 +312,13 @@ namespace Spine.Unity {
 		}
 
 		void UpdateAllBones () {
-			if (boneRoot == null) {
+			if (boneRoot == null)
 				CollectBones();
-			}
-
-			if (utilityBones == null)
-				return;
-
-			foreach (SkeletonUtilityBone b in utilityBones) {
-				b.DoUpdate();
-			}
+				
+			var utilityBones = this.utilityBones;
+			if (utilityBones == null) return;
+			for (int i = 0, n = utilityBones.Count; i < n; i++)
+				utilityBones[i].DoUpdate();
 		}
 
 		public Transform GetBoneRoot () {

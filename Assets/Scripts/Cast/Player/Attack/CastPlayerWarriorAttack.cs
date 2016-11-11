@@ -19,6 +19,11 @@ public class CastPlayerWarriorAttack : Castable
         }
     }
 
+    public override bool IsHighlight
+    {
+        get { return false; }
+    }
+    
     public CastPlayerWarriorAttack(Character caster) : base(caster)
     {
     }

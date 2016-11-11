@@ -21,7 +21,7 @@ public class CastPlayerMageSkill : Castable
     {
         get
         {
-            return new Vector2(5.0f, 1.5f);
+            return new Vector2(2.0f, 1.5f);
         }
     }
 
@@ -44,7 +44,10 @@ public class CastPlayerMageSkill : Castable
     {
         State = Character.STATE.CAST;
         SetCoolTime(CharacterPlayerMage.AttackPerSecond / GameManager.Instance.PlayerSpeed);
+        m_caster.PlayIdleAnimation();
 
+        m_caster.PlayAnimation("stand_01", false, false);
+        
         yield return new WaitForSeconds(0.2f);
 
         m_caster.PlayAnimation("skill_01", false, false);
@@ -71,35 +74,46 @@ public class CastPlayerMageSkill : Castable
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
-    {        
+    {
         eff?.GetComponent<ParticleSystem>().Stop();
-        
-        Projectile proj = ObjectPool<Projectile>.Spawn("@Proj_Meteor");
-        Vector3 dest = m_caster.position + new Vector3(7.5f, 0.0f);//target.position;
-        proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, 45.0f);
-        proj.Init(dest + new Vector3(-7.0f, 7.0f * Mathf.Tan((90.0f - proj.cachedTransform.eulerAngles.z) * Mathf.Deg2Rad)), dest, ()=>
-        {
-            ObjectPool<Effect>.Spawn("@Effect_Meteor").Init(dest);
-            CameraController.Instance.SetShake(0.3f, 0.075f, 0.75f);
+        m_caster.StartCoroutine(_spawn());
+        CameraController.Instance.UnsetZoom();
+    }
 
-            Character[] targets = GetTargets(dest + new Vector3(Rect.x * -0.5f, 0.0f), new Vector2(Rect.x * 0.5f, Rect.y));
+    IEnumerator _spawn()
+    {
+        SpawnMeteor(new Vector2(4.0f, 0.0f));
+        yield return new WaitForSeconds(Random.Range(0.2f, 0.4f));
+        SpawnMeteor(new Vector2(6.5f, 0.0f));
+        yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
+        SpawnMeteor(new Vector2(7.5f, 0.0f));
+        yield return new WaitForSeconds(Random.Range(0.1f, 0.2f));
+        SpawnMeteor(new Vector2(9.5f, 0.0f));
+
+        CameraController.Instance.SetBackgroundFadeIn();
+    }
+
+    void SpawnMeteor(Vector3 offset)
+    {
+        ProjectileArrow proj = (ProjectileArrow)ObjectPool<Projectile>.Spawn("@Proj_Meteor2");
+        Vector3 dest = m_caster.position + offset;//target.position;
+        proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, Random.Range(15.0f, 45.0f));
+        proj.Init(dest + new Vector3(Mathf.Cos((90.0f + proj.cachedTransform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin((90.0f + proj.cachedTransform.eulerAngles.z) * Mathf.Deg2Rad)) * 7.0f, dest, ()=>
+        {
+            proj.Sprite.enabled = false;
+            ObjectPool<Effect>.Spawn("@Effect_Meteor_Explosion").Init(dest);
+            CameraController.Instance.SetShake(0.2f, 0.05f, 0.75f);
+
+            Character[] targets = GetTargets(dest + new Vector3(Rect.x * -0.5f, 0.0f), Rect);
 
             for(int i = 0; i < targets.Length; ++i)
             {
                 Character target = targets[i];
                 if(target == null) continue;
-                //target.Beaten(UpgradeManager.Instance.GetUpgrade("SoceressAttackDamage").currentValue * UpgradeManager.Instance.GetUpgrade("SoceressSkillDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.SORCERESS, true);
-
-                float distFactor = ((target.position.x - dest.x) / (Rect.x * 0.5f));
-                distFactor = (1.0f - Mathf.Abs(distFactor)) * Mathf.Sign(distFactor);
-                float knockback = 20.0f * distFactor;
-                float airborne = 0.0f;//2.3f + 4.6f * Mathf.Abs(distFactor);
-                target.KnockBack(new Vector2(knockback, airborne));
+                target.Beaten(1.0f, CharacterEnemy.DAMAGE_TYPE.SORCERESS, true);
+                target.KnockBack(new Vector2(15.0f * m_caster.Direction, 1.0f));
             }
 
-            CameraController.Instance.SetBackgroundFadeIn();
         });
-
-        CameraController.Instance.UnsetZoom();
     }
 }

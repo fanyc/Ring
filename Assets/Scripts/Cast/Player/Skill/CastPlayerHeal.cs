@@ -39,11 +39,21 @@ public class CastPlayerHeal : Castable
     {
         List<CharacterPlayer> list = CharacterPlayer.PlayerList;
 
-        for(int i = 0, c = list.Count; i < c; ++i)
+        if(list.Count > 0)
         {
-            list[i].Heal(10.0f);
-        }
+            CharacterPlayer lowest = list[0];
 
+            for(int i = 1, c = list.Count; i < c; ++i)
+            {
+                if(lowest.HP / lowest.MaxHP > list[i].HP / list[i].MaxHP)
+                {
+                    lowest = list[i];
+                }
+            }
+            lowest.Heal(100.0f);
+            ObjectPool<Effect>.Spawn("@Effect_Heal_Target", Vector3.zero, lowest.cachedTransform).Init(Vector3.zero);
+        }
+        
         yield break;
     }
     

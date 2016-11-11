@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class CharacterEnemy : Character
 {
@@ -45,14 +46,24 @@ public abstract class CharacterEnemy : Character
     {
         get;
     }
-    protected Castable m_castAttack;
 
     protected override void LateUpdate()
     {
-        if(State != STATE.DEAD && (position.x - (CharacterPlayer.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
+        List<CharacterPlayer> players = CharacterPlayer.PlayerList;
+        Transform target = players[0].cachedTransform;
+
+        for(int i = 1, c = players.Count; i < c; ++i )
+        {
+            if(target.position.x * GameManager.Instance.Direction < players[i].cachedTransform.position.x * GameManager.Instance.Direction)
+            {
+                target = players[i].cachedTransform;
+            }
+        }
+
+        if(State != STATE.DEAD && (position.x - (target.position.x + 1.0f * GameManager.Instance.Direction)) * GameManager.Instance.Direction < 0.0f)
         {
             Vector3 pos = position;
-            pos.x = CharacterPlayer.PlayerList[0].position.x + 1.0f * GameManager.Instance.Direction;
+            pos.x = target.position.x + 1.0f * GameManager.Instance.Direction;
             position = pos;
         }
 

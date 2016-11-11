@@ -1,4 +1,34 @@
-﻿/******************************************************************************
+/******************************************************************************
+ * Spine Runtimes Software License v2.5
+ *
+ * Copyright (c) 2013-2016, Esoteric Software
+ * All rights reserved.
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable, and
+ * non-transferable license to use, install, execute, and perform the Spine
+ * Runtimes software and derivative works solely for personal or internal
+ * use. Without the written permission of Esoteric Software (see Section 2 of
+ * the Spine Software License Agreement), you may not (a) modify, translate,
+ * adapt, or develop new applications using the Spine Runtimes or otherwise
+ * create derivative works or improvements of the Spine Runtimes or (b) remove,
+ * delete, alter, or obscure any trademarks or any copyright, trademark, patent,
+ * or other intellectual property or proprietary rights notices on or in the
+ * Software, including any copy thereof. Redistributions in binary or source
+ * form must include this license and terms.
+ *
+ * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION, OR LOSS OF
+ * USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *****************************************************************************/
+
+/******************************************************************************
  * Spine Runtimes Software License
  * Version 2.3
  * 
@@ -39,10 +69,11 @@ using Spine;
 namespace Spine.Unity {
 	[ExecuteInEditMode, RequireComponent(typeof(CanvasRenderer), typeof(RectTransform)), DisallowMultipleComponent]
 	[AddComponentMenu("Spine/SkeletonGraphic (Unity UI Canvas)")]
-	public class SkeletonGraphic : MaskableGraphic {
+	public class SkeletonGraphic : MaskableGraphic, ISkeletonComponent, IAnimationStateComponent, ISkeletonAnimation {
 
 		#region Inspector
 		public SkeletonDataAsset skeletonDataAsset;
+		public SkeletonDataAsset SkeletonDataAsset { get { return skeletonDataAsset; } }
 
 		[SpineSkin(dataField:"skeletonDataAsset")]
 		public string initialSkinName = "default";
@@ -66,15 +97,13 @@ namespace Spine.Unity {
 					Clear();
 					Initialize(true);
 					startingAnimation = "";
-					if (skeletonDataAsset.atlasAssets.Length > 1 || skeletonDataAsset.atlasAssets[0].materials.Length > 1) {
+					if (skeletonDataAsset.atlasAssets.Length > 1 || skeletonDataAsset.atlasAssets[0].materials.Length > 1)
 						Debug.LogError("Unity UI does not support multiple textures per Renderer. Your skeleton will not be rendered correctly. Recommend using SkeletonAnimation instead. This requires the use of a Screen space camera canvas.");
-					}
 				} else {
 					if (freeze) return;
 					skeleton.SetToSetupPose();
-					if (!string.IsNullOrEmpty(startingAnimation)) {
+					if (!string.IsNullOrEmpty(startingAnimation))
 						skeleton.PoseWithAnimation(startingAnimation, 0f, false);
-					}
 				}
 			} else {
 				if (skeletonDataAsset != null)
@@ -88,13 +117,8 @@ namespace Spine.Unity {
 
 		protected override void Reset () {
 			base.Reset();
-			if (canvas == null) {
-				Debug.LogWarningFormat("SkeletonGraphic requires a Canvas to be visible. Move this GameObject ({0}) in the Hierarchy so it becomes a child of a Canvas.", gameObject.name);
-			}
-
-			if (material == null || material.shader != Shader.Find("Spine/SkeletonGraphic (Premultiply Alpha)")) {
-				Debug.LogWarning("SkeletonGraphic works best with the SkeletonGraphic material.");
-			}
+			if (material == null || material.shader != Shader.Find("Spine/SkeletonGraphic (Premultiply Alpha)"))
+				Debug.LogWarning("SkeletonGraphic works best with the SkeletonGraphic material.");			
 		}
 		#endif
 		#endregion
@@ -148,7 +172,7 @@ namespace Spine.Unity {
 			if (UpdateComplete != null) UpdateComplete(this);
 		}
 
-		void LateUpdate () {
+		public void LateUpdate () {
 			if (freeze) return;
 			//this.SetVerticesDirty(); // Which is better?
 			UpdateMesh();
@@ -168,10 +192,9 @@ namespace Spine.Unity {
 		protected Spine.Unity.MeshGeneration.ISimpleMeshGenerator spineMeshGenerator;
 		public Spine.Unity.MeshGeneration.ISimpleMeshGenerator SpineMeshGenerator { get { return this.spineMeshGenerator; } }
 
-		public delegate void UpdateDelegate (SkeletonGraphic skeletonGraphic);
-		public event UpdateDelegate UpdateLocal;
-		public event UpdateDelegate UpdateWorld;
-		public event UpdateDelegate UpdateComplete;
+		public event UpdateBonesDelegate UpdateLocal;
+		public event UpdateBonesDelegate UpdateWorld;
+		public event UpdateBonesDelegate UpdateComplete;
 
 		public void Clear () {
 			skeleton = null;
@@ -196,6 +219,7 @@ namespace Spine.Unity {
 
 			this.skeleton = new Skeleton(skeletonData);
 			this.spineMeshGenerator = new Spine.Unity.MeshGeneration.ArraysSimpleMeshGenerator(); // You can switch this out with any other implementer of Spine.Unity.MeshGeneration.ISimpleMeshGenerator
+			this.spineMeshGenerator.PremultiplyVertexColors = true;
 
 			// Set the initial Skin and Animation
 			if (!string.IsNullOrEmpty(initialSkinName))
@@ -216,6 +240,11 @@ namespace Spine.Unity {
 			}
 		}
 		#endregion
+		#else
+		public Skeleton Skeleton { get { return null; } }
+		public AnimationState AnimationState { get { return null; } }
+		public event UpdateBonesDelegate UpdateLocal, UpdateWorld, UpdateComplete;
+		public void LateUpdate () { }
 		#endif
 	}
 }

@@ -43,6 +43,7 @@ public class CastPlayerMageSkill_Ball : Castable
     protected override IEnumerator Cast()
     {
         State = Character.STATE.CAST;
+        m_caster.PlayIdleAnimation();
 
         yield return new WaitForSeconds(0.2f);
 
@@ -71,7 +72,7 @@ public class CastPlayerMageSkill_Ball : Castable
     }
 
     void Hit(Spine.AnimationState state, int trackIndex, Spine.Event e)
-    {        
+    {
         eff?.GetComponent<ParticleSystem>().Stop();
         m_caster.StartCoroutine(_move());
         CameraController.Instance.UnsetZoom();
@@ -79,37 +80,38 @@ public class CastPlayerMageSkill_Ball : Castable
 
     IEnumerator _move()
     {
+        Vector3 startPos = position + new Vector3(3.0f * m_caster.Direction, 1.5f);
+        ObjectPool<Effect>.Spawn("@Effect_PlazmaBall_On").Init(startPos);
+        yield return new WaitForSeconds(0.18f);
         EffectSpine ball = (EffectSpine)ObjectPool<Effect>.Spawn("@Effect_Ball");
-        ball.Init(position + new Vector3(1.0f * m_caster.Direction, 1.5f));
+        ball.Init(startPos);
+        ball.PlayAnimation("on_01");
 
-        Vector3 start = ball.cachedTransform.position;
-        Vector3 dist = new Vector3(1.5f * m_caster.Direction, 0.0f);
-        const float time = 0.5f;
-        const float speed = 1.0f / time;
-        float per = 0.0f;
-        while(per < 1.0f)
-        {
-            per += Time.deltaTime * speed;
-            ball.cachedTransform.position = start + dist * (per * per);
-            yield return null;
-        }
+        while(ball.IsPlaying) yield return null;
+        
+        Effect spark = ObjectPool<Effect>.Spawn("@Effect_PlazmaBall_Spark", Vector3.zero, ball.cachedTransform);
+        spark.Init(Vector3.zero);
+        ball.PlayAnimation("play_01", true);
+        yield return null;
+        
+        float speed = 2.5f * m_caster.Direction;
         
         ball.StartCoroutine(_hit(ball));
         while(ball.IsPlaying)
         {
-            ball.cachedTransform.position += new Vector3(1.5f * m_caster.Direction * Time.smoothDeltaTime, 0.0f);
+            ball.cachedTransform.position += new Vector3(speed * Time.smoothDeltaTime, 0.0f);
             yield return null;
         }
+
+        spark.Recycle();
     }
 
     IEnumerator _hit(EffectSpine ball)
     {
-        ball.PlayAnimation("on_01");
-        ball.AddAnimation("play_01", true);
-        ball.GetComponent<Animation>().Play("PlazmaBall_Start");
+        //ball.GetComponent<Animation>().Play("PlazmaBall_Start");
 
-        float duration = 5.0f;
-        float interval = 0.2f;
+        float duration = 3.0f;
+        float interval = 0.15f;
         float damage = 1.0f;
         float timer = 0.0f;
         while(duration > 0.0f)
@@ -140,13 +142,14 @@ public class CastPlayerMageSkill_Ball : Castable
         }
 
         ball.PlayAnimation("off_01");
-        ball.GetComponent<Animation>().Play("PlazmaBall_End");
+        //ball.GetComponent<Animation>().Play("PlazmaBall_End");
         
         while(ball.IsEndAnimation() == false) yield return null;
+        ObjectPool<Effect>.Spawn("@Effect_PlazmaBall_Off").Init(ball.cachedTransform.position);
+        ball.Recycle();
         
         CameraController.Instance.SetBackgroundFadeIn();
         yield return new WaitForSeconds(1.0f);
         
-        ball.Recycle();
     }
 }

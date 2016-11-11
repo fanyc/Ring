@@ -5,7 +5,19 @@ using System.Collections.Generic;
 
 public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
 {
-    public float MP = 4.0f;
+    protected float m_fMP = 4.0f;
+    public float MP
+    {
+        set
+        {
+            m_fMP = Mathf.Clamp(value, 0.0f, MPMax);
+        }
+
+        get
+        {
+            return m_fMP;
+        }
+    }
     public float MPMax = 10.0f;
 
     public Image MPGauge;
@@ -18,9 +30,12 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
             return m_nSlotCount;
         }
     }
-    protected int m_nSlotCount = 6;
+    protected int m_nSlotCount = 8;
 
     protected List<UIAbilityIcon> m_listSlot;
+
+    protected bool m_isTimerEnable = false;
+    protected float m_fTimer = 0.0f;
 
     public void Init()
     {
@@ -35,7 +50,7 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
         }
 
         m_listSlot = new List<UIAbilityIcon>(m_nSlotCount);
-
+        m_isTimerEnable = false;
         StartCoroutine(_init());
 
     }
@@ -49,6 +64,8 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
             while(icon.State == UIAbilityIcon.STATE.MOVE)
                 yield return null;
         }
+
+        m_isTimerEnable = true;
     }
 
     public void Add(string name)
@@ -61,7 +78,8 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
         UIAbilityIcon icon = ObjectPool<UIAbilityIcon>.Spawn(m_listAbilityKey[Random.Range(0, m_listAbilityKey.Count)]);
         RectTransform rt = icon.GetComponent<RectTransform>();
         rt.SetParent(cachedTransform, false);
-        rt.anchoredPosition = new Vector2(-159.0f, 0.0f);
+        rt.anchoredPosition = new Vector2(-220.0f, 0.0f);
+        icon.Init();
 
         icon.Slot = m_listSlot.Count;
         icon.Move();
@@ -99,7 +117,25 @@ public class UIAbilitySlot : MonoSingleton<UIAbilitySlot>
 
     void Update()
     {
-        MP = Mathf.Clamp(MP + Time.deltaTime, 0.0f, MPMax);
+        MP += Time.deltaTime;
         MPGauge.fillAmount = MP / MPMax;
+
+        if(m_listSlot.Count < m_nSlotCount)
+        {
+            if(m_isTimerEnable)
+            {
+                m_fTimer += Time.deltaTime;
+            }
+
+            if(m_fTimer >= 2.0f)
+            {
+                UIAbilitySlot.Instance.SpawnIcon();
+                m_fTimer = 0.0f;
+            }
+        }
+        else
+        {
+            m_fTimer = 0.0f;
+        }
     }
 }

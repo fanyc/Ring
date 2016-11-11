@@ -39,11 +39,24 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<CharacterPlayer> PlayerList;
 
+    public StageData CurrentStage
+    {
+        protected set;
+        get;
+    }
+
+    public int CurrentWave
+    {
+        protected set;
+        get;
+    }
+    
     //====================Properties End====================
     //====================Functions Start====================
     void Awake()
     {
         Application.targetFrameRate = -1;
+        Screen.SetResolution(1280, 720, true);
         CharacterEnemy[] list = Resources.LoadAll<CharacterEnemy>("Enemy/");
         for(int i = 0; i < list.Length; ++i)
         {
@@ -54,7 +67,10 @@ public class GameManager : MonoSingleton<GameManager>
         ObjectPool<DamageText>.CreatePool("@DamageText", Resources.Load<GameObject>("@DamageText"), 20);
         ObjectPool<UIItemSkill>.CreatePool("@ItemSkill", Resources.Load<GameObject>("@ItemSkill"), 16);
         ObjectPool<UIHPGauge>.CreatePool("@HPGauge", Resources.Load<GameObject>("@HPGauge"), 10);
-        
+
+        ObjectPool<UIAbilityIcon>.CreatePool("AbilityIcon_Mana", Resources.Load<GameObject>("Abilities/@AbilityIcon_Mana"), 10);
+        UIAbilitySlot.Instance.Add("AbilityIcon_Mana");
+
         Effect[] effects = Resources.LoadAll<Effect>("Effects/");
         for(int i = 0; i < effects.Length; ++i)
         {
@@ -67,13 +83,9 @@ public class GameManager : MonoSingleton<GameManager>
             ObjectPool<Projectile>.CreatePool(projectiles[i].name, projectiles[i].gameObject, 2);
         }
 
-        float sum = 0;
-        for(int i = 0; i < 1000000; ++i)
-        {
-            float r = Random.Range(0.0f, 1.0f);
-            sum += Mathf.Pow(r, 2.0f) * 0.5f + 0.5f * r;
-        }
-        Debug.Log(sum / 1000000);
+        
+        CurrentStage = new StageData(Resources.Load<TextAsset>("TempStage").text);
+        
     }
     
     void Start()
@@ -102,13 +114,15 @@ public class GameManager : MonoSingleton<GameManager>
         UIWallet.Instance.Init();
         m_InGameState = StateInGame.IDLE;
 
+        CurrentWave = -1;
+
         NextWave();
     }
     
-    public CharacterEnemy SpawnEnemy()
+    public CharacterEnemy SpawnEnemy(string name, float offset)
     {
-        CharacterEnemy enemy = ObjectPool<CharacterEnemy>.Spawn("@Enemy00" + Random.Range(1, 6));
-        enemy.cachedTransform.position = cachedTransform.position + new Vector3(7.5f + m_currentEnemies.Count + enemy.Offset, 0.0f);
+        CharacterEnemy enemy = ObjectPool<CharacterEnemy>.Spawn(name);
+        enemy.cachedTransform.position = cachedTransform.position + new Vector3(7.5f + offset + enemy.Offset, 0.0f);
         enemy.Init();
 
         m_currentEnemies.Add(enemy);
@@ -141,25 +155,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         cachedTransform.position = new Vector3(PlayerList[0].cachedTransform.position.x, 0.0f);
         
-        for(int i = 0; i < 3; ++i)
-        {
-            SpawnEnemy();
-        }
-
-        // if(m_nCurrentWave > WAVE_COUNT)
-        // {
-        //     m_nCurrentWave = 0;
-        // }
-        // else
-        // m_InGameState = StateInGame.IDLE;
-        
-        
-        // StartCoroutine("_waitIdle");
-        // for(int i = 0; i < PlayerList.Count; ++i)
-        // {
-        //     PlayerList[i].State = Character.STATE.IDLE;
-        // }
-        
+        ++CurrentWave;
+        CurrentStage.Spawn(0);
     }
     
     public List<CharacterPlayer> GetPlayers()
@@ -170,63 +167,10 @@ public class GameManager : MonoSingleton<GameManager>
     public void Rebirth()
     {
         
-        StopCoroutine("_waitIdle");
         for(int i = 0; i < PlayerList.Count; ++i)
         {
             PlayerList[i].CastCancel();
         }
         Init();
     }
-    
-    IEnumerator _waitIdle()
-    {
-        // bool all = false;
-        // while(all == false)
-        // {
-        //     yield return null;
-        //     all = true;
-        //     for(int i = 0; i < PlayerList.Count; ++i)
-        //     {
-        //         if(PlayerList[i].State != Character.STATE.IDLE)
-        //         {
-        //             all = false;
-        //             break;
-        //         }  
-        //     }
-        //     if(all == true) break;
-        // }
-
-        m_InGameState = StateInGame.MOVE;
-
-        for(int i = 0; i < 3; ++i)
-        {
-            SpawnEnemy();
-        }
-
-        //Level.text = "Level " + m_nLevel;
-        while(m_InGameState == StateInGame.MOVE) yield return null;
-    }
-
-    // IEnumerator _timer(float timeLimit)
-    // {
-    //     while(m_InGameState == StateInGame.MOVE) yield return null;
-        
-    //     float time = timeLimit;
-    //     TimerText.text = $"{timeLimit:0.0}<size=-4> s</size>";
-    //     TimerGauge.fillAmount = 1.0f;
-
-    //     while(time > 0.0f)
-    //     {
-    //         yield return null;
-    //         time -= Time.deltaTime;
-
-    //         TimerText.text = $"{time:0.0}<size=-4> s</size>";
-    //         TimerGauge.fillAmount = time / timeLimit;
-    //     }
-
-    //     TimerText.text = $"0.0<size=-4> s</size>";
-    //     TimerGauge.fillAmount = 0.0f;
-
-    //     LeaveBoss();
-    // }
 }

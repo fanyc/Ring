@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class ObjectPool
 {
     private static Transform m_ObjectPoolRoot = new GameObject("ObjectPool").transform;
-
+    public static uint UIDCount = 0;
+    
     public static Transform ObjectPoolRoot
     {
         get
@@ -22,7 +23,6 @@ public class ObjectPool<ObjectType>
 
     protected Dictionary<string, GameObject> m_Sources = new Dictionary<string, GameObject>();
     protected Dictionary<string, Queue<ObjectType>> m_ObjectPool = new Dictionary<string, Queue<ObjectType>>();
-
     public static void CreatePool(string poolName, GameObject source, int size = 100, System.Action<ObjectType> init = null)
     {
         Instance.createPool(poolName, source, size, init);
@@ -99,7 +99,8 @@ public class ObjectPool<ObjectType>
             recycle(poolName, obj);
         };
 
-
+        obj.UID = ObjectPool.UIDCount;
+        ++ObjectPool.UIDCount;
         return obj;
     }
 

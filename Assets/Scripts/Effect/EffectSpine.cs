@@ -44,8 +44,14 @@ public class EffectSpine : Effect
 		m_cachedAnimation.state.AddAnimation(0, name, isLoop, 0.0f);
 	}
 
-	public bool IsEndAnimation()
+	public bool IsEndAnimation(float offset = 0.0f)
 	{
-		return m_cachedAnimation.state.GetCurrent(0) == null || m_cachedAnimation.state.GetCurrent(0).Time >= m_cachedAnimation.state.GetCurrent(0).EndTime;
+		return m_cachedAnimation.state.GetCurrent(0) == null || (!m_cachedAnimation.state.GetCurrent(0).Loop && m_cachedAnimation.state.GetCurrent(0).Time >= m_cachedAnimation.state.GetCurrent(0).EndTime - offset);
 	}
+
+	void Update()
+	{
+		m_isPlaying = !IsEndAnimation();
+	}
+
 }

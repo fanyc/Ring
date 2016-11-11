@@ -13,6 +13,8 @@ public class CharacterPlayerArcher : CharacterPlayer
 
     static CharacterPlayerArcher()
     {
+        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "Icons/icskill_elf_01", "CastPlayerArcherSkill_MagicArrow");
+        m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "Icons/icskill_elf_02", "CastPlayerArcherSkill_Guardian");
         m_skillDataList.AddSkillData("매그넘 샷", "ArcherSkill", "skill_01", "Icons/btle_icskill_elf_01b", "CastPlayerArcherSkill_Rope");
     }
 
@@ -28,15 +30,17 @@ public class CharacterPlayerArcher : CharacterPlayer
     public override void Init()
     {
         m_castAttack = new CastPlayerArcherAttack(this);
-        m_castSkill = Castable.CreateCast(m_skillDataList[0].castableName, this);
-         UIAbilityIconSkill orig = Resources.Load<UIAbilityIconSkill>("Abilities/@AbilityIconSkill_Archer");
-        ObjectPool<UIAbilityIcon>.CreatePool("Ability" + m_skillDataList[0].castableName, orig.cachedGameObject, 10, (UIAbilityIcon icon)=>
+        for(int i = 0; i < m_skillDataList.Count; ++i)
         {
-            ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[0]);
-        });
-        UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[0].castableName);
+            UIAbilityIconSkill orig = Resources.Load<UIAbilityIconSkill>("Abilities/@AbilityIconSkill_Archer");
+            ObjectPool<UIAbilityIcon>.CreatePool("Ability" + m_skillDataList[i].castableName, orig.cachedGameObject, 10, (UIAbilityIcon icon)=>
+            {
+                ((UIAbilityIconSkill)icon).Init(this, m_skillDataList[i]);
+            });
+            UIAbilitySlot.Instance.Add("Ability" + m_skillDataList[i].castableName);
+        }
 
-        m_fHP = MaxHP = 10.0f;
+        m_fHP = MaxHP = 150.0f;
 
         base.Init();
     }
@@ -49,7 +53,7 @@ public class CharacterPlayerArcher : CharacterPlayer
         {
             Character target = Castable.GetNearestTarget(this, targets);
             float minDistance =
-            Mathf.Min(m_castAttack.MinDistance - 1.0f,
+            Mathf.Min(m_castAttack.Distance - 1.0f,
                       Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.position.x));
                                 
             if(minDistance <= Mathf.Abs(target.position.x - position.x))
@@ -75,7 +79,7 @@ public class CharacterPlayerArcher : CharacterPlayer
             {
                 Character target = Castable.GetNearestTarget(this, targets);
                 float dist = target.position.x - pos.x;
-                float dest = Mathf.Min(m_castAttack.MinDistance,
+                float dest = Mathf.Min(m_castAttack.Distance,
                 Mathf.Abs((GameManager.Instance.cachedTransform.position.x - GameManager.Instance.LimitDistance * GameManager.Instance.Direction) - target.position.x));
                 if(Mathf.Abs(Mathf.Abs(dist) - dest) <= step)
                 {

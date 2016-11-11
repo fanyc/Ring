@@ -12,6 +12,12 @@ public class CastEnemyWerewolfAttack : Castable
     }
 
     protected TYPE m_Type;
+
+    public override bool IsHighlight
+    {
+        get { return false; }
+    }
+    
     public CastEnemyWerewolfAttack(Character caster) : base(caster)
     {
     }

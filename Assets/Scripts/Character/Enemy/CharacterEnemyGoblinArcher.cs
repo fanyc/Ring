@@ -89,6 +89,11 @@ public class CharacterEnemyGoblinArcher : CharacterEnemy, IProjectile
             }
         }
 
+        public override bool IsHighlight
+        {
+            get { return false; }
+        }
+
         public CastAttack(Character caster) : base(caster)
         {
         }
@@ -137,7 +142,7 @@ public class CharacterEnemyGoblinArcher : CharacterEnemy, IProjectile
             Vector2 dest = new Vector2(dist, dist * Mathf.Tan(muzzle.angle * Mathf.Deg2Rad));
             proj.Init((Vector3)pos, pos + dest, ()=>
             {
-                m_cachedTarget.Beaten(UpgradeManager.Instance.GetUpgrade("ArcherAttackDamage").currentValue, CharacterEnemy.DAMAGE_TYPE.ELF);
+                m_cachedTarget.Beaten(1.0f, CharacterEnemy.DAMAGE_TYPE.ETC);
                 ObjectPool<Effect>.Spawn("@Effect_Arrow_Normal").Init(pos + dest);
                 m_cachedTarget.Stun(0.2f);
             });

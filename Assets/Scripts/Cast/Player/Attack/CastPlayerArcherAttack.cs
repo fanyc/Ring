@@ -14,16 +14,21 @@ public class CastPlayerArcherAttack : Castable
     {
         get
         {
-            return new Vector2((MinDistance + 0.0f) * GameManager.Instance.Direction, 10.0f);
+            return new Vector2((Distance + 0.0f) * GameManager.Instance.Direction, 10.0f);
         }
     }
 
-    public override float MinDistance
+    public override float Distance
     {
         get
         {
             return 3.0f;
         }
+    }
+
+    public override bool IsHighlight
+    {
+        get { return false; }
     }
 
     public CastPlayerArcherAttack(Character caster) : base(caster)
@@ -73,7 +78,6 @@ public class CastPlayerArcherAttack : Castable
         float angle = bone.AppliedRotation + Random.Range(-2.5f, 2.5f);
         float dist = (m_cachedTarget.position.x - m_caster.position.x) + Random.Range(-0.25f, 0.25f);
         proj.cachedTransform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
-        Debug.Log(bone.AppliedRotation + " " + bone.Rotation + " " + bone.WorldRotationX + " " + bone.WorldRotationY);
         Vector2 pos = (Vector2)m_caster.position + new Vector2(bone.WorldX, bone.WorldY);
         Vector2 dest = new Vector2(dist, dist * Mathf.Tan(angle * Mathf.Deg2Rad));
         proj.Init((Vector3)pos, pos + dest, ()=>
